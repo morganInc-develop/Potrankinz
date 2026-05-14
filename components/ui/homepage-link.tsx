@@ -10,7 +10,7 @@ interface HomepageLinkProps {
 }
 
 function isInternalTarget(href: string) {
-  return href.startsWith('/') || href.includes('luminara-table.demo')
+  return href.startsWith('/') || href.includes('potrankinz.vercel.app')
 }
 
 export default function HomepageLink({

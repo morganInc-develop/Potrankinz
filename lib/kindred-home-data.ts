@@ -1,4 +1,4 @@
-const siteRoot = 'https://pot-rankinz-kitchen.demo'
+const siteRoot = ''
 
 export const restaurantName = 'Pot Rankinz Kitchen'
 export const restaurantHandle = '@POTRANKINZKITCHEN'
@@ -57,7 +57,7 @@ export const services: Service[] = [
     utensil: 'ladle',
     tag: '✦ Off-Site Events',
     description:
-      'We bring the Luminara kitchen to you — full equipment, a dedicated service team, and menus designed entirely around your event and your guests.',
+      'We bring the Pot Rankinz kitchen to you — full equipment, a dedicated service team, and menus designed entirely around your event and your guests.',
     includes: [
       'On-site kitchen setup',
       'Custom event menu',
@@ -97,7 +97,7 @@ export const services: Service[] = [
     utensil: 'whisk',
     tag: '✦ Exclusive Use',
     description:
-      'Take the entire restaurant for your launch, celebration, or corporate dinner. Up to eighty guests, a custom program, and the full Luminara team at your disposal.',
+      'Take the entire restaurant for your launch, celebration, or corporate dinner. Up to eighty guests, a custom program, and the full Pot Rankinz team at your disposal.',
     includes: [
       'Exclusive restaurant use',
       'Up to 80 guests',

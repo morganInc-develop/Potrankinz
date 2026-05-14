@@ -203,7 +203,7 @@ export default function Hero({
             ease: [0.33, 1, 0.68, 1],
           }}
           aria-hidden
-          className="hero-chef-card lined-paper pointer-events-none absolute left-[4vw] top-[34%] z-10 h-[12rem] w-[92vw] origin-center md:left-auto md:top-auto md:bottom-12 md:right-[-3rem] md:h-[24rem] md:w-[52rem] md:origin-bottom-right lg:bottom-16 lg:right-6 lg:h-[28rem] lg:w-[60rem]"
+          className="hero-chef-card lined-paper pointer-events-none absolute left-[3vw] top-[28%] z-10 h-[11.25rem] w-[94vw] origin-center md:left-auto md:top-auto md:bottom-12 md:right-[-3rem] md:h-[24rem] md:w-[52rem] md:origin-bottom-right lg:bottom-16 lg:right-6 lg:h-[28rem] lg:w-[60rem]"
           style={{
             boxShadow:
               '3px 4px 0 #ede7dd, 7px 8px 0 #e1dbd0, 0 18px 42px rgba(0,0,0,0.28)',
@@ -283,70 +283,71 @@ export default function Hero({
           <div className="dog-ear-corner" />
         </motion.div>
 
-        <div className="relative z-20 flex min-h-[92svh] items-end px-6 pb-28 pt-32 md:min-h-screen md:px-8 md:pb-16 lg:px-10 lg:pb-20">
-          <div className="relative z-10 max-w-[26rem] text-white">
-            {/* Note-card label */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15, duration: 0.5 }}
-              className="paper-tag mb-4 w-fit"
-              style={{
-                background: 'rgba(253,248,236,0.14)',
-                borderColor: 'rgba(255,255,255,0.28)',
-                color: 'rgba(255,255,255,0.82)',
-              }}
-            >
-              ✦ Est. 2019 &nbsp;·&nbsp; Florida
-            </motion.div>
-
-            {/* Typewriter title */}
-            <TypewriterText
-              as="h1"
-              text={titleHtml}
-              speed={45}
-              delay={350}
-              className="font-display text-[32px] leading-none font-light md:text-[44px]"
+        <div className="relative z-20 flex min-h-[92svh] items-end px-6 pb-20 pt-32 md:min-h-screen md:px-8 md:pb-16 lg:px-10 lg:pb-20">
+          <div className="relative z-10 max-w-[22rem] text-[#2d1c16] md:max-w-[26rem] md:text-white">
+            <div
+              aria-hidden
+              className="absolute -inset-x-4 -inset-y-3 rounded-[4px] bg-[#fdf8ec]/88 shadow-[3px_4px_0_rgba(237,231,221,0.92),0_12px_28px_rgba(0,0,0,0.22)] md:hidden"
             />
-
-            {/* Typewriter description */}
-            <TypewriterText
-              as="p"
-              text={descHtml}
-              speed={28}
-              delay={1400}
-              className="mt-5 max-w-[17rem] font-ui text-[13px] leading-[1.5] text-white/86 md:max-w-[16rem]"
-            />
-
-            {/* Animated "Reserve a Table" CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.8, duration: 0.7 }}
-              className="mt-8"
-            >
-              <HomepageLink
-                href={href}
-                className="group relative inline-flex items-center gap-2"
+            <div className="relative">
+              {/* Note-card label */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15, duration: 0.5 }}
+                className="paper-tag hero-kicker mb-4 w-fit"
               >
-                {/* Pulsing glow ring */}
-                <span
-                  className="pointer-events-none absolute -inset-3 rounded-sm"
-                  style={{
-                    animation: 'reserva-pulse 2.4s ease-in-out infinite',
-                    border: '1px solid rgba(245,197,24,0.55)',
-                    boxShadow: '0 0 12px rgba(61,155,61,0.35)',
-                  }}
-                />
-                <span className="relative border-b border-white/60 pb-2 font-ui text-[11px] uppercase tracking-[0.2em] text-white transition-colors duration-300 group-hover:border-[#F5C518]/80 group-hover:text-[#F5C518]">
-                  {cta}
-                </span>
-                {/* Arrow tick */}
-                <span className="relative mb-2 font-ui text-[10px] text-white/70 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#F5C518]">
-                  →
-                </span>
-              </HomepageLink>
-            </motion.div>
+                ✦ Est. 2019 &nbsp;·&nbsp; Florida
+              </motion.div>
+
+              {/* Typewriter title */}
+              <TypewriterText
+                as="h1"
+                text={titleHtml}
+                speed={45}
+                delay={350}
+                className="font-display text-[32px] leading-none font-light md:text-[44px]"
+              />
+
+              {/* Typewriter description */}
+              <TypewriterText
+                as="p"
+                text={descHtml}
+                speed={28}
+                delay={1400}
+                className="mt-5 max-w-[18rem] font-ui text-[13px] leading-[1.5] text-[#2d1c16]/82 md:max-w-[16rem] md:text-white/86"
+              />
+
+              {/* Animated "Reserve a Table" CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2.8, duration: 0.7 }}
+                className="mt-8"
+              >
+                <HomepageLink
+                  href={href}
+                  className="group relative inline-flex items-center gap-2"
+                >
+                  {/* Pulsing glow ring */}
+                  <span
+                    className="pointer-events-none absolute -inset-3 rounded-sm"
+                    style={{
+                      animation: 'reserva-pulse 2.4s ease-in-out infinite',
+                      border: '1px solid rgba(245,197,24,0.55)',
+                      boxShadow: '0 0 12px rgba(61,155,61,0.35)',
+                    }}
+                  />
+                  <span className="relative border-b border-[#2d1c16]/50 pb-2 font-ui text-[11px] uppercase tracking-[0.2em] text-[#2d1c16] transition-colors duration-300 group-hover:border-[#3D9B3D]/80 group-hover:text-[#3D9B3D] md:border-white/60 md:text-white md:group-hover:border-[#F5C518]/80 md:group-hover:text-[#F5C518]">
+                    {cta}
+                  </span>
+                  {/* Arrow tick */}
+                  <span className="relative mb-2 font-ui text-[10px] text-[#2d1c16]/70 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#3D9B3D] md:text-white/70 md:group-hover:text-[#F5C518]">
+                    →
+                  </span>
+                </HomepageLink>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>

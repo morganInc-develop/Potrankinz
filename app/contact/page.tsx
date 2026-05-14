@@ -45,7 +45,7 @@ const INFO_CARDS = [
     tag: '✉ Reach Us',
     tagRotate: '-0.8deg',
     cardRotate: '-0.5deg',
-    lines: ['(480) 555-0192', 'hello@luminaratable.com'],
+    lines: ['(480) 555-0192', 'hello@potrankinz.com'],
     note: 'Groups 6+ call ahead',
     noteColor: '#94d6ff',
   },

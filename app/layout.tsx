@@ -30,8 +30,25 @@ const lora = Lora({
 })
 
 export const metadata: Metadata = {
-  title: 'Luminara Table',
-  description: 'Restaurant homepage demo for Luminara Table.',
+  metadataBase: new URL('https://potrankinz.vercel.app'),
+  applicationName: 'Potrankinz',
+  title: {
+    default: 'Potrankinz',
+    template: '%s | Potrankinz',
+  },
+  description: 'Soul food and catering done right in Florida and beyond.',
+  openGraph: {
+    title: 'Potrankinz',
+    description: 'Soul food and catering done right in Florida and beyond.',
+    url: 'https://potrankinz.vercel.app',
+    siteName: 'Potrankinz',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Potrankinz',
+    description: 'Soul food and catering done right in Florida and beyond.',
+  },
 }
 
 export default function RootLayout({

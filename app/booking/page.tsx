@@ -703,7 +703,7 @@ function Chalkboard() {
               textTransform: 'uppercase',
             }}
           >
-            Luminara Table
+            Pot Rankinz Kitchen
           </div>
           {/* Chalk dust corner smudges */}
           <div className="flex gap-1 opacity-30" aria-hidden="true">
