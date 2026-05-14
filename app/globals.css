@@ -1,0 +1,428 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-display: var(--font-fraunces);
+  --font-ui: var(--font-dm-sans);
+  --font-special: var(--font-special-elite);
+  --font-body: var(--font-lora);
+
+  --color-warm-white: rgb(251, 248, 245);
+  --color-black: rgb(0, 0, 0);
+  --color-overlay-text: rgb(255, 255, 255);
+  --color-olive-dark: #7b1f1f;
+  --color-brand-red: #7b1f1f;
+  --color-brand-green: #3d9b3d;
+  --color-brand-yellow: #f5c518;
+
+  --text-hero: 44px;
+  --text-hero-mobile: 32px;
+  --text-mission: 44px;
+  --text-mission-mobile: 32px;
+
+  --section-gap: 120px;
+  --section-gap-mobile: 64px;
+}
+
+@layer base {
+  :root {
+    --text-hero: 44px;
+    --text-hero-mobile: 32px;
+    --text-mission: 44px;
+    --text-mission-mobile: 32px;
+    --section-gap: 120px;
+    --section-gap-mobile: 64px;
+  }
+
+  * {
+    @apply border-black/10;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-warm-white);
+    color: var(--color-black);
+    font-family: var(--font-ui);
+  }
+
+  a,
+  button {
+    cursor: pointer;
+  }
+
+  img {
+    user-select: none;
+  }
+
+  em {
+    font-style: italic;
+  }
+}
+
+/* ─── Paper grain overlay ──────────────────────────────────────────────────────
+   Fixed so the grain stays in place as you scroll — feels like the paper itself
+   is textured rather than the content moving over a textured layer.
+   pointer-events: none + high z-index so it never blocks clicks or the cursor.
+───────────────────────────────────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.038;
+  mix-blend-mode: multiply;
+}
+
+/* ─── Paper card — stacked shadow effect ────────────────────────────────────── */
+.shadow-paper {
+  box-shadow:
+    3px 4px 0 0 #ede7dd,
+    6px 8px 0 0 #e1dbd0;
+  transition:
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+}
+
+.shadow-paper:hover {
+  box-shadow:
+    4px 6px 0 0 #ede7dd,
+    8px 12px 0 0 #e1dbd0,
+    0 10px 24px rgba(0, 0, 0, 0.07);
+}
+
+/* ─── Paper image — zero-blur offset drop shadow (Paper Mario signature) ─────── */
+.shadow-paper-img {
+  filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.16))
+    drop-shadow(6px 6px 0px rgba(0, 0, 0, 0.08));
+}
+
+/* ─── Chef cutout collage — paper edge + stacked shadow ───────────────────── */
+.chef-paper-cutout {
+  filter: drop-shadow(2px 0 0 #fdf8ec) drop-shadow(-2px 0 0 #fdf8ec)
+    drop-shadow(0 2px 0 #fdf8ec) drop-shadow(0 -2px 0 #fdf8ec)
+    drop-shadow(3px 4px 0 rgba(0, 0, 0, 0.2))
+    drop-shadow(7px 8px 0 rgba(0, 0, 0, 0.08));
+  transform-origin: 50% 82%;
+  will-change: transform;
+}
+
+.hero-chef-card {
+  padding: 18px 12px 14px 46px;
+}
+
+.chalk-chef-label {
+  z-index: 3;
+  font-family: var(--font-special);
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.42),
+    1px 0 0 currentColor,
+    -1px 0 0 rgba(255, 255, 255, 0.18);
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .hero-chef-card {
+    padding: 26px 28px 28px 76px;
+  }
+}
+
+.chalk-chef-arrow {
+  z-index: 3;
+  opacity: 0.94;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.34));
+}
+
+.chalk-chef-arrow path {
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 8 6;
+  fill: none;
+}
+
+@media (max-width: 767px) {
+  .chalk-chef-label {
+    font-size: 11px;
+  }
+
+  .chalk-chef-arrow path {
+    stroke-width: 2.25;
+    stroke-dasharray: 6 5;
+  }
+}
+
+@keyframes chef-cutout-wiggle-a {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  35% {
+    transform: translateX(-4px) rotate(-0.7deg);
+  }
+  70% {
+    transform: translateX(3px) rotate(0.5deg);
+  }
+}
+
+@keyframes chef-cutout-wiggle-b {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  40% {
+    transform: translateX(3px) rotate(0.6deg);
+  }
+  76% {
+    transform: translateX(-3px) rotate(-0.4deg);
+  }
+}
+
+.chef-cutout-shake-a {
+  animation: chef-cutout-wiggle-a 4.8s ease-in-out infinite;
+}
+
+.chef-cutout-shake-b {
+  animation: chef-cutout-wiggle-b 5.2s ease-in-out infinite 0.35s;
+}
+
+.chef-cutout-shake-c {
+  animation: chef-cutout-wiggle-a 5.6s ease-in-out infinite 0.7s;
+}
+
+.chef-cutout-shake-d {
+  animation: chef-cutout-wiggle-b 4.6s ease-in-out infinite 1s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chef-cutout-shake-a,
+  .chef-cutout-shake-b,
+  .chef-cutout-shake-c,
+  .chef-cutout-shake-d {
+    animation: none;
+  }
+}
+
+/* ─── Typewriter cursor ─────────────────────────────────────────────────────────
+   Appended via ::after while the `.typewriting` class is active.
+   Thin I-beam that blinks in a step (not fade) to feel like a real keyboard.
+───────────────────────────────────────────────────────────────────────────── */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes reserva-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+.typewriting::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 0.82em;
+  background: currentColor;
+  margin-left: 3px;
+  vertical-align: -0.06em;
+  border-radius: 1px;
+  animation: cursor-blink 0.65s step-end infinite;
+}
+
+/* ─── Composition notebook lined paper ─────────────────────────────────────────
+   Classic composition book: cream background, blue horizontal rules every 32px,
+   red margin line at 60px from left, stacked paper shadow.
+   Apply to specific text blocks that should feel like a page from a notebook.
+───────────────────────────────────────────────────────────────────────────── */
+.lined-paper {
+  background-color: #fdf8ec;
+  background-image:
+    /* red left margin — composition book signature */
+    linear-gradient(
+      90deg,
+      transparent 60px,
+      rgba(195, 65, 65, 0.22) 60px,
+      rgba(195, 65, 65, 0.22) 62px,
+      transparent 62px
+    ),
+    /* blue horizontal rules every 32px */
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 31px,
+        rgba(130, 180, 218, 0.48) 31px,
+        rgba(130, 180, 218, 0.48) 32px
+      );
+}
+
+/* ─── Instagram collage — scattered paper rotation ─────────────────────────── */
+.paper-scatter-0 {
+  transform: rotate(-1.8deg);
+}
+.paper-scatter-1 {
+  transform: rotate(1.2deg);
+}
+.paper-scatter-2 {
+  transform: rotate(-0.6deg);
+}
+.paper-scatter-3 {
+  transform: rotate(2.1deg);
+}
+.paper-scatter-4 {
+  transform: rotate(-1.4deg);
+}
+.paper-scatter-5 {
+  transform: rotate(0.9deg);
+}
+
+/* ─── Dog-eared image corner ────────────────────────────────────────────────
+   Drop this div inside any overflow:hidden image container.
+   The CSS gradient cuts a triangle from the bottom-right, giving the card
+   a folded-corner look without needing overflow:visible on the parent.
+───────────────────────────────────────────────────────────────────────────── */
+.dog-ear-corner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 4;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(
+    225deg,
+    var(--color-warm-white) 0%,
+    var(--color-warm-white) 50%,
+    transparent 50%
+  );
+  box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.13);
+  transition:
+    width 0.3s ease,
+    height 0.3s ease;
+}
+
+.group:hover .dog-ear-corner {
+  width: 28px;
+  height: 28px;
+}
+
+/* ─── Washi tape strips ──────────────────────────────────────────────────────
+   Semi-transparent pastel strips. Apply width + rotation inline.
+───────────────────────────────────────────────────────────────────────────── */
+.washi {
+  height: 15px;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 5px,
+    rgba(255, 255, 255, 0.18) 5px,
+    rgba(255, 255, 255, 0.18) 6px
+  );
+}
+
+.washi-sage {
+  background-color: rgba(152, 183, 148, 0.4);
+}
+.washi-rose {
+  background-color: rgba(210, 162, 152, 0.36);
+}
+.washi-amber {
+  background-color: rgba(208, 178, 118, 0.4);
+}
+
+/* ─── Chalkboard surface ─────────────────────────────────────────────────────
+   Dark green slate with SVG noise blended in for chalk-dust texture.
+   Use as background on the booking chalkboard container.
+───────────────────────────────────────────────────────────────────────────── */
+.chalkboard-surface {
+  background-color: #2a3d2a;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-blend-mode: soft-light;
+}
+
+/* ─── Chalk input field ──────────────────────────────────────────────────────
+   Transparent background, chalk-style bottom border, white text.
+   Pairs with Special Elite font for the classroom aesthetic.
+───────────────────────────────────────────────────────────────────────────── */
+.chalk-field {
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.38);
+  border-radius: 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-family: var(--font-special);
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  outline: none;
+  width: 100%;
+  padding: 6px 0 4px;
+  caret-color: rgba(255, 255, 255, 0.7);
+  transition: border-color 0.2s ease;
+}
+
+.chalk-field::placeholder {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.chalk-field:focus {
+  border-bottom-color: rgba(255, 255, 255, 0.72);
+}
+
+/* ─── Paper annotation tag ───────────────────────────────────────────────────
+   Looks like a hand-stamped index-card label.
+   Use font-special for the handwritten feel.
+───────────────────────────────────────────────────────────────────────────── */
+.paper-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px 4px 8px;
+  background: #fdf8ec;
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  font-family: var(--font-special);
+  font-size: 10px;
+  letter-spacing: 0.09em;
+  color: rgba(0, 0, 0, 0.58);
+  box-shadow:
+    1px 2px 0 rgba(0, 0, 0, 0.07),
+    2px 4px 0 rgba(0, 0, 0, 0.04);
+  white-space: nowrap;
+}

@@ -1,0 +1,1996 @@
+- generic [ref=e2]:
+    - generic [ref=e3]:
+        - generic [ref=e4]:
+            - region [ref=e7]:
+                - generic [ref=e8]:
+                    - tabpanel [ref=e9]:
+                        - paragraph [ref=e11]:
+                            - link [ref=e12] [cursor=pointer]:
+                                - /url: /collections/within-the-garden-spring-summer-26
+                                - text: SS26 Collection Now Live
+                    - tabpanel [ref=e13]:
+                        - paragraph [ref=e15]:
+                            - link [ref=e16] [cursor=pointer]:
+                                - /url: /collections/rainbow-restock
+                                - text: Rainbow Restock
+                    - tabpanel "1 of 2" [ref=e17]:
+                        - paragraph [ref=e19]:
+                            - link "SS26 Collection Now Live" [ref=e20] [cursor=pointer]:
+                                - /url: /collections/within-the-garden-spring-summer-26
+                    - tabpanel [ref=e21]:
+                        - paragraph [ref=e23]:
+                            - link [ref=e24] [cursor=pointer]:
+                                - /url: /collections/rainbow-restock
+                                - text: Rainbow Restock
+                    - tabpanel [ref=e25]:
+                        - paragraph [ref=e27]:
+                            - link [ref=e28] [cursor=pointer]:
+                                - /url: /collections/within-the-garden-spring-summer-26
+                                - text: SS26 Collection Now Live
+                    - tabpanel [ref=e29]:
+                        - paragraph [ref=e31]:
+                            - link [ref=e32] [cursor=pointer]:
+                                - /url: /collections/rainbow-restock
+                                - text: Rainbow Restock
+            - 'button "Country: United States / $USD" [ref=e36] [cursor=pointer]'
+        - banner [ref=e37]:
+            - generic [ref=e39]:
+                - list [ref=e40]:
+                    - listitem [ref=e41]:
+                        - link "SS26" [ref=e42] [cursor=pointer]:
+                            - /url: /collections/within-the-garden-spring-summer-26
+                    - listitem [ref=e43]:
+                        - link "Shop" [ref=e44] [cursor=pointer]:
+                            - /url: /collections/all
+                    - listitem [ref=e45]:
+                        - link "Journal" [ref=e46] [cursor=pointer]:
+                            - /url: /blogs/news
+                    - listitem [ref=e47]:
+                        - link "Bridal" [ref=e48] [cursor=pointer]:
+                            - /url: /pages/bridal-2
+                    - listitem [ref=e49]:
+                        - link "Our World" [ref=e50] [cursor=pointer]:
+                            - /url: /pages/our-story
+                - link [ref=e52] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=e53]
+                - list [ref=e70]:
+                    - listitem [ref=e71]:
+                        - link "Search" [ref=e72] [cursor=pointer]:
+                            - /url: '#'
+                    - listitem [ref=e73]:
+                        - link "Saved (0)" [ref=e74] [cursor=pointer]:
+                            - /url: /apps/wishlist
+                    - listitem [ref=e75]:
+                        - link "Account" [ref=e76] [cursor=pointer]:
+                            - /url: https://kindredofireland.com/customer_authentication/redirect?locale=en&region_country=US
+                    - text: ( )
+                    - listitem [ref=e77]:
+                        - link "Bag (0)" [ref=e78] [cursor=pointer]:
+                            - /url: /cart
+            - generic:
+                - generic:
+                    - generic:
+                        - link "Shop":
+                            - /url: /collections/all
+                    - generic:
+                        - generic:
+                            - generic:
+                                - generic: Collections
+                                - list:
+                                    - listitem:
+                                        - link "SS26 Within the Garden":
+                                            - /url: /collections/within-the-garden-spring-summer-26
+                                    - listitem:
+                                        - link "Everyday Collection":
+                                            - /url: /collections/the-everyday-collection
+                                    - listitem:
+                                        - link "Signature Collection":
+                                            - /url: /collections/signature-collection
+                                    - listitem:
+                                        - link "Donegal Tweed Collection":
+                                            - /url: /collections/donegal-tweed
+                                    - listitem:
+                                        - link "Rainbow Edit":
+                                            - /url: /collections/rainbow-restock
+                            - generic:
+                                - generic: Categories
+                                - list:
+                                    - listitem:
+                                        - link "Dresses":
+                                            - /url: /collections/dresses
+                                    - listitem:
+                                        - link "Shirts & Blouses":
+                                            - /url: /collections/linen-blouses
+                                    - listitem:
+                                        - link "Coats & Jackets":
+                                            - /url: /collections/coats-jackets
+                                    - listitem:
+                                        - link "Trousers & Skirts":
+                                            - /url: /collections/skirts
+                                    - listitem:
+                                        - link "Shorts":
+                                            - /url: /collections/shorts
+                                    - listitem:
+                                        - link "Loungewear":
+                                            - /url: /collections/loungewear-1
+                                    - listitem:
+                                        - link "Accessories":
+                                            - /url: /collections/accessories
+                                    - listitem:
+                                        - link "Ready to Ship":
+                                            - /url: /collections/ready-to-ship
+                                    - listitem:
+                                        - link "Menswear":
+                                            - /url: /collections/menswear
+                                    - listitem:
+                                        - link "View All":
+                                            - /url: /collections/all
+                            - generic:
+                                - link "Coats & Jackets":
+                                    - /url: /collections/coats-jackets
+                                    - paragraph: Coats & Jackets
+                            - generic:
+                                - link "Shirts & Blouses":
+                                    - /url: /collections/linen-blouses
+                                    - paragraph: Shirts & Blouses
+                - generic:
+                    - generic:
+                        - link "Our World":
+                            - /url: /pages/our-story
+                    - generic:
+                        - generic:
+                            - generic:
+                                - generic: About
+                                - list:
+                                    - listitem:
+                                        - link "House of Kindred":
+                                            - /url: /pages/our-story
+                                    - listitem:
+                                        - link "Founders' Story":
+                                            - /url: /pages/founders-story
+                                    - listitem:
+                                        - link "Craftsmanship":
+                                            - /url: /pages/craft
+                                    - listitem:
+                                        - link "Sustainability":
+                                            - /url: /pages/sustainability
+                                    - listitem:
+                                        - link "Visit Us":
+                                            - /url: /pages/contact
+                            - generic:
+                                - generic: Editorial
+                                - list:
+                                    - listitem:
+                                        - link "Stories":
+                                            - /url: /blogs/news
+                                    - listitem:
+                                        - link "Kindred Spirits":
+                                            - /url: /blogs/kindred-spirits
+                            - generic:
+                                - link "Sustainability":
+                                    - /url: /pages/sustainability
+                                    - paragraph: Sustainability
+                            - generic:
+                                - link "Kindred Spirits":
+                                    - /url: /blogs/kindred-spirits
+                                    - paragraph: Kindred Spirits
+    - main [ref=e79]:
+        - generic [ref=e83]:
+            - heading "Within the Garden" [level=1] [ref=e84]:
+                - emphasis [ref=e85]: Within
+                - text: the Garden
+            - paragraph [ref=e87]:
+                - text: Spring Summer 26 has
+                - emphasis [ref=e88]: arrived
+                - emphasis [ref=e89]: Irish linen
+                - text: for lighter days
+            - link "VIEW COLLECTION" [ref=e91] [cursor=pointer]:
+                - /url: /collections/within-the-garden-spring-summer-26
+        - heading "Our mission We make luxury linen with heritage and heart, breathing new life into the tradition of Irish linen by creating timeless pieces with a contemporary edge." [level=2] [ref=e95]:
+            - generic [ref=e96]: Our mission
+            - text: We make
+            - emphasis [ref=e97]: luxury linen
+            - text: with
+            - emphasis [ref=e98]: heritage
+            - text: and
+            - emphasis [ref=e99]: heart
+            - text: ', breathing new life into the tradition of Irish linen by creating'
+            - emphasis [ref=e100]: timeless pieces
+            - text: with a
+            - emphasis [ref=e101]: contemporary edge
+            - text: .
+        - generic [ref=e104]:
+            - list [ref=e105]:
+                - listitem [ref=e106]:
+                    - link "SS26" [ref=e107] [cursor=pointer]:
+                        - /url: '#'
+                - listitem [ref=e108]:
+                    - link "Signatures" [ref=e109] [cursor=pointer]:
+                        - /url: '#'
+                - listitem [ref=e110]:
+                    - link "Dresses" [ref=e111] [cursor=pointer]:
+                        - /url: '#'
+            - generic [ref=e112]:
+                - generic [ref=e113]:
+                    - region [ref=e114]:
+                        - generic [ref=e115]:
+                            - group "1 of 14" [ref=e116]:
+                                - generic [ref=e117]:
+                                    - generic [ref=e118]:
+                                        - link "RUGBY SHIRT | PRESSED FLOWER PRINT RUGBY SHIRT | PRESSED FLOWER PRINT" [ref=e119] [cursor=pointer]:
+                                            - /url: /collections/within-the-garden-spring-summer-26/products/rugby-shirt-pressed-flower-print
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img "RUGBY SHIRT | PRESSED FLOWER PRINT" [ref=e120]
+                                            - img "RUGBY SHIRT | PRESSED FLOWER PRINT" [ref=e121]
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - generic:
+                                                - list:
+                                                    - listitem:
+                                                        - link "S/M":
+                                                            - /url: '#'
+                                                    - listitem:
+                                                        - link "M/L":
+                                                            - /url: '#'
+                                    - generic [ref=e122]:
+                                        - generic [ref=e123]:
+                                            - heading "Rugby Shirt | Pressed Flower Print" [level=4] [ref=e124]:
+                                                - link "Rugby Shirt | Pressed Flower Print" [ref=e125] [cursor=pointer]:
+                                                    - /url: /collections/within-the-garden-spring-summer-26/products/rugby-shirt-pressed-flower-print
+                                            - generic [ref=e126]: $504.00
+                                        - link [ref=e129] [cursor=pointer]:
+                                            - /url: '#'
+                                            - img [ref=e130]
+                            - group "2 of 14" [ref=e132]:
+                                - generic [ref=e133]:
+                                    - generic [ref=e134]:
+                                        - link "TENNIS SKIRT | TENNIS PRINT TENNIS SKIRT | TENNIS PRINT" [ref=e135] [cursor=pointer]:
+                                            - /url: /collections/within-the-garden-spring-summer-26/products/tennis-skirt-tennis-print
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img "TENNIS SKIRT | TENNIS PRINT" [ref=e136]
+                                            - img "TENNIS SKIRT | TENNIS PRINT" [ref=e137]
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - generic:
+                                                - list:
+                                                    - listitem:
+                                                        - link "S":
+                                                            - /url: '#'
+                                                    - listitem:
+                                                        - link "M":
+                                                            - /url: '#'
+                                                    - listitem:
+                                                        - link "L":
+                                                            - /url: '#'
+                                    - generic [ref=e138]:
+                                        - generic [ref=e139]:
+                                            - heading "Tennis Skirt | Tennis Print" [level=4] [ref=e140]:
+                                                - link "Tennis Skirt | Tennis Print" [ref=e141] [cursor=pointer]:
+                                                    - /url: /collections/within-the-garden-spring-summer-26/products/tennis-skirt-tennis-print
+                                            - generic [ref=e142]: $449.00
+                                        - link [ref=e145] [cursor=pointer]:
+                                            - /url: '#'
+                                            - img [ref=e146]
+                            - group "3 of 14" [ref=e148]:
+                                - generic [ref=e149]:
+                                    - generic [ref=e150]:
+                                        - link "GARDEN PARTY DRESS GARDEN PARTY DRESS" [ref=e151] [cursor=pointer]:
+                                            - /url: /collections/within-the-garden-spring-summer-26/products/garden-party-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img "GARDEN PARTY DRESS" [ref=e152]
+                                            - img "GARDEN PARTY DRESS" [ref=e153]
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - generic:
+                                                - list:
+                                                    - listitem:
+                                                        - link "XS":
+                                                            - /url: '#'
+                                                    - listitem:
+                                                        - link "S":
+                                                            - /url: '#'
+                                                    - listitem:
+                                                        - link "M":
+                                                            - /url: '#'
+                                                    - listitem:
+                                                        - link "L":
+                                                            - /url: '#'
+                                                    - listitem:
+                                                        - link "XL":
+                                                            - /url: '#'
+                                                    - listitem:
+                                                        - link "XXL":
+                                                            - /url: '#'
+                                    - generic [ref=e154]:
+                                        - generic [ref=e155]:
+                                            - heading "Garden Party Dress" [level=4] [ref=e156]:
+                                                - link "Garden Party Dress" [ref=e157] [cursor=pointer]:
+                                                    - /url: /collections/within-the-garden-spring-summer-26/products/garden-party-dress
+                                            - generic [ref=e158]: $780.00
+                                        - link [ref=e161] [cursor=pointer]:
+                                            - /url: '#'
+                                            - img [ref=e162]
+                            - group [ref=e164]:
+                                - generic [ref=e165]:
+                                    - generic [ref=e166]:
+                                        - link [ref=e167] [cursor=pointer]:
+                                            - /url: /collections/within-the-garden-spring-summer-26/products/gardeners-jacket
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img [ref=e168]
+                                            - img [ref=e169]
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L
+                                    - generic [ref=e170]:
+                                        - generic [ref=e171]:
+                                            - heading [level=4] [ref=e172]:
+                                                - link [ref=e173] [cursor=pointer]:
+                                                    - /url: /collections/within-the-garden-spring-summer-26/products/gardeners-jacket
+                                                    - text: Gardener's Jacket
+                                            - generic [ref=e174]: $676.00
+                                        - link [ref=e177] [cursor=pointer]:
+                                            - /url: '#'
+                                            - img [ref=e178]
+                            - group [ref=e180]:
+                                - generic [ref=e181]:
+                                    - generic [ref=e182]:
+                                        - link [ref=e183] [cursor=pointer]:
+                                            - /url: /collections/within-the-garden-spring-summer-26/products/rugby-shirt-limelight
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img [ref=e184]
+                                            - img [ref=e185]
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L
+                                    - generic [ref=e186]:
+                                        - generic [ref=e187]:
+                                            - heading [level=4] [ref=e188]:
+                                                - link [ref=e189] [cursor=pointer]:
+                                                    - /url: /collections/within-the-garden-spring-summer-26/products/rugby-shirt-limelight
+                                                    - text: Rugby Shirt | Limelight
+                                            - generic [ref=e190]: $435.00
+                                        - link [ref=e193] [cursor=pointer]:
+                                            - /url: '#'
+                                            - img [ref=e194]
+                            - group [ref=e196]:
+                                - generic [ref=e197]:
+                                    - generic [ref=e198]:
+                                        - link [ref=e199] [cursor=pointer]:
+                                            - /url: /collections/within-the-garden-spring-summer-26/products/pressed-flower-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img [ref=e200]
+                                            - img [ref=e201]
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L
+                                    - generic [ref=e202]:
+                                        - generic [ref=e203]:
+                                            - heading [level=4] [ref=e204]:
+                                                - link [ref=e205] [cursor=pointer]:
+                                                    - /url: /collections/within-the-garden-spring-summer-26/products/pressed-flower-dress
+                                                    - text: Pressed Flower Dress
+                                            - generic [ref=e206]: $642.00
+                                        - link [ref=e209] [cursor=pointer]:
+                                            - /url: '#'
+                                            - img [ref=e210]
+                            - group [ref=e212]:
+                                - generic [ref=e213]:
+                                    - generic [ref=e214]:
+                                        - link [ref=e215] [cursor=pointer]:
+                                            - /url: /collections/within-the-garden-spring-summer-26/products/pressed-flower-coat-beetled
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img [ref=e216]
+                                            - img [ref=e217]
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L
+                                    - generic [ref=e218]:
+                                        - generic [ref=e219]:
+                                            - heading [level=4] [ref=e220]:
+                                                - link [ref=e221] [cursor=pointer]:
+                                                    - /url: /collections/within-the-garden-spring-summer-26/products/pressed-flower-coat-beetled
+                                                    - text: Pressed Flower Coat | Beetled
+                                            - generic [ref=e222]: $2,276.00
+                                        - link [ref=e225] [cursor=pointer]:
+                                            - /url: '#'
+                                            - img [ref=e226]
+                            - group [ref=e228]:
+                                - generic [ref=e229]:
+                                    - generic [ref=e230]:
+                                        - link [ref=e231] [cursor=pointer]:
+                                            - /url: /collections/within-the-garden-spring-summer-26/products/tennis-shirt-forget-me-not
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img [ref=e232]
+                                            - img [ref=e233]
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: L
+                                    - generic [ref=e234]:
+                                        - generic [ref=e235]:
+                                            - heading [level=4] [ref=e236]:
+                                                - link [ref=e237] [cursor=pointer]:
+                                                    - /url: /collections/within-the-garden-spring-summer-26/products/tennis-shirt-forget-me-not
+                                                    - text: Tennis Shirt | Forget Me Not
+                                            - generic [ref=e238]: $449.00
+                                        - link [ref=e241] [cursor=pointer]:
+                                            - /url: '#'
+                                            - img [ref=e242]
+                            - group [ref=e244]:
+                                - generic [ref=e245]:
+                                    - generic [ref=e246]:
+                                        - link [ref=e247] [cursor=pointer]:
+                                            - /url: /collections/within-the-garden-spring-summer-26/products/picnic-shirt
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img [ref=e248]
+                                            - img [ref=e249]
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L
+                                    - generic [ref=e250]:
+                                        - generic [ref=e251]:
+                                            - heading [level=4] [ref=e252]:
+                                                - link [ref=e253] [cursor=pointer]:
+                                                    - /url: /collections/within-the-garden-spring-summer-26/products/picnic-shirt
+                                                    - text: Picnic Shirt
+                                            - generic [ref=e254]: $497.00
+                                        - link [ref=e257] [cursor=pointer]:
+                                            - /url: '#'
+                                            - img [ref=e258]
+                            - group [ref=e260]:
+                                - generic [ref=e261]:
+                                    - generic [ref=e262]:
+                                        - link [ref=e263] [cursor=pointer]:
+                                            - /url: /collections/within-the-garden-spring-summer-26/products/tennis-skirt-forget-me-not
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img [ref=e264]
+                                            - img [ref=e265]
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: L
+                                    - generic [ref=e266]:
+                                        - generic [ref=e267]:
+                                            - heading [level=4] [ref=e268]:
+                                                - link [ref=e269] [cursor=pointer]:
+                                                    - /url: /collections/within-the-garden-spring-summer-26/products/tennis-skirt-forget-me-not
+                                                    - text: Tennis Skirt | Forget Me Not
+                                            - generic [ref=e270]: $407.00
+                                        - link [ref=e273] [cursor=pointer]:
+                                            - /url: '#'
+                                            - img [ref=e274]
+                            - group [ref=e276]:
+                                - generic [ref=e277]:
+                                    - generic [ref=e278]:
+                                        - link [ref=e279] [cursor=pointer]:
+                                            - /url: /collections/within-the-garden-spring-summer-26/products/gardeners-smock
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img [ref=e280]
+                                            - img [ref=e281]
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L
+                                    - generic [ref=e282]:
+                                        - generic [ref=e283]:
+                                            - heading [level=4] [ref=e284]:
+                                                - link [ref=e285] [cursor=pointer]:
+                                                    - /url: /collections/within-the-garden-spring-summer-26/products/gardeners-smock
+                                                    - text: Gardeners Smock
+                                            - generic [ref=e286]: $449.00
+                                        - link [ref=e289] [cursor=pointer]:
+                                            - /url: '#'
+                                            - img [ref=e290]
+                            - group [ref=e292]:
+                                - generic [ref=e293]:
+                                    - generic [ref=e294]:
+                                        - link [ref=e295] [cursor=pointer]:
+                                            - /url: /collections/within-the-garden-spring-summer-26/products/margot-shirt-tennis-ball-print
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img [ref=e296]
+                                            - img [ref=e297]
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L
+                                    - generic [ref=e298]:
+                                        - generic [ref=e299]:
+                                            - heading [level=4] [ref=e300]:
+                                                - link [ref=e301] [cursor=pointer]:
+                                                    - /url: /collections/within-the-garden-spring-summer-26/products/margot-shirt-tennis-ball-print
+                                                    - text: Margot Shirt | Tennis Ball Print
+                                            - generic [ref=e302]: $442.00
+                                        - link [ref=e305] [cursor=pointer]:
+                                            - /url: '#'
+                                            - img [ref=e306]
+                            - group [ref=e308]:
+                                - generic [ref=e309]:
+                                    - generic [ref=e310]:
+                                        - link [ref=e311] [cursor=pointer]:
+                                            - /url: /collections/within-the-garden-spring-summer-26/products/eden-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img [ref=e312]
+                                            - img [ref=e313]
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L
+                                    - generic [ref=e314]:
+                                        - generic [ref=e315]:
+                                            - heading [level=4] [ref=e316]:
+                                                - link [ref=e317] [cursor=pointer]:
+                                                    - /url: /collections/within-the-garden-spring-summer-26/products/eden-dress
+                                                    - text: Eden Dress
+                                            - generic [ref=e318]: $635.00
+                                        - link [ref=e321] [cursor=pointer]:
+                                            - /url: '#'
+                                            - img [ref=e322]
+                            - group [ref=e324]:
+                                - generic [ref=e325]:
+                                    - generic [ref=e326]:
+                                        - link [ref=e327] [cursor=pointer]:
+                                            - /url: /collections/within-the-garden-spring-summer-26/products/limelight-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img [ref=e328]
+                                            - img [ref=e329]
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: One Size
+                                    - generic [ref=e330]:
+                                        - generic [ref=e331]:
+                                            - heading [level=4] [ref=e332]:
+                                                - link [ref=e333] [cursor=pointer]:
+                                                    - /url: /collections/within-the-garden-spring-summer-26/products/limelight-dress
+                                                    - text: Limelight Dress
+                                            - generic [ref=e334]: $773.00
+                                        - link [ref=e337] [cursor=pointer]:
+                                            - /url: '#'
+                                            - img [ref=e338]
+                    - link "View all" [ref=e341] [cursor=pointer]:
+                        - /url: /collections/within-the-garden-spring-summer-26
+                - generic:
+                    - region:
+                        - generic:
+                            - group "1 of 14":
+                                - generic:
+                                    - generic:
+                                        - generic: Ready to Ship
+                                        - link "THE PUFF DRESS | POPPY THE PUFF DRESS | POPPY":
+                                            - /url: /collections/house-signatures/products/the-puff-dress-poppy
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img "THE PUFF DRESS | POPPY"
+                                            - img "THE PUFF DRESS | POPPY"
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - generic:
+                                                - list:
+                                                    - listitem:
+                                                        - link "SMALL":
+                                                            - /url: '#'
+                                                    - listitem:
+                                                        - link "MEDIUM":
+                                                            - /url: '#'
+                                                    - listitem:
+                                                        - link "LARGE":
+                                                            - /url: '#'
+                                    - generic:
+                                        - generic:
+                                            - heading "The Puff Dress | Poppy" [level=4]:
+                                                - link "The Puff Dress | Poppy":
+                                                    - /url: /collections/house-signatures/products/the-puff-dress-poppy
+                                            - generic: $538.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group "2 of 14":
+                                - generic:
+                                    - generic:
+                                        - link "TWEED JACKET | BROWN TWEED JACKET | BROWN":
+                                            - /url: /collections/house-signatures/products/tweed-jacket-brown
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img "TWEED JACKET | BROWN"
+                                            - img "TWEED JACKET | BROWN"
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - generic:
+                                                - list:
+                                                    - listitem:
+                                                        - link "S/M (8-12)":
+                                                            - /url: '#'
+                                                    - listitem:
+                                                        - link "M/L (14-18)":
+                                                            - /url: '#'
+                                    - generic:
+                                        - generic:
+                                            - heading "Tweed Jacket | Brown" [level=4]:
+                                                - link "Tweed Jacket | Brown":
+                                                    - /url: /collections/house-signatures/products/tweed-jacket-brown
+                                            - generic: $1,097.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group "3 of 14":
+                                - generic:
+                                    - generic:
+                                        - link "BLOOMERS | ECRU BLOOMERS | ECRU":
+                                            - /url: /collections/house-signatures/products/bloomers
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img "BLOOMERS | ECRU"
+                                            - img "BLOOMERS | ECRU"
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - generic:
+                                                - list:
+                                                    - listitem:
+                                                        - link "S/M(8-12)" [disabled]:
+                                                            - /url: '#'
+                                                    - listitem:
+                                                        - link "M/L(12-16)":
+                                                            - /url: '#'
+                                    - generic:
+                                        - generic:
+                                            - heading "Bloomers | Ecru" [level=4]:
+                                                - link "Bloomers | Ecru":
+                                                    - /url: /collections/house-signatures/products/bloomers
+                                            - generic: $407.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/house-signatures/products/cadhla-shirt-white
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/house-signatures/products/cadhla-shirt-white
+                                                    - text: Cadhla Shirt | White
+                                            - generic: $366.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - generic: Ready to Ship
+                                        - link:
+                                            - /url: /collections/house-signatures/products/marshmallow-white
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M
+                                                - listitem:
+                                                    - link [disabled]:
+                                                        - /url: '#'
+                                                        - text: M/L
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/house-signatures/products/marshmallow-white
+                                                    - text: Marshmallow Blouse | White
+                                            - generic: $435.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/house-signatures/products/camille-candy
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S(8-10)
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M(12-14)
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: L(16-18)
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/house-signatures/products/camille-candy
+                                                    - text: Camille Dress | Candy
+                                            - generic: $566.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - generic: Ready to Ship
+                                        - link:
+                                            - /url: /collections/house-signatures/products/cadhla-black-beetled-linen
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: One Size
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/house-signatures/products/cadhla-black-beetled-linen
+                                                    - text: Cadhla Shirt | Black Beetled Linen
+                                            - generic: $469.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/house-signatures/products/bluebell-blouse
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M(6-12)
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L(12-18)
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/house-signatures/products/bluebell-blouse
+                                                    - text: Bluebell Blouse
+                                            - generic: $373.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/house-signatures/products/striped-bloomers
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M(8-12)
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L(14-18)
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/house-signatures/products/striped-bloomers
+                                                    - text: Bloomers | Navy Stripe
+                                            - generic: $407.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/house-signatures/products/the-stella-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link [disabled]:
+                                                        - /url: '#'
+                                                        - text: S/M (8-12)
+                                                - listitem:
+                                                    - link [disabled]:
+                                                        - /url: '#'
+                                                        - text: M/L (14-18)
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/house-signatures/products/the-stella-dress
+                                                    - text: The Stella Dress
+                                            - generic: $552.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/house-signatures/products/pink-tutu
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: Small
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: Medium
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: Large
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/house-signatures/products/pink-tutu
+                                                    - text: Pink Tutu
+                                            - generic: $449.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/house-signatures/products/the-amy-coat
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M(6-12)
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L(12-18)
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/house-signatures/products/the-amy-coat
+                                                    - text: The Amy Coat
+                                            - generic: $2,138.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/house-signatures/products/bow-dress-black-beetled
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: One Size
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/house-signatures/products/bow-dress-black-beetled
+                                                    - text: Bow Dress | Black Beetled
+                                            - generic: $1,724.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/house-signatures/products/bow-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: One Size
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/house-signatures/products/bow-dress
+                                                    - text: Bow Dress | Beetled Taupe
+                                            - generic: $1,724.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                    - generic:
+                        - link "View all":
+                            - /url: /collections/house-signatures
+                - generic:
+                    - region:
+                        - generic:
+                            - group "1 of 14":
+                                - generic:
+                                    - generic:
+                                        - link "EDEN DRESS EDEN DRESS":
+                                            - /url: /collections/dresses/products/eden-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img "EDEN DRESS"
+                                            - img "EDEN DRESS"
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - generic:
+                                                - list:
+                                                    - listitem:
+                                                        - link "S/M":
+                                                            - /url: '#'
+                                                    - listitem:
+                                                        - link "M/L":
+                                                            - /url: '#'
+                                    - generic:
+                                        - generic:
+                                            - heading "Eden Dress" [level=4]:
+                                                - link "Eden Dress":
+                                                    - /url: /collections/dresses/products/eden-dress
+                                            - generic: $635.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group "2 of 14":
+                                - generic:
+                                    - generic:
+                                        - link "THE HOPE DRESS THE HOPE DRESS | This one is pretty special to us. Some of you may remember back whenever lockdown hit, we sourced some rainbow striped deadstock fabric and used it to make scrunchies. The concept was that when you bought one, we gifted one to your chosen":
+                                            - /url: /collections/dresses/products/the-hope-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img "THE HOPE DRESS"
+                                            - img "THE HOPE DRESS | This one is pretty special to us. Some of you may remember back whenever lockdown hit, we sourced some rainbow striped deadstock fabric and used it to make scrunchies. The concept was that when you bought one, we gifted one to your chosen"
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - generic:
+                                                - list:
+                                                    - listitem:
+                                                        - link "S(8-10)":
+                                                            - /url: '#'
+                                                    - listitem:
+                                                        - link "M(12-14)":
+                                                            - /url: '#'
+                                                    - listitem:
+                                                        - link "L(16-18)":
+                                                            - /url: '#'
+                                    - generic:
+                                        - generic:
+                                            - heading "The Hope Dress" [level=4]:
+                                                - link "The Hope Dress":
+                                                    - /url: /collections/dresses/products/the-hope-dress
+                                            - generic: $580.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group "3 of 14":
+                                - generic:
+                                    - generic:
+                                        - link "LIMELIGHT DRESS LIMELIGHT DRESS":
+                                            - /url: /collections/dresses/products/limelight-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img "LIMELIGHT DRESS"
+                                            - img "LIMELIGHT DRESS"
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - generic:
+                                                - list:
+                                                    - listitem:
+                                                        - link "One Size":
+                                                            - /url: '#'
+                                    - generic:
+                                        - generic:
+                                            - heading "Limelight Dress" [level=4]:
+                                                - link "Limelight Dress":
+                                                    - /url: /collections/dresses/products/limelight-dress
+                                            - generic: $773.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/dresses/products/the-stella-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link [disabled]:
+                                                        - /url: '#'
+                                                        - text: S/M (8-12)
+                                                - listitem:
+                                                    - link [disabled]:
+                                                        - /url: '#'
+                                                        - text: M/L (14-18)
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/dresses/products/the-stella-dress
+                                                    - text: The Stella Dress
+                                            - generic: $552.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/dresses/products/camille-candy
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S(8-10)
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M(12-14)
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: L(16-18)
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/dresses/products/camille-candy
+                                                    - text: Camille Dress | Candy
+                                            - generic: $566.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/dresses/products/pressed-flower-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/dresses/products/pressed-flower-dress
+                                                    - text: Pressed Flower Dress
+                                            - generic: $642.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/dresses/products/garden-party-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: XS
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: L
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: XL
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: XXL
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/dresses/products/garden-party-dress
+                                                    - text: Garden Party Dress
+                                            - generic: $780.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/dresses/products/zinnia-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/dresses/products/zinnia-dress
+                                                    - text: Zinnia Dress
+                                            - generic: $669.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/dresses/products/tennis-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/dresses/products/tennis-dress
+                                                    - text: Tennis Dress
+                                            - generic: $525.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/dresses/products/vivienne-dress-pink
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M (8-12)
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L (14-18)
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/dresses/products/vivienne-dress-pink
+                                                    - text: Vivienne Dress | Pink
+                                            - generic: $607.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - generic: Ready to Ship
+                                        - link:
+                                            - /url: /collections/dresses/products/the-puff-dress-poppy
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: SMALL
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: MEDIUM
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: LARGE
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/dresses/products/the-puff-dress-poppy
+                                                    - text: The Puff Dress | Poppy
+                                            - generic: $538.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - generic: Ready to Ship
+                                        - link:
+                                            - /url: /collections/dresses/products/the-puff-dress-mallow
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: SMALL
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: MEDIUM
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: LARGE
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/dresses/products/the-puff-dress-mallow
+                                                    - text: The Puff Dress | Mallow
+                                            - generic: $538.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/dresses/products/bow-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: One Size
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/dresses/products/bow-dress
+                                                    - text: Bow Dress | Beetled Taupe
+                                            - generic: $1,724.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                            - group:
+                                - generic:
+                                    - generic:
+                                        - link:
+                                            - /url: /collections/dresses/products/tillie-dress
+                                            - paragraph:
+                                                - img
+                                            - paragraph:
+                                                - img
+                                            - img
+                                            - img
+                                        - generic:
+                                            - generic:
+                                                - paragraph: Add to bag +
+                                            - list:
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: S/M(6-12)
+                                                - listitem:
+                                                    - link:
+                                                        - /url: '#'
+                                                        - text: M/L(12-18)
+                                    - generic:
+                                        - generic:
+                                            - heading [level=4]:
+                                                - link:
+                                                    - /url: /collections/dresses/products/tillie-dress
+                                                    - text: Tillie Dress | Navy Stripe
+                                            - generic: $525.00
+                                        - generic:
+                                            - generic:
+                                                - link:
+                                                    - /url: '#'
+                                                    - img
+                    - generic:
+                        - link "View all":
+                            - /url: /collections/dresses
+        - list [ref=e345]:
+            - listitem [ref=e346]:
+                - heading "Shirts & Blouses" [level=3] [ref=e347]:
+                    - link "Shirts & Blouses" [ref=e348] [cursor=pointer]:
+                        - /url: /collections/linen-blouses
+            - listitem [ref=e349]:
+                - heading "Dresses" [level=3] [ref=e350]:
+                    - link "Dresses" [ref=e351] [cursor=pointer]:
+                        - /url: /collections/dresses
+            - listitem [ref=e352]:
+                - heading "Coats & Jackets" [level=3] [ref=e353]:
+                    - link "Coats & Jackets" [ref=e354] [cursor=pointer]:
+                        - /url: /collections/coats-jackets
+        - link "Your browser does not support the video tag. Rainbow Restock A feel-good edit made in our signature rainbow linen with a relaxed, wearable shape. These pieces have been created to celebrate colour, lightness and expression, to bring a little bit of fun and happiness into your everyday Discover Edit" [ref=e357] [cursor=pointer]:
+            - /url: /collections/rainbow-restock
+            - generic [ref=e358]:
+                - paragraph [ref=e360]
+                - paragraph [ref=e362]:
+                    - generic [ref=e363]: Your browser does not support the video tag.
+            - generic [ref=e365]:
+                - heading "Rainbow Restock" [level=2] [ref=e366]:
+                    - emphasis [ref=e367]: Rainbow Restock
+                - generic [ref=e368]:
+                    - paragraph [ref=e370]: A feel-good edit made in our signature rainbow linen with a relaxed, wearable shape. These pieces have been created to celebrate colour, lightness and expression, to bring a little bit of fun and happiness into your everyday
+                    - generic [ref=e371]: Discover Edit
+        - link "House Signatures View Collection" [ref=e375] [cursor=pointer]:
+            - /url: /collections/house-signatures
+            - generic [ref=e377]:
+                - heading "House Signatures" [level=2] [ref=e378]
+                - generic [ref=e379]: View Collection
+        - generic [ref=e382]:
+            - generic [ref=e383]:
+                - generic [ref=e385]:
+                    - generic [ref=e386]:
+                        - button [ref=e387]
+                        - button [ref=e388]
+                        - button [ref=e389]
+                    - generic [ref=e391]: 1 / 3
+                - generic [ref=e392]:
+                    - heading "Handmade in Ireland" [level=2] [ref=e394]:
+                        - text: Handmade
+                        - emphasis [ref=e395]: in
+                        - text: Ireland
+                    - generic [ref=e397]: Your browser does not support the video tag.
+                    - paragraph [ref=e400]:
+                        - text: Rooted in the landscape of this island, craftsmanship here is a story of
+                        - emphasis [ref=e401]: patience
+                        - text: ','
+                        - emphasis [ref=e402]: skill
+                        - text: and
+                        - emphasis [ref=e403]: enduring
+                        - emphasis [ref=e404]: tradition
+                        - text: . We are proud to work with and champion local makers and endangered Irish crafts to help keep this heritage alive.
+                    - link "Discover Our Craft" [ref=e407] [cursor=pointer]:
+                        - /url: /pages/craft
+            - generic:
+                - generic:
+                    - generic:
+                        - generic:
+                            - button
+                            - button
+                            - button
+                        - generic: 1 / 3
+                - generic:
+                    - generic:
+                        - heading "Our Founders" [level=2]:
+                            - emphasis: Our
+                            - text: Founders
+                    - generic:
+                        - generic:
+                            - paragraph: 'Kindred of Ireland was founded on a shared vision: to reimagine Irish linen for modern living, rooted in craftsmanship, heritage and story.'
+                    - generic:
+                        - generic:
+                            - link "Meet Our Founders":
+                                - /url: /pages/founders-story
+            - generic:
+                - generic:
+                    - generic: Your browser does not support the video tag.
+                    - generic:
+                        - generic:
+                            - button
+                            - button
+                            - button
+                        - generic: 1 / 3
+                - generic:
+                    - generic:
+                        - heading "Our Bridal Collection" [level=2]:
+                            - text: Our
+                            - emphasis: Bridal
+                            - text: Collection
+                    - generic:
+                        - generic:
+                            - paragraph: Discover our Bridal Collection, a romantic expression of Irish linen for modern brides.
+                    - generic:
+                        - generic:
+                            - link "view collection":
+                                - /url: /pages/bridal-2025
+        - generic [ref=e410]:
+            - generic [ref=e411]:
+                - heading "Stories & Events" [level=2] [ref=e412]
+                - generic [ref=e413]: Discover the Kindred Journal, an editorial space rooted in Irish craft, culture, and storytelling.
+            - region [ref=e415]:
+                - generic [ref=e416]:
+                    - group "1 of 8" [ref=e417]:
+                        - generic [ref=e418]:
+                            - link "Threads of Ambition" [ref=e420] [cursor=pointer]:
+                                - /url: /blogs/news/threads-of-ambition-the-guardian-2026
+                                - img "Threads of Ambition" [ref=e421]
+                            - generic [ref=e422]:
+                                - list [ref=e423]:
+                                    - listitem [ref=e424]: Our World
+                                    - listitem [ref=e425]: 30 days ago
+                                - heading "Threads of Ambition" [level=5] [ref=e426]:
+                                    - link "Threads of Ambition" [ref=e427] [cursor=pointer]:
+                                        - /url: /blogs/news/threads-of-ambition-the-guardian-2026
+                                - paragraph [ref=e429]: Press in The Guardian.
+                    - group "2 of 8" [ref=e430]:
+                        - generic [ref=e431]:
+                            - link "The Art of Beetling" [ref=e433] [cursor=pointer]:
+                                - /url: /blogs/news/the-art-of-beetling
+                                - img "The Art of Beetling" [ref=e434]
+                            - generic [ref=e435]:
+                                - list [ref=e436]:
+                                    - listitem [ref=e437]: Craftsmanship
+                                    - listitem [ref=e438]: 49 days ago
+                                - heading "The Art of Beetling" [level=5] [ref=e439]:
+                                    - link "The Art of Beetling" [ref=e440] [cursor=pointer]:
+                                        - /url: /blogs/news/the-art-of-beetling
+                                - generic [ref=e441]: An ancient linen craft, carried forward.
+                    - group "3 of 8" [ref=e442]:
+                        - generic [ref=e443]:
+                            - link "Walpole's Brands of Tomorrow" [ref=e445] [cursor=pointer]:
+                                - /url: /blogs/news/walpoles-brands-of-tomorrow
+                                - img "Walpole's Brands of Tomorrow" [ref=e446]
+                            - generic [ref=e447]:
+                                - list [ref=e448]:
+                                    - listitem [ref=e449]: Our World
+                                    - listitem [ref=e450]: 73 days ago
+                                - heading "Walpole's Brands of Tomorrow" [level=5] [ref=e451]:
+                                    - link "Walpole's Brands of Tomorrow" [ref=e452] [cursor=pointer]:
+                                        - /url: /blogs/news/walpoles-brands-of-tomorrow
+                                - paragraph [ref=e454]: A milestone moment.
+                    - group [ref=e455]:
+                        - generic [ref=e456]:
+                            - link [ref=e458] [cursor=pointer]:
+                                - /url: /blogs/news/the-irish-brat
+                                - img [ref=e459]
+                            - generic [ref=e460]:
+                                - list [ref=e461]:
+                                    - listitem [ref=e462]: Our World
+                                    - listitem [ref=e463]: 83 days ago
+                                - heading [level=5] [ref=e464]:
+                                    - link [ref=e465] [cursor=pointer]:
+                                        - /url: /blogs/news/the-irish-brat
+                                        - text: The Irish Brat
+                                - paragraph [ref=e467]: A modern interpretation of Ireland’s oldest outer layer
+                    - group [ref=e468]:
+                        - generic [ref=e469]:
+                            - link [ref=e471] [cursor=pointer]:
+                                - /url: /blogs/news/festive-traditions
+                                - img [ref=e472]
+                            - generic [ref=e473]:
+                                - list [ref=e474]:
+                                    - listitem [ref=e475]: Our World
+                                    - listitem [ref=e476]: 1st of December 2025
+                                - heading [level=5] [ref=e477]:
+                                    - link [ref=e478] [cursor=pointer]:
+                                        - /url: /blogs/news/festive-traditions
+                                        - text: Festive Traditions, Reimagined
+                                - paragraph [ref=e480]: A festive interview with Dana Masters on family and keeping traditions alive.
+                    - group [ref=e481]:
+                        - generic [ref=e482]:
+                            - link [ref=e484] [cursor=pointer]:
+                                - /url: /blogs/news/royal-visit-to-mallon-linen
+                                - img [ref=e485]
+                            - generic [ref=e486]:
+                                - list [ref=e487]:
+                                    - listitem [ref=e488]: Craftsmanship
+                                    - listitem [ref=e489]: 14th of October 2025
+                                - heading [level=5] [ref=e490]:
+                                    - link [ref=e491] [cursor=pointer]:
+                                        - /url: /blogs/news/royal-visit-to-mallon-linen
+                                        - text: Royal Visit to Mallon Linen
+                                - paragraph [ref=e493]:
+                                    - text: Welcoming the Prince and Princess of Wales
+                                    - strong [ref=e494]
+                                    - text: to Northern Ireland.
+                    - group [ref=e495]:
+                        - generic [ref=e496]:
+                            - link [ref=e498] [cursor=pointer]:
+                                - /url: /blogs/news/aw25-the-quiet-kingdom
+                                - img [ref=e499]
+                            - generic [ref=e500]:
+                                - list [ref=e501]:
+                                    - listitem [ref=e502]: Collections
+                                    - listitem [ref=e503]: 26th of September 2025
+                                - heading [level=5] [ref=e504]:
+                                    - link [ref=e505] [cursor=pointer]:
+                                        - /url: /blogs/news/aw25-the-quiet-kingdom
+                                        - text: AW25 | The Quiet Kingdom
+                                - paragraph [ref=e507]: A collection for those who still believe in magic.
+                    - group [ref=e508]:
+                        - generic [ref=e509]:
+                            - link [ref=e511] [cursor=pointer]:
+                                - /url: /blogs/news/kindred-spirits-caren
+                                - img [ref=e512]
+                            - generic [ref=e513]:
+                                - list [ref=e514]:
+                                    - listitem [ref=e515]: Kindred Spirits
+                                    - listitem [ref=e516]: 10th of August 2025
+                                - heading [level=5] [ref=e517]:
+                                    - link [ref=e518] [cursor=pointer]:
+                                        - /url: /blogs/news/kindred-spirits-caren
+                                        - text: Kindred Spirits | Caren
+        - link "Follow us on Instagram @kindredofireland" [ref=e521] [cursor=pointer]:
+            - /url: https://www.instagram.com/kindredofireland/
+            - generic [ref=e522]:
+                - heading "Follow us on Instagram" [level=4] [ref=e523]
+                - generic [ref=e524]: '@kindredofireland'
+    - contentinfo [ref=e527]:
+        - generic [ref=e531]:
+            - generic [ref=e532]:
+                - generic [ref=e533]:
+                    - heading "Company" [level=5] [ref=e534]
+                    - list [ref=e535]:
+                        - listitem [ref=e536]:
+                            - link "Story" [ref=e537] [cursor=pointer]:
+                                - /url: /pages/our-story
+                        - listitem [ref=e538]:
+                            - link "Sustainability" [ref=e539] [cursor=pointer]:
+                                - /url: /pages/sustainability
+                        - listitem [ref=e540]:
+                            - link "Craftsmanship" [ref=e541] [cursor=pointer]:
+                                - /url: /pages/craft
+                        - listitem [ref=e542]:
+                            - link "Gift Cards" [ref=e543] [cursor=pointer]:
+                                - /url: /products/kindred-of-ireland-gift-card
+                        - listitem [ref=e544]:
+                            - link "Customer Reviews" [ref=e545] [cursor=pointer]:
+                                - /url: /pages/customer-reviews
+                - generic [ref=e546]:
+                    - heading "Help" [level=5] [ref=e547]
+                    - list [ref=e548]:
+                        - listitem [ref=e549]:
+                            - link "FAQs" [ref=e550] [cursor=pointer]:
+                                - /url: /pages/faqs-2
+                        - listitem [ref=e551]:
+                            - link "Shipping" [ref=e552] [cursor=pointer]:
+                                - /url: /policies/shipping-policy
+                        - listitem [ref=e553]:
+                            - link "Returns & Refunds" [ref=e554] [cursor=pointer]:
+                                - /url: /pages/returns-and-refunds
+                        - listitem [ref=e555]:
+                            - link "Contact" [ref=e556] [cursor=pointer]:
+                                - /url: /pages/contact
+                        - listitem [ref=e557]:
+                            - link "Privacy Policies" [ref=e558] [cursor=pointer]:
+                                - /url: /pages/privacy-policies
+                - generic [ref=e559]:
+                    - heading "Social" [level=5] [ref=e560]
+                    - list [ref=e561]:
+                        - listitem [ref=e562]:
+                            - link "Facebook" [ref=e563] [cursor=pointer]:
+                                - /url: https://www.facebook.com/kindredofireland
+                        - listitem [ref=e564]:
+                            - link "Instagram" [ref=e565] [cursor=pointer]:
+                                - /url: https://www.instagram.com/kindredofireland/
+                        - listitem [ref=e566]:
+                            - link "YouTube" [ref=e567] [cursor=pointer]:
+                                - /url: https://www.youtube.com/channel/UCAbdnwolMmiiKLcTaSr3X-g
+                        - listitem [ref=e568]:
+                            - link "Pinterest" [ref=e569] [cursor=pointer]:
+                                - /url: https://uk.pinterest.com/kindred_of_ireland/
+                - generic [ref=e570]:
+                    - heading "Kindred of Ireland Post" [level=5] [ref=e571]
+                    - generic [ref=e572]: Sign-up to our newsletter to receive updates and offers exclusive to our subscribers
+                    - generic [ref=e587]:
+                        - generic [ref=e589]:
+                            - generic [ref=e590]: Sign up to our newsletter
+                            - textbox "Sign up to our newsletter" [ref=e591]:
+                                - /placeholder: Email
+                        - button "Subscribe" [ref=e592] [cursor=pointer]
+            - generic [ref=e573]:
+                - generic [ref=e574]: © 2026, Kindred of Ireland
+                - list [ref=e575]:
+                    - listitem [ref=e576]:
+                        - link "Terms of Use" [ref=e577] [cursor=pointer]:
+                            - /url: /policies/terms-of-service
+                    - listitem [ref=e578]:
+                        - link "Privacy Policy" [ref=e579] [cursor=pointer]:
+                            - /url: /policies/privacy-policy
+                    - listitem [ref=e580]:
+                        - link "Shipping Policy" [ref=e581] [cursor=pointer]:
+                            - /url: /policies/shipping-policy
