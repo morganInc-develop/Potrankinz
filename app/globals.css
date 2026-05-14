@@ -4,17 +4,23 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-display: var(--font-fraunces);
-  --font-ui: var(--font-dm-sans);
-  --font-special: var(--font-special-elite);
-  --font-body: var(--font-lora);
+  --font-display: var(--font-anton);
+  --font-ui: var(--font-oswald);
+  --font-body: var(--font-dm-sans);
+
+  --color-bg-dark: #0d0a06;
+  --color-gold: #f5c518;
+  --color-hero-green: #1e6b1e;
+  --color-hero-red: #c41e3a;
+  --color-badge-green: #2a7a1a;
+  --color-feature-bg: #0a0a0a;
+  --color-feature-green: #4caf50;
 
   --color-warm-white: rgb(251, 248, 245);
   --color-black: rgb(0, 0, 0);
   --color-overlay-text: rgb(255, 255, 255);
-  --color-olive-dark: #7b1f1f;
-  --color-brand-red: #7b1f1f;
-  --color-brand-green: #3d9b3d;
+  --color-brand-red: #c41e3a;
+  --color-brand-green: #4caf50;
   --color-brand-yellow: #f5c518;
 
   --text-hero: 44px;
@@ -45,9 +51,9 @@
   }
 
   body {
-    background: var(--color-warm-white);
-    color: var(--color-black);
-    font-family: var(--font-ui);
+    background: var(--color-bg-dark);
+    color: #ffffff;
+    font-family: var(--font-body);
   }
 
   a,
@@ -278,6 +284,178 @@ body::before {
   vertical-align: -0.06em;
   border-radius: 1px;
   animation: cursor-blink 0.65s step-end infinite;
+}
+
+/* ─── Feature bar painted edge ─────────────────────────────────────────────── */
+.feature-rugged-band {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E");
+  background-size:
+    42px 42px,
+    42px 42px,
+    220px 220px;
+}
+
+.feature-rugged-band::before,
+.feature-rugged-band::after {
+  content: '';
+  position: absolute;
+  left: -2%;
+  z-index: 4;
+  width: 104%;
+  height: 18px;
+  background: #050505;
+  pointer-events: none;
+}
+
+.feature-rugged-band::before {
+  top: -1px;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 58%,
+    96% 48%,
+    92% 70%,
+    88% 44%,
+    84% 66%,
+    80% 50%,
+    76% 78%,
+    72% 46%,
+    68% 64%,
+    64% 52%,
+    60% 72%,
+    56% 48%,
+    52% 62%,
+    48% 46%,
+    44% 68%,
+    40% 50%,
+    36% 74%,
+    32% 44%,
+    28% 64%,
+    24% 48%,
+    20% 72%,
+    16% 46%,
+    12% 66%,
+    8% 50%,
+    4% 72%,
+    0 58%
+  );
+}
+
+.feature-rugged-band::after {
+  bottom: -1px;
+  clip-path: polygon(
+    0 42%,
+    4% 56%,
+    8% 36%,
+    12% 58%,
+    16% 34%,
+    20% 52%,
+    24% 28%,
+    28% 56%,
+    32% 36%,
+    36% 60%,
+    40% 30%,
+    44% 54%,
+    48% 34%,
+    52% 58%,
+    56% 38%,
+    60% 52%,
+    64% 32%,
+    68% 56%,
+    72% 36%,
+    76% 60%,
+    80% 30%,
+    84% 54%,
+    88% 36%,
+    92% 58%,
+    96% 38%,
+    100% 52%,
+    100% 100%,
+    0 100%
+  );
+}
+
+.feature-paint-edge {
+  position: absolute;
+  left: -4%;
+  z-index: 3;
+  width: 108%;
+  height: 32px;
+  pointer-events: none;
+  opacity: 0.92;
+}
+
+.feature-paint-edge-top {
+  top: 4px;
+  background: linear-gradient(
+    92deg,
+    transparent 0 6%,
+    rgba(76, 175, 80, 0.82) 7% 25%,
+    transparent 31% 42%,
+    rgba(245, 197, 24, 0.78) 45% 62%,
+    transparent 68% 76%,
+    rgba(76, 175, 80, 0.72) 80% 96%,
+    transparent 100%
+  );
+  clip-path: polygon(
+    0 62%,
+    7% 50%,
+    14% 66%,
+    22% 46%,
+    31% 70%,
+    39% 44%,
+    48% 62%,
+    57% 48%,
+    66% 70%,
+    75% 50%,
+    84% 64%,
+    92% 44%,
+    100% 58%,
+    100% 100%,
+    0 100%
+  );
+}
+
+.feature-paint-edge-bottom {
+  bottom: 5px;
+  background: linear-gradient(
+    91deg,
+    rgba(76, 175, 80, 0.82) 0 24%,
+    transparent 28% 34%,
+    rgba(245, 197, 24, 0.88) 38% 73%,
+    transparent 76% 82%,
+    rgba(76, 175, 80, 0.7) 86% 100%
+  );
+  clip-path: polygon(
+    0 30%,
+    7% 48%,
+    14% 34%,
+    23% 54%,
+    31% 28%,
+    41% 50%,
+    50% 32%,
+    59% 56%,
+    68% 36%,
+    76% 52%,
+    85% 30%,
+    93% 48%,
+    100% 34%,
+    100% 72%,
+    92% 84%,
+    83% 66%,
+    74% 88%,
+    65% 70%,
+    55% 92%,
+    46% 68%,
+    36% 84%,
+    27% 72%,
+    17% 90%,
+    8% 68%,
+    0 82%
+  );
 }
 
 /* ─── Composition notebook lined paper ─────────────────────────────────────────
