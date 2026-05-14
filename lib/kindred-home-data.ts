@@ -612,17 +612,16 @@ export const footer = {
       title: 'Restaurant',
       links: [
         { label: 'Menus', href: `${siteRoot}/menu` },
-        { label: 'Reservations', href: `${siteRoot}/reservations` },
-        { label: 'Private Dining', href: `${siteRoot}/private-dining` },
-        { label: 'Gift Cards', href: `${siteRoot}/gift-cards` },
+        { label: 'Book Now', href: `${siteRoot}/booking` },
+        { label: 'Services', href: `${siteRoot}/services` },
         { label: 'Contact', href: `${siteRoot}/contact` },
       ],
     },
     {
       title: 'Visit',
       links: [
-        { label: 'Hours', href: `${siteRoot}/hours` },
-        { label: 'Location', href: `${siteRoot}/location` },
+        { label: 'Hours', href: `${siteRoot}/contact` },
+        { label: 'Location', href: `${siteRoot}/contact` },
         { label: 'Accessibility', href: `${siteRoot}/accessibility` },
         { label: 'Careers', href: `${siteRoot}/careers` },
         { label: 'Press', href: `${siteRoot}/press` },
@@ -637,6 +636,18 @@ export const footer = {
         { label: 'Resy', href: 'https://resy.com/' },
       ],
     },
+  ],
+  hours: [
+    'Tue-Thu 11am-8pm',
+    'Fri-Sat 11am-10pm',
+    'Sun 12pm-6pm',
+    'Mon closed',
+  ],
+  contactLines: ['Florida & beyond', 'Catering inquiries welcome'],
+  externalLinks: [
+    { label: 'Google Maps', href: 'https://maps.google.com/' },
+    { label: 'Yelp', href: 'https://www.yelp.com/' },
+    { label: 'DoorDash', href: 'https://www.doordash.com/' },
   ],
   legalLinks: [
     { label: 'Terms of Use', href: `${siteRoot}/terms` },

@@ -6,7 +6,7 @@ import {
   UtensilsCrossed,
   CalendarDays,
   Mail,
-  Sparkles,
+  ChefHat,
   BookOpen,
 } from 'lucide-react'
 
@@ -28,7 +28,7 @@ const PAPER_GRAIN = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/200
 const NAV_ICONS: Record<string, React.ElementType> = {
   menu: UtensilsCrossed,
   contact: Mail,
-  services: Sparkles,
+  services: ChefHat,
   reservations: CalendarDays,
   'book now': BookOpen,
 }

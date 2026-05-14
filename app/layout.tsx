@@ -30,6 +30,11 @@ export const metadata: Metadata = {
     template: '%s | Potrankinz',
   },
   description: 'Soul food and catering done right in Florida and beyond.',
+  icons: {
+    icon: '/hero-chefs/cutouts/pot-rankinz-logo.png',
+    shortcut: '/hero-chefs/cutouts/pot-rankinz-logo.png',
+    apple: '/hero-chefs/cutouts/pot-rankinz-logo.png',
+  },
   openGraph: {
     title: 'Potrankinz',
     description: 'Soul food and catering done right in Florida and beyond.',

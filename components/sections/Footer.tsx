@@ -45,6 +45,9 @@ interface FooterProps {
   newsletterDescription: string
   columns: FooterColumn[]
   legalLinks: FooterLink[]
+  hours?: string[]
+  contactLines?: string[]
+  externalLinks?: FooterLink[]
 }
 
 export default function Footer({
@@ -53,6 +56,9 @@ export default function Footer({
   newsletterDescription,
   columns,
   legalLinks,
+  hours = [],
+  contactLines = [],
+  externalLinks = [],
 }: FooterProps) {
   return (
     <footer className="relative overflow-hidden bg-warm-white">
@@ -109,6 +115,46 @@ export default function Footer({
                   <p className="mt-4 max-w-[28rem] font-ui text-[14px] leading-[1.6] text-black/72">
                     {newsletterDescription}
                   </p>
+                  {(hours.length > 0 || externalLinks.length > 0) && (
+                    <div className="mt-7 grid gap-5 border-t border-black/10 pt-6 sm:grid-cols-2">
+                      {hours.length > 0 && (
+                        <div>
+                          <div className="font-ui text-[10px] uppercase tracking-[0.2em] text-black/46">
+                            Hours
+                          </div>
+                          <ul className="mt-3 space-y-1.5">
+                            {hours.map((line) => (
+                              <li
+                                key={line}
+                                className="font-ui text-[12px] leading-[1.55] text-black/68"
+                              >
+                                {line}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {externalLinks.length > 0 && (
+                        <div>
+                          <div className="font-ui text-[10px] uppercase tracking-[0.2em] text-black/46">
+                            External Links
+                          </div>
+                          <ul className="mt-3 space-y-1.5">
+                            {externalLinks.map((link) => (
+                              <li key={link.label}>
+                                <HomepageLink
+                                  href={link.href}
+                                  className="font-ui text-[12px] uppercase tracking-[0.12em] text-black/70 transition-colors hover:text-[#3D9B3D]"
+                                >
+                                  {link.label}
+                                </HomepageLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  )}
                   <div className="mt-8">
                     <div className="font-ui text-[11px] uppercase tracking-[0.2em] text-black">
                       Sign up to our newsletter
@@ -133,6 +179,44 @@ export default function Footer({
                 <p className="mt-4 font-ui text-[15px] leading-[1.6] text-black/72">
                   {newsletterDescription}
                 </p>
+                {(hours.length > 0 || contactLines.length > 0) && (
+                  <div className="mt-7 grid gap-5 border-t border-black/10 pt-6 sm:grid-cols-2">
+                    {hours.length > 0 && (
+                      <div>
+                        <div className="font-ui text-[10px] uppercase tracking-[0.2em] text-black/46">
+                          Hours
+                        </div>
+                        <ul className="mt-3 space-y-1.5">
+                          {hours.map((line) => (
+                            <li
+                              key={line}
+                              className="font-ui text-[12px] leading-[1.55] text-black/68"
+                            >
+                              {line}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    {contactLines.length > 0 && (
+                      <div>
+                        <div className="font-ui text-[10px] uppercase tracking-[0.2em] text-black/46">
+                          Contact
+                        </div>
+                        <ul className="mt-3 space-y-1.5">
+                          {contactLines.map((line) => (
+                            <li
+                              key={line}
+                              className="font-ui text-[12px] leading-[1.55] text-black/68"
+                            >
+                              {line}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
                 <div className="mt-8">
                   <div className="font-ui text-[11px] uppercase tracking-[0.2em] text-black">
                     Sign up to our newsletter
@@ -165,6 +249,25 @@ export default function Footer({
                         </AccordionContent>
                       </AccordionItem>
                     ))}
+                    {externalLinks.length > 0 && (
+                      <AccordionItem value="External Links">
+                        <AccordionTrigger>External Links</AccordionTrigger>
+                        <AccordionContent>
+                          <ul className="space-y-3">
+                            {externalLinks.map((link) => (
+                              <li key={link.label}>
+                                <HomepageLink
+                                  href={link.href}
+                                  className="font-ui text-[11px] uppercase tracking-[0.15em] text-black/72"
+                                >
+                                  {link.label}
+                                </HomepageLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </AccordionContent>
+                      </AccordionItem>
+                    )}
                   </Accordion>
                 </div>
               </div>

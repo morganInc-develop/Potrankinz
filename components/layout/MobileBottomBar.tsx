@@ -1,7 +1,7 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { UtensilsCrossed, Mail, Sparkles, BookOpen } from 'lucide-react'
+import { UtensilsCrossed, Mail, ChefHat, BookOpen } from 'lucide-react'
 import Link from 'next/link'
 
 import { navLinks } from '@/lib/kindred-home-data'
@@ -9,7 +9,7 @@ import { navLinks } from '@/lib/kindred-home-data'
 const ICONS: Record<string, React.ElementType> = {
   menu: UtensilsCrossed,
   contact: Mail,
-  services: Sparkles,
+  services: ChefHat,
   'book now': BookOpen,
 }
 

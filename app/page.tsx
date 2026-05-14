@@ -1,6 +1,9 @@
 import NavBar from '@/components/layout/NavBar'
 import HeroSection from '@/components/sections/HeroSection'
 import FeatureBar from '@/components/sections/FeatureBar'
+import { HomepageCompletionSections } from '@/components/sections/HomepageSections'
+import Footer from '@/components/sections/Footer'
+import { footer } from '@/lib/kindred-home-data'
 
 export default function Home() {
   return (
@@ -8,6 +11,8 @@ export default function Home() {
       <NavBar />
       <HeroSection />
       <FeatureBar />
+      <HomepageCompletionSections />
+      <Footer {...footer} />
     </main>
   )
 }
