@@ -1,10 +1,12 @@
 import Link from 'next/link'
+import type { CSSProperties } from 'react'
 
 import { cn } from '@/lib/utils'
 
 interface HomepageLinkProps {
   href: string
   className?: string
+  style?: CSSProperties
   children: React.ReactNode
   homepageOnly?: boolean
 }
@@ -16,6 +18,7 @@ function isInternalTarget(href: string) {
 export default function HomepageLink({
   href,
   className,
+  style,
   children,
   homepageOnly = false,
 }: HomepageLinkProps) {
@@ -25,6 +28,7 @@ export default function HomepageLink({
         aria-disabled="true"
         title="Homepage focus mode"
         className={cn('cursor-default', className)}
+        style={style}
       >
         {children}
       </span>
@@ -33,14 +37,14 @@ export default function HomepageLink({
 
   if (href === '/') {
     return (
-      <Link href={href} className={className}>
+      <Link href={href} className={className} style={style}>
         {children}
       </Link>
     )
   }
 
   return (
-    <a href={href} className={className}>
+    <a href={href} className={className} style={style}>
       {children}
     </a>
   )

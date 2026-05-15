@@ -225,7 +225,9 @@ export function AboutPreview() {
 
 export function MenuPreview() {
   const featured = menuItems
-    .filter((item) => ['tagliatelle', 'pork', 'panna-cotta'].includes(item.id))
+    .filter((item) =>
+      ['curry-goat', 'jerk-chicken', 'ackee-saltfish'].includes(item.id),
+    )
     .slice(0, 3)
 
   return (

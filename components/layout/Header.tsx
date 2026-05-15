@@ -36,25 +36,17 @@ const NAV_ICONS: Record<string, React.ElementType> = {
 function NavIcon({ label, className }: { label: string; className?: string }) {
   const Icon = NAV_ICONS[label.toLowerCase()]
   if (!Icon) return null
-  return <Icon size={13} className={className} strokeWidth={1.6} />
+  return <Icon size={17} className={className} strokeWidth={1.9} />
 }
 
-function HeaderNav({
-  links,
-  scrolled,
-}: {
-  links: HeaderLink[]
-  scrolled: boolean
-}) {
+function HeaderNav({ links }: { links: HeaderLink[] }) {
   return (
-    <nav className="hidden items-center gap-7 lg:flex">
+    <nav className="hidden items-center gap-8 lg:flex">
       {links.map((link) => (
         <HomepageLink
           key={link.label}
           href={link.href}
-          className={`pointer-events-auto flex items-center gap-1.5 font-ui text-[11px] uppercase tracking-[0.2em] transition-colors duration-500 hover:opacity-60 ${
-            scrolled ? 'text-black/75' : 'text-white drop-shadow-sm'
-          }`}
+          className="pointer-events-auto flex items-center gap-2 font-ui text-[13px] uppercase tracking-[0.19em] text-white/78 transition-colors duration-300 hover:text-[#F5C518]"
         >
           <NavIcon label={link.label} />
           {link.label}
@@ -82,11 +74,11 @@ export default function Header({ leftLinks, rightLinks }: HeaderProps) {
     >
       {/* Paper backing (fades in on scroll) */}
       <motion.div
-        animate={{ opacity: scrolled ? 1 : 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.38 }}
         className="pointer-events-none absolute inset-0"
         style={{
-          background: 'rgba(251, 248, 245, 0.96)',
+          background: 'rgba(23, 23, 23, 0.94)',
           backdropFilter: 'blur(10px)',
           WebkitBackdropFilter: 'blur(10px)',
           backgroundImage: PAPER_GRAIN,
@@ -96,18 +88,18 @@ export default function Header({ leftLinks, rightLinks }: HeaderProps) {
 
       {/* Stacked paper shadow lines at bottom */}
       <motion.div
-        animate={{ opacity: scrolled ? 1 : 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.38 }}
         className="pointer-events-none absolute inset-x-0 bottom-0 h-px"
         style={{
           boxShadow:
-            '0 1px 0 0 #e8e2d8, 0 3px 0 0 #ddd7cc, 0 8px 18px rgba(0,0,0,0.06)',
+            '0 1px 0 0 rgba(255,255,255,0.08), 0 3px 0 0 rgba(0,0,0,0.28), 0 8px 18px rgba(0,0,0,0.18)',
         }}
       />
 
       {/* Wavy paper drip */}
       <motion.div
-        animate={{ opacity: scrolled ? 1 : 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.38 }}
         className="pointer-events-none absolute inset-x-0 bottom-0"
         style={{ height: 9, transform: 'translateY(100%)' }}
@@ -119,34 +111,34 @@ export default function Header({ leftLinks, rightLinks }: HeaderProps) {
         >
           <path
             d="M0,4.5 Q80,9 160,4.5 Q240,0 320,4.5 Q400,9 480,4.5 Q560,0 640,4.5 Q720,9 800,4.5 Q880,0 960,4.5 Q1040,9 1120,4.5 Q1200,0 1280,4.5 Q1360,9 1440,4.5 L1440,9 L0,9 Z"
-            fill="rgba(251,248,245,0.96)"
+            fill="rgba(23,23,23,0.94)"
           />
         </svg>
       </motion.div>
 
       {/* Nav content */}
-      <div className="relative z-10 grid grid-cols-1 items-start py-4 lg:grid-cols-[1fr_auto_1fr]">
-        <HeaderNav links={leftLinks} scrolled={scrolled} />
+      <div className="relative z-10 grid grid-cols-1 items-center py-4 lg:grid-cols-[1fr_auto_1fr]">
+        <HeaderNav links={leftLinks} />
 
         <HomepageLink
           href="/"
-          className={`pointer-events-auto mx-auto flex flex-col items-center text-center transition-colors duration-500 ${
-            scrolled ? 'text-black' : 'text-white drop-shadow-sm'
-          }`}
+          className="pointer-events-auto mx-auto flex flex-col items-center text-center drop-shadow-sm"
+          aria-label={restaurantName}
         >
           <span className="font-ui text-[17px] uppercase tracking-[0.36em] md:text-[21px] md:tracking-[0.42em]">
-            {restaurantName.split(' ').slice(0, 2).join(' ')}
+            <span style={{ color: '#C41E3A' }}>Pot</span>
+            <span style={{ color: '#F5C518' }}>Rankinz</span>
           </span>
           <span
             className="mt-1 font-ui text-[9px] uppercase tracking-[0.35em] md:text-[10px]"
-            style={{ color: scrolled ? '#3D9B3D' : 'inherit' }}
+            style={{ color: '#3D9B3D' }}
           >
-            {restaurantName.split(' ')[2]}
+            Kitchen
           </span>
         </HomepageLink>
 
         <div className="justify-self-end">
-          <HeaderNav links={rightLinks} scrolled={scrolled} />
+          <HeaderNav links={rightLinks} />
         </div>
       </div>
     </header>

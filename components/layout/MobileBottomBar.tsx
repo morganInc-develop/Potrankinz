@@ -28,18 +28,21 @@ export default function MobileBottomBar() {
         <div className="grid grid-cols-4">
           {allLinks.map((link) => {
             const Icon = ICONS[link.label.toLowerCase()]
+            const isBookNow = link.label.toLowerCase() === 'book now'
             return (
               <Link
                 key={link.label}
                 href={link.href}
-                className="flex min-h-16 flex-col items-center justify-center gap-1"
-                style={
-                  link.label.toLowerCase() === 'book now'
-                    ? { color: '#3D9B3D' }
-                    : undefined
-                }
+                className="flex min-h-16 flex-col items-center justify-center gap-1 transition-colors"
+                style={isBookNow ? { color: '#1E6B1E' } : { color: '#191919' }}
               >
-                {Icon && <Icon className="h-4 w-4" strokeWidth={1.6} />}
+                {Icon && (
+                  <Icon
+                    className="h-4 w-4"
+                    strokeWidth={1.9}
+                    style={isBookNow ? { color: '#1E6B1E' } : undefined}
+                  />
+                )}
                 <span className="font-ui text-[10px] uppercase tracking-[0.15em]">
                   {link.label}
                 </span>

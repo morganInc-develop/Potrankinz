@@ -1,6 +1,7 @@
 interface TornEdgeProps {
   variant?: 1 | 2 | 3
   flip?: boolean
+  fill?: string
   className?: string
 }
 
@@ -14,13 +15,14 @@ const PATHS: Record<1 | 2 | 3, string> = {
 export default function TornEdge({
   variant = 1,
   flip = false,
+  fill = '#fbf8f5',
   className = '',
 }: TornEdgeProps) {
   return (
     <div
       aria-hidden
       className={`pointer-events-none relative z-10 w-full ${className}`}
-      style={{ height: 52, marginTop: -52 }}
+      style={{ height: 52, marginBottom: -52 }}
     >
       <svg
         width="100%"
@@ -34,7 +36,7 @@ export default function TornEdge({
           filter: 'drop-shadow(0 4px 5px rgba(0,0,0,0.09))',
         }}
       >
-        <path d={PATHS[variant]} fill="#fbf8f5" />
+        <path d={PATHS[variant]} fill={fill} />
       </svg>
     </div>
   )
