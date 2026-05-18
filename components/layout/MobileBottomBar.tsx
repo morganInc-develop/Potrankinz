@@ -31,7 +31,7 @@ export default function MobileBottomBar() {
         animate={{ y: 0 }}
         exit={{ y: 72 }}
         transition={{ duration: 0.55, ease: [0.3, 0, 0, 1], delay: 0.3 }}
-        className="fixed inset-x-0 bottom-0 z-[80] border-t border-[#7B1F1F]/30 bg-warm-white md:hidden"
+        className="fixed inset-x-0 bottom-0 z-[80] border-t border-white/10 bg-[#171717]/95 shadow-[0_-8px_24px_rgba(0,0,0,0.28)] backdrop-blur-md md:hidden"
       >
         <div
           className="grid"
@@ -48,14 +48,14 @@ export default function MobileBottomBar() {
                 key={link.label}
                 href={link.href}
                 className="flex min-h-16 flex-col items-center justify-center gap-1 transition-colors"
-                style={isBookNow ? { color: '#1E6B1E' } : { color: '#191919' }}
+                style={isBookNow ? { color: '#4CAF50' } : { color: '#FFFFFFC7' }}
               >
                 {Icon && (
                   <span className="relative">
                     <Icon
                       className="h-4 w-4"
                       strokeWidth={1.9}
-                      style={isBookNow ? { color: '#1E6B1E' } : undefined}
+                      style={isBookNow ? { color: '#4CAF50' } : undefined}
                     />
                     {isCart && (
                       <CartNavBadge className="absolute -right-3 -top-3" />
