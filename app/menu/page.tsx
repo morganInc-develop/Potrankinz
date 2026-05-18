@@ -19,6 +19,7 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
+import AddToCartButton from '@/components/cart/AddToCartButton'
 import AnnouncementBar from '@/components/layout/AnnouncementBar'
 import Header from '@/components/layout/Header'
 import MobileBottomBar from '@/components/layout/MobileBottomBar'
@@ -34,6 +35,7 @@ import {
   type MenuCategory,
   type MenuItem,
 } from '@/lib/kindred-home-data'
+import { cartProductFromMenu, yardBoxProduct } from '@/lib/cart-products'
 
 const ease = [0.33, 1, 0.68, 1] as const
 
@@ -498,6 +500,8 @@ function CategoryTabs({
 }
 
 function MenuPosterCard({ item, index }: { item: MenuItem; index: number }) {
+  const product = cartProductFromMenu(item)
+
   return (
     <motion.article
       className="group grid gap-4 border-b border-white/12 pb-6 md:grid-cols-[8.5rem_1fr_auto]"
@@ -539,19 +543,26 @@ function MenuPosterCard({ item, index }: { item: MenuItem; index: number }) {
           </p>
         )}
       </div>
-      <div className="flex md:justify-end">
+      <div className="flex flex-wrap items-center gap-3 md:flex-col md:items-end">
         <span
           className="grid h-16 min-w-16 place-items-center bg-[#1E6B1E] px-3 text-center font-ui text-xl font-bold text-white"
           style={{ clipPath: ROUGH_BTN }}
         >
           {item.price}
         </span>
+        <AddToCartButton
+          product={product}
+          style={{ clipPath: ROUGH_BTN }}
+          disabledLabel="Quote"
+        />
       </div>
     </motion.article>
   )
 }
 
 function PriceLine({ item, index }: { item: MenuItem; index: number }) {
+  const product = cartProductFromMenu(item)
+
   return (
     <motion.div
       className="group"
@@ -560,7 +571,7 @@ function PriceLine({ item, index }: { item: MenuItem; index: number }) {
       viewport={{ once: true, amount: 0.5 }}
       transition={{ duration: 0.42, delay: index * 0.045 }}
     >
-      <div className="flex items-baseline gap-3">
+      <div className="flex flex-wrap items-center gap-3">
         <h3 className="shrink-0 font-ui text-[clamp(1.05rem,2vw,1.42rem)] font-bold uppercase tracking-[0.04em] text-white">
           {item.title}
         </h3>
@@ -568,6 +579,11 @@ function PriceLine({ item, index }: { item: MenuItem; index: number }) {
         <span className="font-ui text-[clamp(1.1rem,2vw,1.55rem)] font-bold text-[#F5C518]">
           {item.price}
         </span>
+        <AddToCartButton
+          product={product}
+          style={{ clipPath: ROUGH_BTN }}
+          disabledLabel="Quote"
+        />
       </div>
       <p className="mt-1 max-w-xl text-sm leading-6 text-white/54">
         {item.description}
@@ -699,6 +715,12 @@ function YardBoxCombo() {
             <br />
             Yaad style.
           </p>
+          <AddToCartButton
+            product={yardBoxProduct}
+            label="Add box"
+            className="w-fit bg-black text-white hover:bg-[#C41E3A] hover:text-white"
+            style={{ clipPath: ROUGH_BTN }}
+          />
         </motion.div>
       </div>
     </section>

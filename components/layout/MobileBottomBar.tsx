@@ -1,13 +1,21 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { UtensilsCrossed, Mail, ChefHat, BookOpen } from 'lucide-react'
+import {
+  UtensilsCrossed,
+  Mail,
+  ChefHat,
+  BookOpen,
+  ShoppingCart,
+} from 'lucide-react'
 import Link from 'next/link'
 
+import CartNavBadge from '@/components/cart/CartNavBadge'
 import { navLinks } from '@/lib/kindred-home-data'
 
 const ICONS: Record<string, React.ElementType> = {
   menu: UtensilsCrossed,
+  cart: ShoppingCart,
   contact: Mail,
   services: ChefHat,
   'book now': BookOpen,
@@ -25,9 +33,15 @@ export default function MobileBottomBar() {
         transition={{ duration: 0.55, ease: [0.3, 0, 0, 1], delay: 0.3 }}
         className="fixed inset-x-0 bottom-0 z-[80] border-t border-[#7B1F1F]/30 bg-warm-white md:hidden"
       >
-        <div className="grid grid-cols-4">
+        <div
+          className="grid"
+          style={{
+            gridTemplateColumns: `repeat(${allLinks.length}, minmax(0, 1fr))`,
+          }}
+        >
           {allLinks.map((link) => {
             const Icon = ICONS[link.label.toLowerCase()]
+            const isCart = link.label.toLowerCase() === 'cart'
             const isBookNow = link.label.toLowerCase() === 'book now'
             return (
               <Link
@@ -37,11 +51,16 @@ export default function MobileBottomBar() {
                 style={isBookNow ? { color: '#1E6B1E' } : { color: '#191919' }}
               >
                 {Icon && (
-                  <Icon
-                    className="h-4 w-4"
-                    strokeWidth={1.9}
-                    style={isBookNow ? { color: '#1E6B1E' } : undefined}
-                  />
+                  <span className="relative">
+                    <Icon
+                      className="h-4 w-4"
+                      strokeWidth={1.9}
+                      style={isBookNow ? { color: '#1E6B1E' } : undefined}
+                    />
+                    {isCart && (
+                      <CartNavBadge className="absolute -right-3 -top-3" />
+                    )}
+                  </span>
                 )}
                 <span className="font-ui text-[10px] uppercase tracking-[0.15em]">
                   {link.label}

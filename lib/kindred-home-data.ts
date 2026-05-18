@@ -496,6 +496,7 @@ export const announcementMessages = [
 export const navLinks = {
   left: [
     { label: 'Menu', href: `/menu` },
+    { label: 'Cart', href: `/cart` },
     { label: 'Contact', href: `/contact` },
   ],
   right: [

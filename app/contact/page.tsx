@@ -102,13 +102,7 @@ function ContactHero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.75 }}
       >
-        <div className="flex items-center justify-between gap-6">
-          <HomepageLink
-            href="/"
-            className="font-ui text-[12px] font-bold uppercase tracking-[0.18em]"
-          >
-            Home
-          </HomepageLink>
+        <div className="flex justify-center">
           <Image
             src="/hero-chefs/cutouts/pot-rankinz-logo.png"
             alt="Pot Rankinz Kitchen"
@@ -116,12 +110,6 @@ function ContactHero() {
             height={70}
             className="h-16 w-16 object-contain"
           />
-          <HomepageLink
-            href="/booking"
-            className="font-ui text-[12px] font-bold uppercase tracking-[0.18em]"
-          >
-            Book
-          </HomepageLink>
         </div>
 
         <div className="relative mt-16 text-center md:mt-20">
@@ -143,7 +131,10 @@ function ContactHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.28 }}
           >
-            Connect with Pot Rankinz
+            <span className="text-[#C41E3A]">Connect</span>{' '}
+            <span className="text-[#F5C518]">with</span>{' '}
+            <span className="text-[#1E6B1E]">Pot</span>{' '}
+            <span className="text-[#C41E3A]">Rankinz</span>
           </motion.h1>
           <motion.p
             className="relative z-10 mx-auto mt-5 max-w-2xl text-base leading-7 text-black/62 md:text-lg"
@@ -160,7 +151,7 @@ function ContactHero() {
           {contactImages.map((image, i) => (
             <motion.div
               key={image.label}
-              className={`relative overflow-hidden bg-black ${image.className}`}
+              className={`group relative overflow-hidden bg-black ${image.className}`}
               style={{ aspectRatio: i === 2 ? '4/5.1' : '4/5.8' }}
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -171,7 +162,7 @@ function ContactHero() {
                 alt="Pot Rankinz kitchen and food"
                 fill
                 sizes="(min-width: 768px) 18vw, 45vw"
-                className="object-cover grayscale"
+                className="object-cover grayscale transition-[filter,transform] duration-500 ease-out group-hover:scale-105 group-hover:grayscale-0"
               />
               <span className="absolute left-3 top-3 bg-warm-white px-2 py-1 font-ui text-[11px] font-bold text-black">
                 {image.label}

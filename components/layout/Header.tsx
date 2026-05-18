@@ -8,8 +8,10 @@ import {
   Mail,
   ChefHat,
   BookOpen,
+  ShoppingCart,
 } from 'lucide-react'
 
+import CartNavBadge from '@/components/cart/CartNavBadge'
 import HomepageLink from '@/components/ui/homepage-link'
 import { restaurantName } from '@/lib/kindred-home-data'
 
@@ -28,6 +30,7 @@ const PAPER_GRAIN = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/200
 const NAV_ICONS: Record<string, React.ElementType> = {
   menu: UtensilsCrossed,
   contact: Mail,
+  cart: ShoppingCart,
   services: ChefHat,
   reservations: CalendarDays,
   'book now': BookOpen,
@@ -42,16 +45,23 @@ function NavIcon({ label, className }: { label: string; className?: string }) {
 function HeaderNav({ links }: { links: HeaderLink[] }) {
   return (
     <nav className="hidden items-center gap-8 lg:flex">
-      {links.map((link) => (
-        <HomepageLink
-          key={link.label}
-          href={link.href}
-          className="pointer-events-auto flex items-center gap-2 font-ui text-[13px] uppercase tracking-[0.19em] text-white/78 transition-colors duration-300 hover:text-[#F5C518]"
-        >
-          <NavIcon label={link.label} />
-          {link.label}
-        </HomepageLink>
-      ))}
+      {links.map((link) => {
+        const isCart = link.label.toLowerCase() === 'cart'
+
+        return (
+          <HomepageLink
+            key={link.label}
+            href={link.href}
+            className="pointer-events-auto relative flex items-center gap-2 font-ui text-[13px] uppercase tracking-[0.19em] text-white/78 transition-colors duration-300 hover:text-[#F5C518]"
+          >
+            <span className="relative">
+              <NavIcon label={link.label} />
+              {isCart && <CartNavBadge className="absolute -right-3 -top-3" />}
+            </span>
+            {link.label}
+          </HomepageLink>
+        )
+      })}
     </nav>
   )
 }

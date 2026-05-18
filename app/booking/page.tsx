@@ -59,8 +59,15 @@ const foodGallery = [
 
 function BookingHero() {
   return (
-    <section className="relative overflow-hidden bg-[#454932] px-5 pb-16 pt-36 text-[#F8DCA7] md:px-8 md:pb-24 md:pt-40 lg:px-14">
-      <div className="mx-auto grid max-w-[92rem] overflow-hidden bg-[#222515] shadow-[0_30px_80px_rgba(0,0,0,0.28)] lg:grid-cols-[0.95fr_1fr]">
+    <section className="relative overflow-hidden bg-[#050505] px-5 pb-16 pt-36 text-white md:px-8 md:pb-24 md:pt-40 lg:px-14">
+      <div
+        className="absolute inset-0 opacity-70"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle at 18% 20%, rgba(196,30,58,0.22), transparent 28%), radial-gradient(circle at 82% 24%, rgba(245,197,24,0.18), transparent 26%), radial-gradient(circle at 48% 88%, rgba(76,175,80,0.16), transparent 34%)',
+        }}
+      />
+      <div className="relative mx-auto grid max-w-[92rem] overflow-hidden border border-white/10 bg-[#0D0A06] shadow-[0_30px_80px_rgba(0,0,0,0.38)] lg:grid-cols-[0.95fr_1fr]">
         <motion.div
           className="flex min-h-[44rem] flex-col justify-between p-6 md:p-9 lg:p-12"
           initial={{ opacity: 0, x: -32 }}
@@ -70,11 +77,11 @@ function BookingHero() {
           <div>
             <HomepageLink
               href="/services"
-              className="mb-8 inline-grid h-12 w-12 place-items-center rounded-full bg-[#F8DCA7] text-[#222515]"
+              className="mb-8 inline-grid h-12 w-12 place-items-center rounded-full bg-[#C41E3A] text-white"
             >
               <ArrowLeft size={22} />
             </HomepageLink>
-            <div className="h-px w-full bg-[#F8DCA7]/70" />
+            <div className="h-px w-full bg-gradient-to-r from-[#C41E3A] via-[#F5C518] to-[#4CAF50]" />
 
             <motion.p
               className="mt-8 font-ui text-[12px] font-bold uppercase tracking-[0.24em] text-[#4CAF50]"
@@ -95,11 +102,11 @@ function BookingHero() {
           </div>
 
           <div>
-            <div className="mb-6 h-px w-full bg-[#F8DCA7]/70" />
+            <div className="mb-6 h-px w-full bg-gradient-to-r from-[#4CAF50] via-[#F5C518] to-[#C41E3A]" />
             <div className="grid gap-5 md:grid-cols-[0.8fr_1fr_1fr] md:items-center">
               <HomepageLink
                 href="#request"
-                className="inline-flex items-center justify-center gap-2 bg-[#F8DCA7] px-8 py-4 font-ui text-[14px] font-bold uppercase tracking-[0.14em] text-[#222515]"
+                className="inline-flex items-center justify-center gap-2 bg-[#C41E3A] px-8 py-4 font-ui text-[14px] font-bold uppercase tracking-[0.14em] text-white"
                 style={{ clipPath: ROUGH_BTN }}
               >
                 Book now
@@ -107,23 +114,23 @@ function BookingHero() {
               </HomepageLink>
               {quickDetails.slice(1).map(([label, value]) => (
                 <div key={label}>
-                  <p className="font-ui text-[12px] uppercase tracking-[0.16em] text-[#F8DCA7]/56">
+                  <p className="font-ui text-[12px] uppercase tracking-[0.16em] text-white/54">
                     {label}
                   </p>
-                  <p className="mt-1 text-xl leading-tight text-[#F8DCA7]">
+                  <p className="mt-1 text-xl leading-tight text-[#F5C518]">
                     {value}
                   </p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-7 grid gap-7 border-t border-[#F8DCA7]/60 pt-6 md:grid-cols-2">
-              <p className="text-sm leading-6 text-[#F8DCA7]/78">
+            <div className="mt-7 grid gap-7 border-t border-white/12 pt-6 md:grid-cols-2">
+              <p className="text-sm leading-6 text-white/76">
                 Whether it is a birthday, wedding, office lunch, church event,
                 or backyard party, we shape the menu, portions, setup, and
                 service around the crowd.
               </p>
-              <p className="text-sm leading-6 text-[#F8DCA7]/78">
+              <p className="text-sm leading-6 text-white/76">
                 Send the basics and we will follow up with a clear plan: guest
                 count, food style, timing, equipment, staffing, and next steps.
               </p>
@@ -133,14 +140,14 @@ function BookingHero() {
               {featureRows.map(({ Icon, label, value }) => (
                 <div
                   key={label}
-                  className="flex items-center gap-4 border-t border-[#F8DCA7]/36 py-4"
+                  className="flex items-center gap-4 border-t border-white/12 py-4"
                 >
-                  <Icon className="h-5 w-5 text-[#F8DCA7]" />
+                  <Icon className="h-5 w-5 text-[#4CAF50]" />
                   <div>
-                    <p className="font-ui text-[11px] uppercase tracking-[0.16em] text-[#F8DCA7]/48">
+                    <p className="font-ui text-[11px] uppercase tracking-[0.16em] text-white/48">
                       {label}
                     </p>
-                    <p className="mt-1 text-base text-[#F8DCA7]">{value}</p>
+                    <p className="mt-1 text-base text-white">{value}</p>
                   </div>
                 </div>
               ))}
@@ -162,12 +169,12 @@ function BookingHero() {
             sizes="(min-width: 1024px) 48vw, 100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-white/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-[#F5C518]/12" />
           <div className="absolute right-5 top-5 flex gap-3">
             {[Heart, Share2].map((Icon, i) => (
               <button
                 key={i}
-                className="grid h-12 w-12 place-items-center rounded-full bg-[#F8DCA7] text-[#222515]"
+                className="grid h-12 w-12 place-items-center rounded-full border border-[#F5C518]/50 bg-black/72 text-[#F5C518]"
                 type="button"
                 aria-label={
                   i === 0 ? 'Save booking idea' : 'Share booking idea'
@@ -178,7 +185,7 @@ function BookingHero() {
             ))}
           </div>
           <div
-            className="absolute bottom-8 right-7 flex items-center gap-2 bg-[#F8DCA7] px-5 py-3 font-ui text-[12px] font-bold uppercase tracking-[0.12em] text-[#222515]"
+            className="absolute bottom-8 right-7 flex items-center gap-2 bg-[#F5C518] px-5 py-3 font-ui text-[12px] font-bold uppercase tracking-[0.12em] text-black"
             style={{ clipPath: ROUGH_BTN }}
           >
             <ImageIcon size={16} />
@@ -364,7 +371,7 @@ function BookingGallery() {
 
 export default function BookingPage() {
   return (
-    <main className="overflow-x-hidden bg-[#454932] pb-16 md:pb-0">
+    <main className="overflow-x-hidden bg-[#050505] pb-16 md:pb-0">
       <AnnouncementBar messages={announcementMessages} />
       <Header leftLinks={navLinks.left} rightLinks={navLinks.right} />
       <BookingHero />
