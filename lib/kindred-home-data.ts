@@ -6,6 +6,8 @@ export const restaurantHandle = '@POTRANKINZKITCHEN'
 const image = (id: string) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=1600`
 
+const menuImage = (file: string) => `/menu-images/${file}`
+
 // ─── Services ─────────────────────────────────────────────────────────────────
 
 export interface Service {
@@ -114,7 +116,13 @@ export const services: Service[] = [
 
 // ─── Menu types ───────────────────────────────────────────────────────────────
 
-export type MenuCategory = 'breakfast' | 'mains' | 'snacks' | 'sides' | 'drinks'
+export type MenuCategory =
+  | 'breakfast'
+  | 'mains'
+  | 'vegan'
+  | 'snacks'
+  | 'sides'
+  | 'drinks'
 
 export interface MenuItem {
   id: string
@@ -132,6 +140,7 @@ export interface MenuItem {
 export const menuCategories: { id: MenuCategory; label: string }[] = [
   { id: 'breakfast', label: 'Breakfast / All-Day Classics' },
   { id: 'mains', label: 'Main Plates' },
+  { id: 'vegan', label: 'Vegan Yard Vibes' },
   { id: 'snacks', label: 'Snacks & Bread' },
   { id: 'sides', label: 'Sides' },
   { id: 'drinks', label: 'Drinks' },
@@ -148,7 +157,7 @@ export const menuItems: MenuItem[] = [
     id: 'ackee-saltfish',
     title: 'Ackee & Saltfish',
     price: '$15',
-    image: image('1640772'),
+    image: menuImage('ackee-saltfish.jpg'),
     category: 'breakfast',
     ingredients: [
       'Ackee',
@@ -167,7 +176,7 @@ export const menuItems: MenuItem[] = [
     id: 'callaloo-saltfish',
     title: 'Callaloo & Saltfish',
     price: '$12',
-    image: image('1640774'),
+    image: menuImage('callaloo-saltfish.jpg'),
     category: 'breakfast',
     ingredients: [
       'Callaloo',
@@ -184,7 +193,7 @@ export const menuItems: MenuItem[] = [
     id: 'liver-onions',
     title: 'Liver & Onions',
     price: '$10',
-    image: image('6260921'),
+    image: menuImage('liver-onions.jpg'),
     category: 'breakfast',
     ingredients: ['Tender liver', 'Onions', 'Peppers', 'House spice blend'],
     description:
@@ -195,7 +204,7 @@ export const menuItems: MenuItem[] = [
     id: 'cornmeal-porridge',
     title: 'Cornmeal Porridge',
     price: '$5',
-    image: image('1095550'),
+    image: menuImage('cornmeal-porridge.jpg'),
     category: 'breakfast',
     ingredients: [
       'Yellow cornmeal',
@@ -215,7 +224,7 @@ export const menuItems: MenuItem[] = [
     id: 'curry-goat',
     title: 'Curry Goat',
     price: '$17',
-    image: image('6210921'),
+    image: menuImage('curry-goat.jpg'),
     category: 'mains',
     ingredients: [
       'Tender goat',
@@ -234,7 +243,7 @@ export const menuItems: MenuItem[] = [
     id: 'stew-peas',
     title: 'Stew Peas',
     price: '$12',
-    image: image('1640777'),
+    image: menuImage('stew-peas.jpg'),
     category: 'mains',
     ingredients: [
       'Red peas',
@@ -251,7 +260,7 @@ export const menuItems: MenuItem[] = [
     id: 'escovitch-fish',
     title: 'Escovitch Fish',
     price: 'MP',
-    image: image('262978'),
+    image: menuImage('escovitch-fish.jpg'),
     category: 'mains',
     ingredients: [
       'Crispy fried fish',
@@ -269,7 +278,7 @@ export const menuItems: MenuItem[] = [
     id: 'brown-stew-chicken',
     title: 'Brown Stew Chicken',
     price: '$12',
-    image: image('958545'),
+    image: menuImage('brown-stew-chicken.jpg'),
     category: 'mains',
     ingredients: [
       'Bone-in chicken',
@@ -285,7 +294,7 @@ export const menuItems: MenuItem[] = [
     id: 'jerk-chicken',
     title: 'Jerk Chicken',
     price: '$12',
-    image: image('2338407'),
+    image: menuImage('jerk-chicken.jpg'),
     category: 'mains',
     ingredients: [
       'Chicken',
@@ -300,12 +309,97 @@ export const menuItems: MenuItem[] = [
     featured: true,
   },
 
+  // ── Vegan Yard Vibes ──
+  {
+    id: 'ital-stew-bowl',
+    title: 'Ital Stew Bowl',
+    price: '$12',
+    image: menuImage('ital-stew-bowl.jpg'),
+    category: 'vegan',
+    ingredients: [
+      'Pumpkin',
+      'Potato',
+      'Carrot',
+      'Chickpeas',
+      'Coconut gravy',
+      'Rice',
+    ],
+    description:
+      'Slow-simmered pumpkin, potato, carrot, chickpeas, and coconut gravy over rice.',
+    chefNote: '100% plant based.',
+    tags: ['Vegan', 'Plant based'],
+    featured: true,
+  },
+  {
+    id: 'jerk-oyster-mushroom',
+    title: 'Jerk Oyster Mushroom Plate',
+    price: '$14',
+    image: menuImage('jerk-oyster-mushroom.jpg'),
+    category: 'vegan',
+    ingredients: [
+      'Oyster mushrooms',
+      'Jerk seasoning',
+      'Steamed cabbage',
+      'Rice & peas',
+    ],
+    description: 'Spicy jerk mushrooms with steamed cabbage and rice & peas.',
+    tags: ['Vegan', 'Spicy'],
+  },
+  {
+    id: 'bbq-seitan-plate',
+    title: 'BBQ Seitan Plate',
+    price: '$15',
+    image: menuImage('bbq-seitan-plate.jpg'),
+    category: 'vegan',
+    ingredients: [
+      'Seitan strips',
+      'Sweet jerk BBQ sauce',
+      'Rice & peas',
+      'Plantains',
+    ],
+    description:
+      'Smoky Jamaican-style BBQ seitan strips glazed in sweet jerk BBQ sauce with rice & peas and plantains.',
+    tags: ['Vegan', 'Spicy'],
+  },
+  {
+    id: 'curry-chickpea-plate',
+    title: 'Curry Chickpea Plate',
+    price: '$12',
+    image: menuImage('curry-chickpea-plate.jpg'),
+    category: 'vegan',
+    ingredients: ['Chickpeas', 'Jamaican curry', 'Potatoes', 'Steamed veggies'],
+    description: 'Jamaican curry chickpeas with potatoes and steamed veggies.',
+    tags: ['Vegan', 'Curry'],
+  },
+  {
+    id: 'vegan-brown-stew-tofu',
+    title: 'Vegan Brown Stew Tofu',
+    price: '$13',
+    image: menuImage('vegan-brown-stew-tofu.jpg'),
+    category: 'vegan',
+    ingredients: ['Tofu', 'Brown stew sauce', 'Peppers', 'Onions'],
+    description:
+      'Tofu simmered in rich brown stew sauce with peppers and onions.',
+    tags: ['Vegan', 'House gravy'],
+  },
+  {
+    id: 'callaloo-breakfast-bowl',
+    title: 'Callaloo Breakfast Bowl',
+    price: '$11',
+    image: menuImage('callaloo-breakfast-bowl.jpg'),
+    category: 'vegan',
+    ingredients: ['Callaloo', 'Seasoned tofu', 'Fried dumplings or rice'],
+    description:
+      'Callaloo sauteed with seasoned tofu, served over fried dumplings or rice.',
+    tags: ['Vegan', 'Breakfast'],
+  },
+
   // ── Snacks & bread ──
   {
     id: 'beef-patty',
     title: 'Beef Patty',
     price: '$4',
-    image: image('376464'),
+    image: menuImage('beef-patty.jpg'),
     category: 'snacks',
     ingredients: ['Spiced beef', 'Flaky crust', 'Island seasoning'],
     description: 'Spicy beef patty wrapped in a flaky golden crust.',
@@ -315,7 +409,7 @@ export const menuItems: MenuItem[] = [
     id: 'coco-bread',
     title: 'Coco Bread',
     price: '$3',
-    image: image('209206'),
+    image: menuImage('coco-bread.jpg'),
     category: 'snacks',
     ingredients: ['Soft bread', 'Slight sweetness', 'Buttery fold'],
     description:
@@ -326,7 +420,7 @@ export const menuItems: MenuItem[] = [
     id: 'bun-cheese',
     title: 'Bun & Cheese',
     price: '$5',
-    image: image('1098592'),
+    image: menuImage('bun-cheese.jpg'),
     category: 'snacks',
     ingredients: ['Jamaican hard dough bread', 'Cheddar cheese', 'Sweet spice'],
     description: 'Jamaican hard dough bread with cheddar cheese.',
@@ -338,72 +432,82 @@ export const menuItems: MenuItem[] = [
     id: 'rice-peas',
     title: 'Rice & Peas',
     price: '$4',
-    image: image('1640777'),
+    image: menuImage('rice-peas.jpg'),
     category: 'sides',
     ingredients: ['Rice', 'Red peas', 'Coconut milk', 'Thyme'],
     description:
       'Coconut rice and peas, built for curry, stew, and jerk gravy.',
-    tags: ['Side'],
+    tags: ['Vegan', 'Side'],
   },
   {
     id: 'steamed-cabbage',
     title: 'Steamed Cabbage',
     price: '$4',
-    image: image('1640774'),
+    image: menuImage('steamed-cabbage.jpg'),
     category: 'sides',
     ingredients: ['Cabbage', 'Carrot', 'Scallion', 'Pepper'],
     description: 'Light, seasoned cabbage steamed with vegetables.',
-    tags: ['Side'],
+    tags: ['Vegan', 'Side'],
   },
   {
     id: 'fried-plantains',
     title: 'Fried Plantains',
     price: '$4',
-    image: image('1098592'),
+    image: menuImage('fried-plantains.jpg'),
     category: 'sides',
     ingredients: ['Ripe plantain', 'Sea salt'],
     description: 'Sweet fried plantains with caramelized edges.',
-    tags: ['Side'],
+    tags: ['Vegan', 'Side'],
   },
   {
     id: 'fried-dumpling',
     title: 'Fried Dumpling',
     price: '$2',
-    image: image('376464'),
+    image: menuImage('fried-dumpling.jpg'),
     category: 'sides',
     ingredients: ['Flour', 'Salt', 'Golden crust'],
     description: 'Golden fried dumpling for soaking up every drop.',
-    tags: ['Side'],
+    tags: ['Vegan', 'Side'],
   },
   {
     id: 'festival',
     title: 'Festival',
     price: '$2',
-    image: image('376464'),
+    image: menuImage('festival.jpg'),
     category: 'sides',
     ingredients: ['Cornmeal', 'Flour', 'Sweet spice'],
     description: 'Sweet fried festival with crisp edges and soft center.',
-    tags: ['Side'],
+    tags: ['Vegan', 'Side'],
   },
   {
     id: 'boiled-banana',
     title: 'Boiled Banana',
     price: '$3',
-    image: image('1098592'),
+    image: menuImage('boiled-banana.jpg'),
     category: 'sides',
     ingredients: ['Green banana', 'Sea salt'],
     description: 'Classic boiled banana, simple and grounding.',
-    tags: ['Side'],
+    tags: ['Vegan', 'Side'],
   },
   {
     id: 'mac-cheese',
     title: 'Mac & Cheese',
     price: '$4',
-    image: image('1435904'),
+    image: menuImage('mac-cheese.jpg'),
     category: 'sides',
     ingredients: ['Macaroni', 'Cheese sauce', 'Baked top'],
     description: 'Creamy baked mac and cheese with a rich finish.',
     tags: ['Side'],
+  },
+  {
+    id: 'vegan-mac-cheese-cup',
+    title: 'Vegan Mac & "Cheese" Cup',
+    price: '$6',
+    image: menuImage('mac-cheese.jpg'),
+    category: 'sides',
+    ingredients: ['Macaroni', 'Plant-based cheese sauce', 'Seasoned top'],
+    description: 'Plant-based mac cup with creamy vegan cheese-style sauce.',
+    tags: ['Vegan', 'Side'],
   },
 
   // ── Drinks ──
@@ -411,7 +515,7 @@ export const menuItems: MenuItem[] = [
     id: 'sorrel',
     title: 'Sorrel',
     price: '$4',
-    image: image('1092730'),
+    image: menuImage('sorrel.jpg'),
     category: 'drinks',
     ingredients: ['Sorrel', 'Ginger', 'Island spice'],
     description: 'Bright sorrel with ginger and warm spices.',
@@ -421,7 +525,7 @@ export const menuItems: MenuItem[] = [
     id: 'irish-moss',
     title: 'Irish Moss',
     price: '$4',
-    image: image('5946965'),
+    image: menuImage('irish-moss.jpg'),
     category: 'drinks',
     ingredients: ['Irish moss', 'Vanilla', 'Nutmeg'],
     description: 'Creamy island drink with vanilla and spice.',
@@ -431,7 +535,7 @@ export const menuItems: MenuItem[] = [
     id: 'ginger-beer',
     title: 'Ginger Beer',
     price: '$4',
-    image: image('109275'),
+    image: menuImage('ginger-beer.jpg'),
     category: 'drinks',
     ingredients: ['Ginger', 'Cane sugar', 'Citrus'],
     description: 'Sharp, cold ginger beer with a clean kick.',
@@ -441,7 +545,7 @@ export const menuItems: MenuItem[] = [
     id: 'peanut-punch',
     title: 'Peanut Punch',
     price: '$4',
-    image: image('5946970'),
+    image: menuImage('peanut-punch.jpg'),
     category: 'drinks',
     ingredients: ['Peanut', 'Milk', 'Nutmeg'],
     description: 'Rich peanut punch, chilled and filling.',
@@ -451,7 +555,7 @@ export const menuItems: MenuItem[] = [
     id: 'jamaican-kola',
     title: 'Jamaican Kola Champagne',
     price: '$3',
-    image: image('5946971'),
+    image: menuImage('jamaican-kola.jpg'),
     category: 'drinks',
     ingredients: ['Kola champagne soda'],
     description: 'Classic Jamaican kola champagne soda.',
@@ -461,17 +565,37 @@ export const menuItems: MenuItem[] = [
     id: 'pineapple-soda',
     title: 'Pineapple Soda',
     price: '$3',
-    image: image('5946972'),
+    image: menuImage('pineapple-soda.jpg'),
     category: 'drinks',
     ingredients: ['Pineapple soda'],
     description: 'Cold pineapple soda with a bright tropical finish.',
     tags: ['Soda'],
   },
   {
+    id: 'pineapple-ginger-juice',
+    title: 'Pineapple Ginger Juice',
+    price: '$5',
+    image: menuImage('pineapple-ginger-juice.jpg'),
+    category: 'drinks',
+    ingredients: ['Pineapple', 'Ginger', 'Citrus'],
+    description: 'Fresh pineapple juice with ginger heat and a bright finish.',
+    tags: ['Vegan', 'Juice'],
+  },
+  {
+    id: 'cucumber-mint-juice',
+    title: 'Cucumber Mint Juice',
+    price: '$5',
+    image: menuImage('cucumber-mint-juice.jpg'),
+    category: 'drinks',
+    ingredients: ['Cucumber', 'Mint', 'Lime'],
+    description: 'Cool cucumber mint juice with a clean, refreshing finish.',
+    tags: ['Vegan', 'Juice'],
+  },
+  {
     id: 'water',
     title: 'Water',
     price: '$2',
-    image: image('327090'),
+    image: menuImage('water.jpg'),
     category: 'drinks',
     ingredients: ['Bottled water'],
     description: 'Cold bottled water.',

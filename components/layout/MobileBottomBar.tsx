@@ -48,7 +48,9 @@ export default function MobileBottomBar() {
                 key={link.label}
                 href={link.href}
                 className="flex min-h-16 flex-col items-center justify-center gap-1 transition-colors"
-                style={isBookNow ? { color: '#4CAF50' } : { color: '#FFFFFFC7' }}
+                style={
+                  isBookNow ? { color: '#4CAF50' } : { color: '#FFFFFFC7' }
+                }
               >
                 {Icon && (
                   <span className="relative">

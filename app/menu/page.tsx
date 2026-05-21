@@ -70,6 +70,13 @@ const CATEGORY_META: Record<
     text: '#0D0A06',
     glow: 'rgba(76,175,80,0.22)',
   },
+  vegan: {
+    Icon: Leaf,
+    shortLabel: 'Vegan',
+    paint: '#6FCD5B',
+    text: '#0D0A06',
+    glow: 'rgba(111,205,91,0.24)',
+  },
   snacks: {
     Icon: Sandwich,
     shortLabel: 'Snacks',
@@ -270,7 +277,9 @@ function MenuHero() {
   )
   const heroDish =
     menuItems.find((item) => item.id === 'jerk-chicken') ?? menuItems[0]
-  const featured = menuItems.filter((item) => item.featured).slice(0, 3)
+  const featured = ['jerk-chicken', 'curry-goat', 'ital-stew-bowl']
+    .map((id) => menuItems.find((item) => item.id === id))
+    .filter((item): item is MenuItem => Boolean(item))
 
   return (
     <section
@@ -356,8 +365,8 @@ function MenuHero() {
             transition={{ duration: 0.62, delay: 0.45, ease }}
           >
             Big flavor, small price, yaad style. Breakfast classics, main
-            plates, sides, drinks, and a Yard Box combo built for the full
-            plate.
+            plates, a dedicated Vegan Yard Vibes section, sides, drinks, and a
+            Yard Box combo built for the full plate.
           </motion.p>
           <motion.div
             className="mt-8 flex flex-wrap gap-3"
@@ -372,6 +381,14 @@ function MenuHero() {
             >
               See main plates
               <UtensilsCrossed size={16} />
+            </HomepageLink>
+            <HomepageLink
+              href="#vegan"
+              className="inline-flex items-center gap-2 bg-[#4CAF50] px-7 py-3 font-ui text-[13px] font-bold uppercase tracking-[0.16em] text-black"
+              style={{ clipPath: ROUGH_BTN }}
+            >
+              Vegan options
+              <Leaf size={16} />
             </HomepageLink>
             <HomepageLink
               href="/booking"
@@ -708,6 +725,29 @@ function YardBoxCombo() {
               ))}
             </div>
           </div>
+          <div>
+            <h3 className="font-ui text-[12px] font-bold uppercase tracking-[0.2em] text-[#1E6B1E]">
+              Vegan combo vibes
+            </h3>
+            <div className="mt-4 grid gap-3">
+              {[
+                ['Small Belly Fill', 'Plate + drink', '$15'],
+                ['Yardman Combo', 'Plate + festival + drink', '$18'],
+                ['Rasta Box', '3 sides sampler', '$10'],
+              ].map(([label, detail, price]) => (
+                <div key={label} className="flex items-baseline gap-3">
+                  <span className="font-ui text-base font-bold uppercase tracking-[0.08em]">
+                    {label}
+                  </span>
+                  <span className="hidden text-xs font-bold uppercase tracking-[0.08em] text-black/55 sm:inline">
+                    {detail}
+                  </span>
+                  <span className="h-px flex-1 border-b border-dotted border-black/45" />
+                  <span className="font-ui text-xl font-bold">{price}</span>
+                </div>
+              ))}
+            </div>
+          </div>
           <p className="font-special text-[1.5rem] uppercase leading-tight text-[#1E6B1E]">
             One love.
             <br />
@@ -784,10 +824,12 @@ export default function MenuPage() {
       <TornEdge variant={1} fill={EDGE_COLORS[0]} />
       <CategorySection category="mains" />
       <TornEdge variant={2} fill={EDGE_COLORS[1]} />
-      <CategorySection category="snacks" />
+      <CategorySection category="vegan" />
       <TornEdge variant={3} fill={EDGE_COLORS[2]} />
-      <CategorySection category="sides" />
+      <CategorySection category="snacks" />
       <TornEdge variant={1} fill={EDGE_COLORS[0]} />
+      <CategorySection category="sides" />
+      <TornEdge variant={2} fill={EDGE_COLORS[1]} />
       <CategorySection category="drinks" />
       <YardBoxCombo />
       <MenuClosingBand />
