@@ -31,7 +31,7 @@ export default function MobileBottomBar() {
         animate={{ y: 0 }}
         exit={{ y: 72 }}
         transition={{ duration: 0.55, ease: [0.3, 0, 0, 1], delay: 0.3 }}
-        className="fixed inset-x-0 bottom-0 z-[80] border-t border-white/10 bg-[#171717]/95 shadow-[0_-8px_24px_rgba(0,0,0,0.28)] backdrop-blur-md md:hidden"
+        className="fixed inset-x-0 bottom-0 z-[80] border-t border-white/10 bg-[#171717]/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_24px_rgba(0,0,0,0.28)] backdrop-blur-md md:hidden"
       >
         <div
           className="grid"

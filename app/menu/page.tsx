@@ -815,7 +815,7 @@ export default function MenuPage() {
   }, [])
 
   return (
-    <main className="overflow-x-hidden bg-[#050505] pb-16 md:pb-0">
+    <main className="overflow-x-hidden bg-[#050505] pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0">
       <AnnouncementBar messages={announcementMessages} />
       <Header leftLinks={navLinks.left} rightLinks={navLinks.right} />
       <MenuHero />

@@ -78,8 +78,8 @@ export default function Header({ leftLinks, rightLinks }: HeaderProps) {
 
   return (
     <header
-      className={`pointer-events-none fixed inset-x-0 z-40 px-6 transition-[top] duration-500 ease-out md:px-8 lg:px-10 ${
-        scrolled ? 'top-0' : 'top-8'
+      className={`pointer-events-none fixed inset-x-0 top-0 z-40 px-0 transition-[top] duration-500 ease-out md:px-8 lg:px-10 ${
+        scrolled ? 'md:top-0' : 'md:top-8'
       }`}
     >
       {/* Paper backing (fades in on scroll) */}
@@ -127,7 +127,11 @@ export default function Header({ leftLinks, rightLinks }: HeaderProps) {
       </motion.div>
 
       {/* Nav content */}
-      <div className="relative z-10 grid grid-cols-1 items-center py-4 lg:grid-cols-[1fr_auto_1fr]">
+      <div
+        className={`relative z-10 grid grid-cols-1 items-center px-6 pb-4 transition-[padding] duration-500 ease-out md:px-0 md:py-4 lg:grid-cols-[1fr_auto_1fr] ${
+          scrolled ? 'pt-4' : 'pt-12'
+        }`}
+      >
         <HeaderNav links={leftLinks} />
 
         <HomepageLink
