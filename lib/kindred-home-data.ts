@@ -839,7 +839,12 @@ export const footer = {
     'Sun 12pm-6pm',
     'Mon closed',
   ],
-  contactLines: ['Florida & beyond', 'Catering inquiries welcome'],
+  contactLines: [
+    '11582 SW Village Parkway',
+    'Port Saint Lucie, FL 34987',
+    '772-521-6124',
+    'Potrankinz@gmail.com',
+  ],
   externalLinks: [
     { label: 'Google Maps', href: 'https://maps.google.com/' },
     { label: 'Yelp', href: 'https://www.yelp.com/' },
