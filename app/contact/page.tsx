@@ -58,20 +58,20 @@ const contactMethods = [
   {
     Icon: Phone,
     label: 'Call',
-    value: '(555) 000-0192',
+    value: '772-521-6124',
     note: 'Best for urgent catering dates',
   },
   {
     Icon: Mail,
     label: 'Email',
-    value: 'hello@potrankinz.com',
+    value: 'Potrankinz@gmail.com',
     note: 'Menus, quotes, private events',
   },
   {
     Icon: MapPin,
-    label: 'Service area',
-    value: 'Florida & beyond',
-    note: 'Travel available by request',
+    label: 'Location',
+    value: 'Port Saint Lucie, FL',
+    note: '11582 SW Village Parkway, FL 34987',
   },
   {
     Icon: Instagram,
