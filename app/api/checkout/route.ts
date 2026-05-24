@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
 import { cartProductsById } from '@/lib/cart-products'
+import { absoluteUrl } from '@/lib/site'
 
 interface CheckoutLine {
   id: string
@@ -48,7 +49,7 @@ export async function POST(request: Request) {
           product_data: {
             name: product.title,
             description: product.description,
-            images: product.image.startsWith('http') ? [product.image] : [],
+            images: [absoluteUrl(product.image)],
           },
         },
       }
@@ -71,12 +72,16 @@ export async function POST(request: Request) {
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
     line_items: lineItems,
-    success_url: `${origin}/cart?checkout=success`,
+    customer_creation: 'if_required',
+    phone_number_collection: {
+      enabled: true,
+    },
+    success_url: `${origin}/cart?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/cart?checkout=cancelled`,
     metadata: {
       source: 'potrankinz-cart',
     },
   })
 
-  return NextResponse.json({ url: session.url })
+  return NextResponse.json({ id: session.id, url: session.url })
 }

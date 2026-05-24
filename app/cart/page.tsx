@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
+import { loadStripe } from '@stripe/stripe-js'
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
@@ -231,8 +232,35 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
   useEffect(() => {
     const search = new URLSearchParams(window.location.search)
     if (search.get('checkout') === 'success') {
+      const sessionId = search.get('session_id')
       setMessage('Payment complete. We will start lining up the order.')
       clearCart()
+
+      if (sessionId) {
+        fetch('/api/checkout/receipt', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId }),
+        })
+          .then(async (response) => {
+            if (!response.ok) {
+              const payload = (await response.json()) as { error?: string }
+              throw new Error(
+                payload.error ?? 'Receipt email could not be sent.',
+              )
+            }
+            setMessage(
+              'Payment complete. A Pot Rankinz receipt has been emailed.',
+            )
+          })
+          .catch((error) => {
+            setMessage(
+              error instanceof Error
+                ? `Payment complete, but ${error.message}`
+                : 'Payment complete, but receipt email could not be sent.',
+            )
+          })
+      }
     }
     if (search.get('checkout') === 'cancelled') {
       setMessage('Checkout was cancelled. Your cart is still here.')
@@ -244,6 +272,14 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
     setMessage('')
 
     try {
+      const stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY
+
+      if (!stripePublicKey) {
+        throw new Error(
+          'Stripe is installed. Add NEXT_PUBLIC_STRIPE_PUBLIC_KEY to enable checkout.',
+        )
+      }
+
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -255,12 +291,19 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
         }),
       })
       const payload = (await response.json()) as {
+        id?: string
         url?: string
         error?: string
       }
 
       if (!response.ok || !payload.url) {
         throw new Error(payload.error ?? 'Checkout could not start.')
+      }
+
+      const stripe = await loadStripe(stripePublicKey)
+
+      if (!stripe) {
+        throw new Error('Stripe could not be loaded.')
       }
 
       window.location.href = payload.url

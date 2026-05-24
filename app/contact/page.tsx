@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, type FormEvent } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import {
@@ -216,6 +217,46 @@ function ContactMethods() {
 }
 
 function ContactForm() {
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
+  const [message, setMessage] = useState('')
+
+  const submitContact = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setStatus('sending')
+    setMessage('')
+
+    const form = event.currentTarget
+    const formData = new FormData(form)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.get('name'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          inquiryType: formData.get('inquiryType'),
+          message: formData.get('message'),
+        }),
+      })
+      const payload = (await response.json()) as { error?: string }
+
+      if (!response.ok) {
+        throw new Error(payload.error ?? 'Message could not be sent.')
+      }
+
+      form.reset()
+      setStatus('sent')
+      setMessage('Message sent. Check your email for the Pot Rankinz copy.')
+    } catch (error) {
+      setStatus('idle')
+      setMessage(
+        error instanceof Error ? error.message : 'Message could not be sent.',
+      )
+    }
+  }
+
   return (
     <section className="bg-warm-white px-6 py-20 text-black md:px-8 md:py-28 lg:px-14">
       <div className="mx-auto grid max-w-[90rem] gap-10 lg:grid-cols-[0.8fr_1fr]">
@@ -261,6 +302,7 @@ function ContactForm() {
         </div>
 
         <motion.form
+          onSubmit={submitContact}
           className="grid gap-5 border border-black/8 bg-white p-5 shadow-[8px_10px_0_rgba(0,0,0,0.08)] md:p-8"
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -268,11 +310,17 @@ function ContactForm() {
           transition={{ duration: 0.65 }}
         >
           <div className="grid gap-5 md:grid-cols-2">
-            <Field label="Your name" placeholder="Full name" />
-            <Field label="Email" placeholder="you@example.com" type="email" />
-            <Field label="Phone" placeholder="(555) 000-0000" />
+            <Field label="Your name" name="name" placeholder="Full name" />
+            <Field
+              label="Email"
+              name="email"
+              placeholder="you@example.com"
+              type="email"
+            />
+            <Field label="Phone" name="phone" placeholder="(555) 000-0000" />
             <Field
               label="Inquiry type"
+              name="inquiryType"
               placeholder="Catering, pickup, pop-up"
             />
           </div>
@@ -281,7 +329,9 @@ function ContactForm() {
               Message
             </span>
             <textarea
+              name="message"
               rows={6}
+              required
               placeholder="Tell us the date, guest count, location, service style, or question."
               className="resize-none border border-black/10 bg-black/[0.025] px-4 py-3 text-sm leading-6 text-black outline-none placeholder:text-black/30 focus:border-[#C41E3A]/70"
             />
@@ -292,14 +342,20 @@ function ContactForm() {
               We reply within 24 hours.
             </span>
             <button
-              type="button"
+              type="submit"
+              disabled={status === 'sending'}
               className="inline-flex items-center gap-2 bg-[#C41E3A] px-8 py-3 font-ui text-[13px] font-bold uppercase tracking-[0.16em] text-white"
               style={{ clipPath: ROUGH_BTN }}
             >
-              Send message
+              {status === 'sending' ? 'Sending' : 'Send message'}
               <Send size={16} />
             </button>
           </div>
+          {message && (
+            <p className="border border-black/10 bg-black/[0.025] p-3 text-sm leading-6 text-black/66">
+              {message}
+            </p>
+          )}
         </motion.form>
       </div>
     </section>
@@ -308,10 +364,12 @@ function ContactForm() {
 
 function Field({
   label,
+  name,
   placeholder,
   type = 'text',
 }: {
   label: string
+  name: string
   placeholder: string
   type?: string
 }) {
@@ -321,7 +379,9 @@ function Field({
         {label}
       </span>
       <input
+        name={name}
         type={type}
+        required={name === 'name' || name === 'email'}
         placeholder={placeholder}
         className="h-12 border border-black/10 bg-black/[0.025] px-4 text-sm text-black outline-none placeholder:text-black/30 focus:border-[#C41E3A]/70"
       />

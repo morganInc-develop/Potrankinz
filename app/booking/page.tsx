@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, type FormEvent } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import {
@@ -199,6 +199,52 @@ function BookingHero() {
 
 function RequestForm() {
   const [service, setService] = useState(services[1]?.id ?? services[0]?.id)
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
+  const [message, setMessage] = useState('')
+  const selectedService =
+    services.find((item) => item.id === service) ?? services[0]
+
+  const submitBooking = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setStatus('sending')
+    setMessage('')
+
+    const form = event.currentTarget
+    const formData = new FormData(form)
+
+    try {
+      const response = await fetch('/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.get('name'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          service: selectedService?.title ?? service,
+          eventDate: formData.get('eventDate'),
+          guestCount: formData.get('guestCount'),
+          location: formData.get('location'),
+          notes: formData.get('notes'),
+        }),
+      })
+      const payload = (await response.json()) as { error?: string }
+
+      if (!response.ok) {
+        throw new Error(payload.error ?? 'Booking request could not be sent.')
+      }
+
+      form.reset()
+      setStatus('sent')
+      setMessage('Request sent. Check your email for the Pot Rankinz copy.')
+    } catch (error) {
+      setStatus('idle')
+      setMessage(
+        error instanceof Error
+          ? error.message
+          : 'Booking request could not be sent.',
+      )
+    }
+  }
 
   return (
     <section
@@ -253,6 +299,7 @@ function RequestForm() {
         </motion.div>
 
         <motion.form
+          onSubmit={submitBooking}
           className="grid gap-5 border border-white/10 bg-white/[0.055] p-5 shadow-[8px_10px_0_rgba(245,197,24,0.14)] md:p-8"
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -260,19 +307,38 @@ function RequestForm() {
           transition={{ duration: 0.65, delay: 0.08, ease }}
         >
           <div className="grid gap-5 md:grid-cols-2">
-            <Field label="Your name" placeholder="Full name" />
-            <Field label="Email" placeholder="you@example.com" type="email" />
-            <Field label="Phone" placeholder="(555) 000-0000" />
-            <Field label="Event date" placeholder="MM/DD/YYYY" />
-            <Field label="Guest count" placeholder="Approx. guests" />
-            <Field label="Location" placeholder="City / venue" />
+            <Field label="Your name" name="name" placeholder="Full name" />
+            <Field
+              label="Email"
+              name="email"
+              placeholder="you@example.com"
+              type="email"
+            />
+            <Field label="Phone" name="phone" placeholder="(555) 000-0000" />
+            <Field
+              label="Event date"
+              name="eventDate"
+              placeholder="MM/DD/YYYY"
+            />
+            <Field
+              label="Guest count"
+              name="guestCount"
+              placeholder="Approx. guests"
+            />
+            <Field
+              label="Location"
+              name="location"
+              placeholder="City / venue"
+            />
           </div>
           <label className="grid gap-2">
             <span className="font-ui text-[11px] font-bold uppercase tracking-[0.18em] text-white/54">
               Notes
             </span>
             <textarea
+              name="notes"
               rows={5}
+              required
               placeholder="Tell us about the occasion, service style, favorite menu items, timing, and dietary needs."
               className="resize-none border border-white/12 bg-black/24 px-4 py-3 text-sm leading-6 text-white outline-none placeholder:text-white/28 focus:border-[#F5C518]/70"
             />
@@ -282,14 +348,20 @@ function RequestForm() {
               We reply within 24 hours.
             </span>
             <button
-              type="button"
+              type="submit"
+              disabled={status === 'sending'}
               className="inline-flex items-center gap-2 bg-[#F5C518] px-8 py-3 font-ui text-[13px] font-bold uppercase tracking-[0.16em] text-black"
               style={{ clipPath: ROUGH_BTN }}
             >
-              Send request
+              {status === 'sending' ? 'Sending' : 'Send request'}
               <Mail size={16} />
             </button>
           </div>
+          {message && (
+            <p className="border border-white/10 bg-white/[0.055] p-3 text-sm leading-6 text-white/68">
+              {message}
+            </p>
+          )}
         </motion.form>
       </div>
     </section>
@@ -298,10 +370,12 @@ function RequestForm() {
 
 function Field({
   label,
+  name,
   placeholder,
   type = 'text',
 }: {
   label: string
+  name: string
   placeholder: string
   type?: string
 }) {
@@ -311,7 +385,9 @@ function Field({
         {label}
       </span>
       <input
+        name={name}
         type={type}
+        required={name === 'name' || name === 'email'}
         placeholder={placeholder}
         className="h-12 border border-white/12 bg-black/24 px-4 text-sm text-white outline-none placeholder:text-white/28 focus:border-[#F5C518]/70"
       />

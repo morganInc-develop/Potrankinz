@@ -35,7 +35,8 @@ export const metadata: Metadata = {
     default: 'Potrankinz',
     template: '%s | Potrankinz',
   },
-  description: 'Soul food and catering done right in Port Saint Lucie, FL and beyond.',
+  description:
+    'Soul food and catering done right in Port Saint Lucie, FL and beyond.',
   icons: {
     icon: '/hero-chefs/cutouts/pot-rankinz-logo.png',
     shortcut: '/hero-chefs/cutouts/pot-rankinz-logo.png',
@@ -43,7 +44,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Potrankinz',
-    description: 'Soul food and catering done right in Port Saint Lucie, FL and beyond.',
+    description:
+      'Soul food and catering done right in Port Saint Lucie, FL and beyond.',
     url: 'https://potrankinz.vercel.app',
     siteName: 'Potrankinz',
     type: 'website',
@@ -51,7 +53,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Potrankinz',
-    description: 'Soul food and catering done right in Port Saint Lucie, FL and beyond.',
+    description:
+      'Soul food and catering done right in Port Saint Lucie, FL and beyond.',
   },
 }
 
