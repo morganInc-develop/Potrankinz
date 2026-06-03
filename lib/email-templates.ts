@@ -1,4 +1,4 @@
-import { absoluteUrl, SITE_URL } from '@/lib/site'
+import { absoluteAssetUrl, SITE_URL } from '@/lib/site'
 
 export interface ContactEmailData {
   name: string
@@ -72,7 +72,7 @@ function emailLayout({
   heroImage: string
   children: string
 }) {
-  const logo = absoluteUrl('/hero-chefs/cutouts/pot-rankinz-logo.png')
+  const logo = absoluteAssetUrl('/hero-chefs/cutouts/pot-rankinz-logo.png')
 
   return `<!doctype html>
 <html>
@@ -104,7 +104,7 @@ function emailLayout({
             </tr>
             <tr>
               <td>
-                <img src="${absoluteUrl(heroImage)}" width="680" alt="" style="display:block;width:100%;max-width:680px;height:250px;object-fit:cover;border:0;">
+                <img src="${absoluteAssetUrl(heroImage)}" width="680" alt="" style="display:block;width:100%;max-width:680px;height:250px;object-fit:cover;border:0;">
               </td>
             </tr>
             <tr>
@@ -185,7 +185,7 @@ export function receiptEmailTemplate(data: ReceiptEmailData) {
           <td style="padding:14px 0;border-bottom:1px solid #eadfca;width:72px;">
             ${
               item.image
-                ? `<img src="${absoluteUrl(item.image)}" width="58" height="58" alt="" style="display:block;width:58px;height:58px;object-fit:cover;border:0;">`
+                ? `<img src="${absoluteAssetUrl(item.image)}" width="58" height="58" alt="" style="display:block;width:58px;height:58px;object-fit:cover;border:0;">`
                 : ''
             }
           </td>
