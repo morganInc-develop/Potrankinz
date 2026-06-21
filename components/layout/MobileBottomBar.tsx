@@ -1,6 +1,7 @@
 'use client'
 
-import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import {
   UtensilsCrossed,
   Mail,
@@ -24,54 +25,54 @@ const ICONS: Record<string, React.ElementType> = {
 const allLinks = [...navLinks.left, ...navLinks.right]
 
 export default function MobileBottomBar() {
-  return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ y: 72 }}
-        animate={{ y: 0 }}
-        exit={{ y: 72 }}
-        transition={{ duration: 0.55, ease: [0.3, 0, 0, 1], delay: 0.3 }}
-        className="fixed inset-x-0 bottom-0 z-[80] border-t border-white/10 bg-[#171717]/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_24px_rgba(0,0,0,0.28)] backdrop-blur-md md:hidden"
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => setMounted(true), [])
+
+  if (!mounted) return null
+
+  return createPortal(
+    <div
+      data-mobile-bottom-bar
+      className="fixed inset-x-0 bottom-[-1px] z-[80] w-full overflow-hidden border-t border-white/10 bg-[#171717] pb-[calc(env(safe-area-inset-bottom)+1px)] shadow-[0_-6px_18px_rgba(0,0,0,0.22)] md:hidden"
+    >
+      <div
+        className="grid"
+        style={{
+          gridTemplateColumns: `repeat(${allLinks.length}, minmax(0, 1fr))`,
+        }}
       >
-        <div
-          className="grid"
-          style={{
-            gridTemplateColumns: `repeat(${allLinks.length}, minmax(0, 1fr))`,
-          }}
-        >
-          {allLinks.map((link) => {
-            const Icon = ICONS[link.label.toLowerCase()]
-            const isCart = link.label.toLowerCase() === 'cart'
-            const isBookNow = link.label.toLowerCase() === 'book now'
-            return (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="flex min-h-16 flex-col items-center justify-center gap-1 transition-colors"
-                style={
-                  isBookNow ? { color: '#4CAF50' } : { color: '#FFFFFFC7' }
-                }
-              >
-                {Icon && (
-                  <span className="relative">
-                    <Icon
-                      className="h-4 w-4"
-                      strokeWidth={1.9}
-                      style={isBookNow ? { color: '#4CAF50' } : undefined}
-                    />
-                    {isCart && (
-                      <CartNavBadge className="absolute -right-3 -top-3" />
-                    )}
-                  </span>
-                )}
-                <span className="font-ui text-[10px] uppercase tracking-[0.15em]">
-                  {link.label}
+        {allLinks.map((link) => {
+          const Icon = ICONS[link.label.toLowerCase()]
+          const isCart = link.label.toLowerCase() === 'cart'
+          const isBookNow = link.label.toLowerCase() === 'book now'
+          return (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="flex min-h-16 flex-col items-center justify-center gap-1 transition-colors"
+              style={isBookNow ? { color: '#4CAF50' } : { color: '#FFFFFFC7' }}
+            >
+              {Icon && (
+                <span className="relative">
+                  <Icon
+                    className="h-4 w-4"
+                    strokeWidth={1.9}
+                    style={isBookNow ? { color: '#4CAF50' } : undefined}
+                  />
+                  {isCart && (
+                    <CartNavBadge className="absolute -right-3 -top-3" />
+                  )}
                 </span>
-              </Link>
-            )
-          })}
-        </div>
-      </motion.div>
-    </AnimatePresence>
+              )}
+              <span className="font-ui text-[10px] uppercase tracking-[0.15em]">
+                {link.label}
+              </span>
+            </Link>
+          )
+        })}
+      </div>
+    </div>,
+    document.body,
   )
 }

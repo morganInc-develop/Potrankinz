@@ -22,6 +22,7 @@ export default function AnnouncementBar({ messages }: AnnouncementBarProps) {
 
   return (
     <div
+      data-announcement-bar
       className="relative z-50 flex h-8 items-center justify-center overflow-hidden bg-olive-dark px-4 text-center"
       style={{
         backgroundImage: PAPER_GRAIN,

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import type { CSSProperties } from 'react'
 import { motion } from 'framer-motion'
 import {
   UtensilsCrossed,
@@ -68,19 +69,46 @@ function HeaderNav({ links }: { links: HeaderLink[] }) {
 
 export default function Header({ leftLinks, rightLinks }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false)
+  const [desktopTop, setDesktopTop] = useState(32)
 
   useEffect(() => {
-    const handle = () => setScrolled(window.scrollY > 80)
+    let frame = 0
+
+    const handle = () => {
+      if (frame) return
+
+      frame = window.requestAnimationFrame(() => {
+        const announcement = document.querySelector<HTMLElement>(
+          '[data-announcement-bar]',
+        )
+        const announcementBottom =
+          announcement?.getBoundingClientRect().bottom ?? 0
+
+        setScrolled(window.scrollY > 80)
+        setDesktopTop(Math.max(0, Math.round(announcementBottom)))
+        frame = 0
+      })
+    }
+
     handle()
     window.addEventListener('scroll', handle, { passive: true })
-    return () => window.removeEventListener('scroll', handle)
+    window.addEventListener('resize', handle)
+
+    return () => {
+      window.removeEventListener('scroll', handle)
+      window.removeEventListener('resize', handle)
+      if (frame) window.cancelAnimationFrame(frame)
+    }
   }, [])
 
   return (
     <header
-      className={`pointer-events-none fixed inset-x-0 top-0 z-40 px-0 transition-[top] duration-500 ease-out md:px-8 lg:px-10 ${
-        scrolled ? 'md:top-0' : 'md:top-8'
-      }`}
+      className="pointer-events-none fixed inset-x-0 top-0 z-40 px-0 md:top-[var(--desktop-nav-top)] md:px-8 lg:px-10"
+      style={
+        {
+          '--desktop-nav-top': `${desktopTop}px`,
+        } as CSSProperties
+      }
     >
       {/* Paper backing (fades in on scroll) */}
       <motion.div
@@ -88,7 +116,7 @@ export default function Header({ leftLinks, rightLinks }: HeaderProps) {
         transition={{ duration: 0.38 }}
         className="pointer-events-none absolute inset-0"
         style={{
-          background: 'rgba(23, 23, 23, 0.94)',
+          background: '#171717',
           backdropFilter: 'blur(10px)',
           WebkitBackdropFilter: 'blur(10px)',
           backgroundImage: PAPER_GRAIN,
@@ -121,7 +149,7 @@ export default function Header({ leftLinks, rightLinks }: HeaderProps) {
         >
           <path
             d="M0,4.5 Q80,9 160,4.5 Q240,0 320,4.5 Q400,9 480,4.5 Q560,0 640,4.5 Q720,9 800,4.5 Q880,0 960,4.5 Q1040,9 1120,4.5 Q1200,0 1280,4.5 Q1360,9 1440,4.5 L1440,9 L0,9 Z"
-            fill="rgba(23,23,23,0.94)"
+            fill="#171717"
           />
         </svg>
       </motion.div>
