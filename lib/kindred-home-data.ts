@@ -440,6 +440,16 @@ export const menuItems: MenuItem[] = [
     tags: ['Vegan', 'Side'],
   },
   {
+    id: 'white-rice',
+    title: 'White Rice',
+    price: '$4',
+    image: menuImage('white-rice.jpg'),
+    category: 'sides',
+    ingredients: ['Long-grain rice', 'Sea salt'],
+    description: 'Fluffy steamed white rice ready for curry, stew, or gravy.',
+    tags: ['Vegan', 'Side'],
+  },
+  {
     id: 'steamed-cabbage',
     title: 'Steamed Cabbage',
     price: '$4',

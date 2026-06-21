@@ -9,6 +9,7 @@ import {
   useTransform,
 } from 'framer-motion'
 import {
+  ArrowDown,
   Bean,
   Coffee,
   CupSoda,
@@ -221,8 +222,10 @@ function PaintHeading({
 
 function FeaturedPlate({ item, index }: { item: MenuItem; index: number }) {
   return (
-    <motion.div
-      className="group relative flex items-center gap-4 bg-white/[0.08] p-3 shadow-[8px_10px_30px_rgba(0,0,0,0.26)] backdrop-blur-md"
+    <motion.a
+      href={`#menu-item-${item.id}`}
+      aria-label={`View ${item.title} in the menu`}
+      className="group relative flex items-center gap-4 bg-white/[0.08] p-3 shadow-[8px_10px_30px_rgba(0,0,0,0.26)] backdrop-blur-md transition-colors hover:bg-white/[0.14] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5C518]"
       style={{ clipPath: ROUGH_BTN }}
       initial={{ opacity: 0, x: 34 }}
       animate={{ opacity: 1, x: 0 }}
@@ -245,11 +248,15 @@ function FeaturedPlate({ item, index }: { item: MenuItem; index: number }) {
         <p className="mt-1 line-clamp-2 text-xs leading-5 text-white/62">
           {item.description}
         </p>
+        <span className="mt-2 inline-flex items-center gap-1 font-ui text-[9px] font-bold uppercase tracking-[0.16em] text-[#4CAF50] transition-colors group-hover:text-[#F5C518]">
+          View dish
+          <ArrowDown size={11} />
+        </span>
       </div>
       <span className="ml-auto shrink-0 font-ui text-lg font-bold text-[#F5C518]">
         {item.price}
       </span>
-    </motion.div>
+    </motion.a>
   )
 }
 
@@ -521,7 +528,8 @@ function MenuPosterCard({ item, index }: { item: MenuItem; index: number }) {
 
   return (
     <motion.article
-      className="group grid gap-4 border-b border-white/12 pb-6 md:grid-cols-[8.5rem_1fr_auto]"
+      id={`menu-item-${item.id}`}
+      className="group scroll-mt-[160px] grid gap-4 border-b border-white/12 pb-6 transition-[background-color,box-shadow] duration-500 target:bg-white/[0.06] target:shadow-[0_0_0_10px_rgba(245,197,24,0.08)] md:grid-cols-[8.5rem_1fr_auto]"
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}

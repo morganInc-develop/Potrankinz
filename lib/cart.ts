@@ -8,8 +8,20 @@ export interface CartProduct {
   description: string
 }
 
+export interface CartSideSelection {
+  id: string
+  title: string
+  image: string
+}
+
 export interface CartLine extends CartProduct {
+  lineId: string
+  selectedSide?: CartSideSelection
   quantity: number
+}
+
+type StoredCartLine = Omit<CartLine, 'lineId'> & {
+  lineId?: string
 }
 
 export const CART_STORAGE_KEY = 'potrankinz-cart'
@@ -45,6 +57,17 @@ export function formatMoney(cents: number) {
   }).format(cents / 100)
 }
 
+function isCartSideSelection(value: unknown): value is CartSideSelection {
+  if (!value || typeof value !== 'object') return false
+
+  const side = value as Record<string, unknown>
+  return (
+    typeof side.id === 'string' &&
+    typeof side.title === 'string' &&
+    typeof side.image === 'string'
+  )
+}
+
 export function readCart(): CartLine[] {
   if (typeof window === 'undefined') return memoryCart
 
@@ -58,21 +81,25 @@ export function readCart(): CartLine[] {
     if (!Array.isArray(parsed)) return []
 
     return parsed
-      .filter((item): item is CartLine => {
+      .filter((item): item is StoredCartLine => {
         return (
           item &&
           typeof item.id === 'string' &&
+          (item.lineId === undefined || typeof item.lineId === 'string') &&
           typeof item.title === 'string' &&
           typeof item.price === 'string' &&
           typeof item.priceCents === 'number' &&
           typeof item.image === 'string' &&
           typeof item.category === 'string' &&
           typeof item.description === 'string' &&
-          typeof item.quantity === 'number'
+          typeof item.quantity === 'number' &&
+          (item.selectedSide === undefined ||
+            isCartSideSelection(item.selectedSide))
         )
       })
       .map((item) => ({
         ...item,
+        lineId: item.lineId ?? item.id,
         quantity: Math.max(1, Math.min(99, Math.floor(item.quantity))),
       }))
   } catch {
@@ -96,32 +123,44 @@ export function writeCart(lines: CartLine[]) {
   )
 }
 
-export function addCartItem(product: CartProduct, quantity = 1) {
+export function addCartItem(
+  product: CartProduct,
+  quantity = 1,
+  selectedSide?: CartSideSelection,
+) {
   const lines = readCart()
-  const existing = lines.find((line) => line.id === product.id)
+  const lineId = selectedSide
+    ? `${product.id}::side:${selectedSide.id}`
+    : product.id
+  const existing = lines.find((line) => line.lineId === lineId)
 
   if (existing) {
     existing.quantity = Math.min(99, existing.quantity + quantity)
   } else {
-    lines.push({ ...product, quantity: Math.max(1, quantity) })
+    lines.push({
+      ...product,
+      lineId,
+      selectedSide,
+      quantity: Math.max(1, quantity),
+    })
   }
 
   writeCart(lines)
 }
 
-export function updateCartQuantity(id: string, quantity: number) {
+export function updateCartQuantity(lineId: string, quantity: number) {
   const nextQuantity = Math.max(0, Math.min(99, Math.floor(quantity)))
   writeCart(
     readCart()
       .map((line) =>
-        line.id === id ? { ...line, quantity: nextQuantity } : line,
+        line.lineId === lineId ? { ...line, quantity: nextQuantity } : line,
       )
       .filter((line) => line.quantity > 0),
   )
 }
 
-export function removeCartItem(id: string) {
-  writeCart(readCart().filter((line) => line.id !== id))
+export function removeCartItem(lineId: string) {
+  writeCart(readCart().filter((line) => line.lineId !== lineId))
 }
 
 export function clearCart() {

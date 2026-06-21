@@ -1,0 +1,199 @@
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
+import { Music2, Pause, Play, Volume2, VolumeX } from 'lucide-react'
+
+const MUSIC_ENABLED_KEY = 'potrankinz-music-enabled'
+const MUSIC_MUTED_KEY = 'potrankinz-music-muted'
+
+interface AmbientMusicPlayerProps {
+  src: string
+  title: string
+  placement?: 'splash' | 'site'
+}
+
+export default function AmbientMusicPlayer({
+  src,
+  title,
+  placement = 'site',
+}: AmbientMusicPlayerProps) {
+  const audioRef = useRef<HTMLAudioElement>(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [isMuted, setIsMuted] = useState(false)
+  const [needsSoundGesture, setNeedsSoundGesture] = useState(false)
+
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    const musicEnabled =
+      window.sessionStorage.getItem(MUSIC_ENABLED_KEY) !== 'false'
+    const savedMuted = window.sessionStorage.getItem(MUSIC_MUTED_KEY) === 'true'
+
+    audio.volume = 0.32
+    audio.muted = savedMuted
+    setIsMuted(savedMuted)
+
+    if (!musicEnabled) return
+
+    let cancelled = false
+
+    const startMusic = async () => {
+      try {
+        await audio.play()
+        if (!cancelled) setIsPlaying(true)
+      } catch {
+        if (cancelled) return
+
+        audio.muted = true
+        setIsMuted(true)
+        setNeedsSoundGesture(true)
+        window.sessionStorage.setItem(MUSIC_MUTED_KEY, 'true')
+
+        try {
+          await audio.play()
+          if (!cancelled) setIsPlaying(true)
+        } catch {
+          if (!cancelled) setIsPlaying(false)
+        }
+      }
+    }
+
+    void startMusic()
+
+    return () => {
+      cancelled = true
+      audio.pause()
+    }
+  }, [src])
+
+  const togglePlayback = async () => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    if (!audio.paused) {
+      audio.pause()
+      setIsPlaying(false)
+      window.sessionStorage.setItem(MUSIC_ENABLED_KEY, 'false')
+      return
+    }
+
+    try {
+      await audio.play()
+      setIsPlaying(true)
+      window.sessionStorage.setItem(MUSIC_ENABLED_KEY, 'true')
+    } catch {
+      setIsPlaying(false)
+    }
+  }
+
+  const toggleMute = async () => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    const nextMuted = !audio.muted
+    audio.muted = nextMuted
+    setIsMuted(nextMuted)
+    setNeedsSoundGesture(false)
+    window.sessionStorage.setItem(MUSIC_MUTED_KEY, String(nextMuted))
+
+    if (!nextMuted && audio.paused) {
+      try {
+        await audio.play()
+        setIsPlaying(true)
+        window.sessionStorage.setItem(MUSIC_ENABLED_KEY, 'true')
+      } catch {
+        setIsPlaying(false)
+      }
+    }
+  }
+
+  const positionClass =
+    placement === 'splash'
+      ? 'right-4 top-4 md:right-6 md:top-6'
+      : 'right-4 top-24 md:right-8 md:top-32 lg:top-28'
+
+  return (
+    <div
+      className={`fixed z-[70] ${positionClass}`}
+      aria-label={`Music player: ${title}`}
+    >
+      <audio
+        ref={audioRef}
+        src={src}
+        autoPlay
+        muted={isMuted}
+        loop
+        preload="auto"
+        playsInline
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      />
+
+      <div className="relative flex items-center gap-2 border border-[#F5C518]/55 bg-[#0D0A06]/92 p-2 text-white shadow-[5px_6px_0_rgba(196,30,58,0.36)] backdrop-blur-md">
+        <span
+          className="absolute inset-x-0 top-0 h-[3px]"
+          style={{
+            background:
+              'linear-gradient(90deg, #C41E3A 0 33%, #F5C518 33% 66%, #4CAF50 66%)',
+          }}
+          aria-hidden
+        />
+
+        <div className="hidden min-w-0 items-center gap-2 pl-1 pr-2 sm:flex">
+          <Music2 size={16} className="shrink-0 text-[#4CAF50]" />
+          <span className="min-w-0">
+            <span className="block font-ui text-[8px] font-bold uppercase tracking-[0.18em] text-[#F5C518]">
+              {needsSoundGesture
+                ? 'Tap for sound'
+                : isPlaying
+                  ? 'Now playing'
+                  : 'Music paused'}
+            </span>
+            <span className="block max-w-44 truncate font-special text-[10px] uppercase tracking-[0.06em] text-white/72">
+              {title}
+            </span>
+          </span>
+          <span className="flex h-5 items-end gap-[2px]" aria-hidden>
+            {[10, 17, 13].map((height, index) => (
+              <span
+                key={height}
+                className={`w-[3px] bg-[#4CAF50] ${
+                  isPlaying ? 'animate-pulse' : 'opacity-35'
+                }`}
+                style={{
+                  height,
+                  animationDelay: `${index * 140}ms`,
+                }}
+              />
+            ))}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => void togglePlayback()}
+          aria-label={isPlaying ? `Pause ${title}` : `Play ${title}`}
+          title={isPlaying ? 'Pause music' : 'Play music'}
+          className="grid h-10 w-10 place-items-center bg-[#F5C518] text-black transition-colors hover:bg-[#4CAF50] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        >
+          {isPlaying ? <Pause size={17} /> : <Play size={17} />}
+        </button>
+
+        <button
+          type="button"
+          onClick={() => void toggleMute()}
+          aria-label={isMuted ? `Turn on sound for ${title}` : `Mute ${title}`}
+          title={isMuted ? 'Turn sound on' : 'Mute music'}
+          className={`grid h-10 w-10 place-items-center border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+            isMuted
+              ? 'border-[#C41E3A] bg-[#C41E3A] text-white hover:bg-[#a7182e]'
+              : 'border-[#4CAF50]/65 bg-[#1E6B1E] text-white hover:bg-[#4CAF50] hover:text-black'
+          }`}
+        >
+          {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+        </button>
+      </div>
+    </div>
+  )
+}

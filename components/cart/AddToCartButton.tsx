@@ -3,7 +3,12 @@
 import { useEffect, useState } from 'react'
 import { Check, ShoppingCart } from 'lucide-react'
 
-import { addCartItem, type CartProduct } from '@/lib/cart'
+import SideSelectionModal from '@/components/cart/SideSelectionModal'
+import {
+  addCartItem,
+  type CartProduct,
+  type CartSideSelection,
+} from '@/lib/cart'
 
 interface AddToCartButtonProps {
   product: CartProduct | null
@@ -21,6 +26,7 @@ export default function AddToCartButton({
   style,
 }: AddToCartButtonProps) {
   const [added, setAdded] = useState(false)
+  const [sidePickerOpen, setSidePickerOpen] = useState(false)
 
   useEffect(() => {
     if (!added) return
@@ -41,27 +47,51 @@ export default function AddToCartButton({
     )
   }
 
+  const needsSide =
+    product.category === 'mains' ||
+    product.category === 'vegan' ||
+    (product.category === 'breakfast' && product.id !== 'cornmeal-porridge')
+
+  const addProduct = (selectedSide?: CartSideSelection) => {
+    addCartItem(product, 1, selectedSide)
+    setSidePickerOpen(false)
+    setAdded(true)
+  }
+
   return (
-    <button
-      type="button"
-      onClick={() => {
-        addCartItem(product)
-        setAdded(true)
-      }}
-      style={style}
-      className={`inline-flex items-center justify-center gap-2 bg-[#F5C518] px-4 py-2 font-ui text-[11px] font-bold uppercase tracking-[0.14em] text-black transition-colors hover:bg-[#4CAF50] ${className}`}
-    >
-      {added ? (
-        <>
-          <Check size={14} />
-          Added
-        </>
-      ) : (
-        <>
-          <ShoppingCart size={14} />
-          {label}
-        </>
+    <>
+      <button
+        type="button"
+        onClick={() => {
+          if (needsSide) {
+            setSidePickerOpen(true)
+            return
+          }
+          addProduct()
+        }}
+        style={style}
+        className={`inline-flex items-center justify-center gap-2 bg-[#F5C518] px-4 py-2 font-ui text-[11px] font-bold uppercase tracking-[0.14em] text-black transition-colors hover:bg-[#4CAF50] ${className}`}
+      >
+        {added ? (
+          <>
+            <Check size={14} />
+            Added
+          </>
+        ) : (
+          <>
+            <ShoppingCart size={14} />
+            {label}
+          </>
+        )}
+      </button>
+      {needsSide && (
+        <SideSelectionModal
+          open={sidePickerOpen}
+          onOpenChange={setSidePickerOpen}
+          productTitle={product.title}
+          onConfirm={addProduct}
+        />
       )}
-    </button>
+    </>
   )
 }

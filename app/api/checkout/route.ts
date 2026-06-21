@@ -2,11 +2,13 @@ import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
 import { cartProductsById } from '@/lib/cart-products'
+import { menuItems } from '@/lib/kindred-home-data'
 import { absoluteUrl } from '@/lib/site'
 
 interface CheckoutLine {
   id: string
   quantity: number
+  selectedSideId?: string
 }
 
 export async function POST(request: Request) {
@@ -38,6 +40,9 @@ export async function POST(request: Request) {
     .map((line) => {
       const product = cartProductsById.get(line.id)
       const quantity = Math.max(1, Math.min(99, Math.floor(line.quantity)))
+      const selectedSide = menuItems.find(
+        (item) => item.id === line.selectedSideId && item.category === 'sides',
+      )
 
       if (!product || !Number.isFinite(quantity)) return null
 
@@ -47,8 +52,12 @@ export async function POST(request: Request) {
           currency: 'usd',
           unit_amount: product.priceCents,
           product_data: {
-            name: product.title,
-            description: product.description,
+            name: selectedSide
+              ? `${product.title} — ${selectedSide.title}`
+              : product.title,
+            description: selectedSide
+              ? `${product.description} Side choice: ${selectedSide.title}.`
+              : product.description,
             images: [absoluteUrl(product.image)],
           },
         },

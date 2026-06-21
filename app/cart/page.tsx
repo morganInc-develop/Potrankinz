@@ -189,6 +189,27 @@ function CartLineItem({ line }: { line: CartLine }) {
         <p className="mt-3 max-w-2xl text-sm leading-6 text-white/64">
           {line.description}
         </p>
+        {line.selectedSide && (
+          <div className="mt-4 inline-flex items-center gap-3 border border-[#F5C518]/30 bg-[#F5C518]/8 p-2 pr-4">
+            <span className="relative h-12 w-14 shrink-0 overflow-hidden">
+              <Image
+                src={line.selectedSide.image}
+                alt=""
+                fill
+                sizes="56px"
+                className="object-cover"
+              />
+            </span>
+            <span>
+              <span className="block font-ui text-[9px] font-bold uppercase tracking-[0.16em] text-white/48">
+                Side choice
+              </span>
+              <span className="font-ui text-xs font-bold uppercase tracking-[0.1em] text-[#F5C518]">
+                {line.selectedSide.title}
+              </span>
+            </span>
+          </div>
+        )}
       </div>
       <div className="flex flex-col items-start gap-4 md:items-end">
         <p className="font-ui text-2xl font-bold text-[#F5C518]">
@@ -197,7 +218,7 @@ function CartLineItem({ line }: { line: CartLine }) {
         <div className="flex items-center gap-2">
           <QuantityButton
             label={`Remove one ${line.title}`}
-            onClick={() => updateCartQuantity(line.id, line.quantity - 1)}
+            onClick={() => updateCartQuantity(line.lineId, line.quantity - 1)}
           >
             <Minus size={15} />
           </QuantityButton>
@@ -206,14 +227,14 @@ function CartLineItem({ line }: { line: CartLine }) {
           </span>
           <QuantityButton
             label={`Add one ${line.title}`}
-            onClick={() => updateCartQuantity(line.id, line.quantity + 1)}
+            onClick={() => updateCartQuantity(line.lineId, line.quantity + 1)}
           >
             <Plus size={15} />
           </QuantityButton>
         </div>
         <button
           type="button"
-          onClick={() => removeCartItem(line.id)}
+          onClick={() => removeCartItem(line.lineId)}
           className="inline-flex items-center gap-2 font-ui text-[11px] font-bold uppercase tracking-[0.16em] text-white/44 transition-colors hover:text-[#C41E3A]"
         >
           <Trash2 size={14} />
@@ -287,6 +308,7 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
           items: lines.map((line) => ({
             id: line.id,
             quantity: line.quantity,
+            selectedSideId: line.selectedSide?.id,
           })),
         }),
       })
@@ -465,7 +487,7 @@ export default function CartPage() {
             {lines.length > 0 ? (
               <div className="grid gap-6">
                 {lines.map((line) => (
-                  <CartLineItem key={line.id} line={line} />
+                  <CartLineItem key={line.lineId} line={line} />
                 ))}
               </div>
             ) : (
