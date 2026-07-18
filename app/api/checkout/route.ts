@@ -11,6 +11,8 @@ interface CheckoutLine {
   selectedSideId?: string
 }
 
+type Fulfillment = 'pickup' | 'delivery'
+
 export async function POST(request: Request) {
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY
 
@@ -24,7 +26,7 @@ export async function POST(request: Request) {
     )
   }
 
-  let body: { items?: CheckoutLine[] }
+  let body: { items?: CheckoutLine[]; fulfillment?: Fulfillment }
 
   try {
     body = await request.json()
@@ -36,6 +38,8 @@ export async function POST(request: Request) {
   }
 
   const items = Array.isArray(body.items) ? body.items : []
+  const fulfillment: Fulfillment =
+    body.fulfillment === 'delivery' ? 'delivery' : 'pickup'
   const lineItems = items
     .map((line) => {
       const product = cartProductsById.get(line.id)
@@ -85,10 +89,25 @@ export async function POST(request: Request) {
     phone_number_collection: {
       enabled: true,
     },
+    shipping_address_collection:
+      fulfillment === 'delivery'
+        ? {
+            allowed_countries: ['US'],
+          }
+        : undefined,
+    custom_text: {
+      submit: {
+        message:
+          fulfillment === 'delivery'
+            ? 'Your delivery address will be included with the order.'
+            : 'This order is marked for pickup at Pot Rankinz Kitchen.',
+      },
+    },
     success_url: `${origin}/cart?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/cart?checkout=cancelled`,
     metadata: {
       source: 'potrankinz-cart',
+      fulfillment,
     },
   })
 

@@ -9,14 +9,17 @@ import { ArrowLeft, ArrowRight, Check, X } from 'lucide-react'
 import type { CartSideSelection } from '@/lib/cart'
 import { menuItems } from '@/lib/kindred-home-data'
 
-const sideOptions: CartSideSelection[] = menuItems
+const allSideOptions: CartSideSelection[] = menuItems
   .filter((item) => item.category === 'sides')
   .map(({ id, title, image }) => ({ id, title, image }))
+
+const breakfastExcludedSideIds = new Set(['rice-peas', 'white-rice'])
 
 interface SideSelectionModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   productTitle: string
+  productCategory: string
   onConfirm: (side: CartSideSelection) => void
 }
 
@@ -24,8 +27,13 @@ export default function SideSelectionModal({
   open,
   onOpenChange,
   productTitle,
+  productCategory,
   onConfirm,
 }: SideSelectionModalProps) {
+  const sideOptions =
+    productCategory === 'breakfast'
+      ? allSideOptions.filter((side) => !breakfastExcludedSideIds.has(side.id))
+      : allSideOptions
   const [activeIndex, setActiveIndex] = useState(0)
   const activeSide = sideOptions[activeIndex]
 

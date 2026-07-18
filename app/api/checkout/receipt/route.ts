@@ -102,6 +102,8 @@ export async function POST(request: Request) {
         customerName: session.customer_details?.name ?? undefined,
         customerEmail,
         orderId: session.id,
+        fulfillment:
+          session.metadata?.fulfillment === 'delivery' ? 'Delivery' : 'Pickup',
         total: formatMoney(session.amount_total ?? 0, currency),
         items,
       }),

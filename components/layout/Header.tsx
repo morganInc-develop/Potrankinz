@@ -4,15 +4,16 @@ import { useState, useEffect } from 'react'
 import type { CSSProperties } from 'react'
 import { motion } from 'framer-motion'
 import {
-  UtensilsCrossed,
   CalendarDays,
   Mail,
   ChefHat,
   BookOpen,
+  Info,
   ShoppingCart,
 } from 'lucide-react'
 
 import CartNavBadge from '@/components/cart/CartNavBadge'
+import MenuPlateIcon from '@/components/icons/MenuPlateIcon'
 import HomepageLink from '@/components/ui/homepage-link'
 import { restaurantName } from '@/lib/kindred-home-data'
 
@@ -29,31 +30,55 @@ interface HeaderProps {
 const PAPER_GRAIN = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.042'/%3E%3C/svg%3E")`
 
 const NAV_ICONS: Record<string, React.ElementType> = {
-  menu: UtensilsCrossed,
   contact: Mail,
   cart: ShoppingCart,
   services: ChefHat,
   reservations: CalendarDays,
   'book now': BookOpen,
+  'about us': Info,
+}
+
+const NAV_ACCENTS: Record<string, string> = {
+  menu: '#F5C518',
+  cart: '#4CAF50',
+  contact: '#C41E3A',
+  services: '#F5C518',
+  'about us': '#4CAF50',
 }
 
 function NavIcon({ label, className }: { label: string; className?: string }) {
+  if (label.toLowerCase() === 'menu') {
+    return <MenuPlateIcon className={className} size={20} />
+  }
+
   const Icon = NAV_ICONS[label.toLowerCase()]
   if (!Icon) return null
-  return <Icon size={17} className={className} strokeWidth={1.9} />
+  return (
+    <Icon
+      size={18}
+      className={className}
+      strokeWidth={2.15}
+      style={{ color: NAV_ACCENTS[label.toLowerCase()] ?? '#FFFFFF' }}
+    />
+  )
 }
 
 function HeaderNav({ links }: { links: HeaderLink[] }) {
   return (
-    <nav className="hidden items-center gap-8 lg:flex">
+    <nav className="hidden items-center gap-4 lg:flex">
       {links.map((link) => {
         const isCart = link.label.toLowerCase() === 'cart'
+        const accent = NAV_ACCENTS[link.label.toLowerCase()] ?? '#F5C518'
 
         return (
           <HomepageLink
             key={link.label}
             href={link.href}
-            className="pointer-events-auto relative flex items-center gap-2 font-ui text-[13px] uppercase tracking-[0.19em] text-white/78 transition-colors duration-300 hover:text-[#F5C518]"
+            className="pointer-events-auto relative flex items-center gap-2.5 border bg-white/[0.045] px-3 py-2 font-ui text-[12px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_3px_12px_rgba(0,0,0,0.24)] transition-[color,background-color,border-color,transform] duration-300 hover:-translate-y-0.5 hover:border-white/45 hover:bg-white/[0.11] hover:text-[#F5C518]"
+            style={{
+              borderColor: `${accent}66`,
+              textShadow: '0 1px 8px rgba(255,255,255,0.2)',
+            }}
           >
             <span className="relative">
               <NavIcon label={link.label} />

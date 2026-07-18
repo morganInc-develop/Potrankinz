@@ -18,7 +18,9 @@ import {
   Star,
 } from 'lucide-react'
 
+import AddToCartButton from '@/components/cart/AddToCartButton'
 import Photo from '@/components/ui/Photo'
+import { cartProductFromMenu } from '@/lib/cart-products'
 import {
   menuItems,
   services,
@@ -274,6 +276,11 @@ export function MenuPreview() {
                 {item.price}
               </span>
             </div>
+            <AddToCartButton
+              product={cartProductFromMenu(item)}
+              className="mt-4"
+              style={{ clipPath: ROUGH_BTN }}
+            />
           </motion.article>
         ))}
       </div>
@@ -450,7 +457,7 @@ export function VisitAndBooking() {
     {
       icon: Clock,
       title: 'Hours',
-      lines: ['Tue-Thu 11am-8pm', 'Fri-Sat 11am-10pm', 'Sun 12pm-6pm'],
+      lines: ['Every day', '6:00am until sold out'],
     },
     {
       icon: MapPin,
