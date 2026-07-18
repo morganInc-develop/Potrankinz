@@ -10,8 +10,10 @@ import {
   LockKeyhole,
   Minus,
   Plus,
+  ShoppingBag,
   ShoppingCart,
   Trash2,
+  Truck,
   UtensilsCrossed,
 } from 'lucide-react'
 
@@ -120,7 +122,8 @@ function CartHero({ count }: { count: number }) {
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-7 text-white/72 md:text-lg">
             Add menu favorites, check the count, and move to Stripe when the
-            order is ready. Simple pickup flow, big Pot Rankinz flavor.
+            order is ready. Choose pickup or delivery, then let Stripe handle
+            the secure checkout.
           </p>
         </motion.div>
 
@@ -247,6 +250,9 @@ function CartLineItem({ line }: { line: CartLine }) {
 
 function CartSummary({ lines }: { lines: CartLine[] }) {
   const [checkoutState, setCheckoutState] = useState<'idle' | 'loading'>('idle')
+  const [fulfillment, setFulfillment] = useState<'pickup' | 'delivery'>(
+    'pickup',
+  )
   const [message, setMessage] = useState('')
   const subtotal = cartSubtotal(lines)
 
@@ -305,6 +311,7 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          fulfillment,
           items: lines.map((line) => ({
             id: line.id,
             quantity: line.quantity,
@@ -342,6 +349,63 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
       <p className="font-ui text-[12px] font-bold uppercase tracking-[0.22em] text-[#F5C518]">
         Order check
       </p>
+      <fieldset className="mt-6">
+        <legend className="font-ui text-[11px] font-bold uppercase tracking-[0.18em] text-white/58">
+          Pickup or delivery
+        </legend>
+        <div className="mt-3 grid grid-cols-2 gap-3">
+          {(
+            [
+              {
+                id: 'pickup',
+                label: 'Pickup',
+                detail: 'Collect at the kitchen',
+                Icon: ShoppingBag,
+              },
+              {
+                id: 'delivery',
+                label: 'Delivery',
+                detail: 'Address at checkout',
+                Icon: Truck,
+              },
+            ] as const
+          ).map(({ id, label, detail, Icon }) => {
+            const selected = fulfillment === id
+
+            return (
+              <button
+                key={id}
+                type="button"
+                aria-pressed={selected}
+                onClick={() => setFulfillment(id)}
+                className={`border p-3 text-left transition-colors ${
+                  selected
+                    ? 'border-[#F5C518] bg-[#F5C518] text-black'
+                    : 'border-white/14 bg-white/[0.04] text-white hover:border-white/36'
+                }`}
+              >
+                <span className="flex items-center gap-2 font-ui text-[12px] font-bold uppercase tracking-[0.12em]">
+                  <Icon size={16} />
+                  {label}
+                </span>
+                <span
+                  className={`mt-2 block text-xs ${
+                    selected ? 'text-black/62' : 'text-white/48'
+                  }`}
+                >
+                  {detail}
+                </span>
+              </button>
+            )
+          })}
+        </div>
+        {fulfillment === 'delivery' && (
+          <p className="mt-3 text-xs leading-5 text-white/52">
+            Stripe will collect the delivery address securely. Delivery is
+            currently offered without an added delivery fee.
+          </p>
+        )}
+      </fieldset>
       <div className="mt-6 space-y-4 border-b border-white/12 pb-6">
         <div className="flex items-center justify-between gap-4">
           <span className="text-white/58">Subtotal</span>
@@ -369,7 +433,9 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
         className="mt-7 inline-flex w-full items-center justify-center gap-2 bg-[#C41E3A] px-8 py-4 font-ui text-[13px] font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#F5C518] hover:text-black disabled:cursor-not-allowed disabled:bg-white/16 disabled:text-white/38"
         style={{ clipPath: ROUGH_BTN }}
       >
-        {checkoutState === 'loading' ? 'Starting checkout' : 'Checkout'}
+        {checkoutState === 'loading'
+          ? 'Starting checkout'
+          : `Checkout for ${fulfillment}`}
         <CreditCard size={16} />
       </button>
       {message && (

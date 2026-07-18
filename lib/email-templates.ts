@@ -30,6 +30,7 @@ export interface ReceiptEmailData {
   customerName?: string
   customerEmail: string
   orderId: string
+  fulfillment?: string
   total: string
   items: ReceiptEmailItem[]
 }
@@ -211,6 +212,7 @@ export function receiptEmailTemplate(data: ReceiptEmailData) {
           ['Customer', data.customerName ?? data.customerEmail],
           ['Email', data.customerEmail],
           ['Order', data.orderId],
+          ['Order type', data.fulfillment],
         ])}
       </table>
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top:18px;">

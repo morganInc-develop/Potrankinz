@@ -36,16 +36,30 @@ import {
   type MenuCategory,
   type MenuItem,
 } from '@/lib/kindred-home-data'
-import { cartProductFromMenu, yardBoxProduct } from '@/lib/cart-products'
+import {
+  cartProductFromMenu,
+  extraProteinProducts,
+  veganComboProducts,
+  yardBoxProduct,
+} from '@/lib/cart-products'
 
 const ease = [0.33, 1, 0.68, 1] as const
 
 const ROUGH_BTN =
   'polygon(0% 10%, 4% 2%, 10% 8%, 17% 0%, 24% 8%, 31% 2%, 38% 10%, 45% 2%, 52% 8%, 59% 2%, 66% 8%, 73% 0%, 80% 10%, 87% 2%, 94% 8%, 100% 5%, 99% 50%, 100% 95%, 96% 100%, 89% 90%, 82% 100%, 75% 92%, 68% 100%, 61% 90%, 54% 100%, 47% 92%, 40% 100%, 33% 90%, 26% 100%, 19% 92%, 12% 100%, 5% 90%, 0% 95%, 1% 50%)'
 
+const ROUGH_PANEL =
+  'polygon(0% 1.2%, 6% 0.2%, 13% 1%, 20% 0%, 28% 1.1%, 36% 0.3%, 44% 1.2%, 52% 0.2%, 60% 1%, 68% 0%, 76% 1.1%, 84% 0.2%, 92% 1%, 100% 0.4%, 100% 99.2%, 94% 100%, 87% 99%, 80% 100%, 73% 99.1%, 66% 100%, 59% 99%, 52% 100%, 45% 99.1%, 38% 100%, 31% 99%, 24% 100%, 17% 99.1%, 10% 100%, 4% 99%, 0% 99.5%)'
+
 const GRAIN = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`
 
 const EDGE_COLORS = ['#C41E3A', '#F5C518', '#4CAF50'] as const
+
+const VEGAN_COMBO_DETAILS: Record<string, string> = {
+  'small-belly-fill': 'Plate + drink',
+  'yardman-combo': 'Plate + festival + drink',
+  'rasta-box': '3 sides sampler',
+}
 
 const CATEGORY_META: Record<
   MenuCategory,
@@ -488,9 +502,9 @@ function CategoryTabs({
   }
 
   return (
-    <div className="sticky top-[92px] z-30 border-y border-white/10 bg-[#050505]/94 backdrop-blur-md">
-      <div className="mx-auto max-w-[90rem] px-6 md:px-8 lg:px-14">
-        <div className="flex overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <div className="sticky top-[92px] z-30 border-y border-[#F5C518]/30 bg-[#050505]/98 shadow-[0_8px_24px_rgba(0,0,0,0.42)] backdrop-blur-md">
+      <div className="mx-auto max-w-[90rem] px-2 md:px-8 lg:px-14">
+        <div className="flex overflow-x-auto py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {menuCategories.map((cat) => {
             const meta = CATEGORY_META[cat.id]
             const isActive = active === cat.id
@@ -499,17 +513,29 @@ function CategoryTabs({
                 key={cat.id}
                 type="button"
                 onClick={() => scrollTo(cat.id)}
-                className="relative flex shrink-0 items-center gap-2 px-5 py-4 font-ui text-[12px] font-bold uppercase tracking-[0.16em] transition-colors"
+                className="relative my-1 flex shrink-0 items-center gap-2.5 border px-4 py-3 font-ui text-[12px] font-bold uppercase tracking-[0.14em] transition-[color,background-color,border-color,box-shadow] duration-300 md:px-5"
                 style={{
-                  color: isActive ? meta.paint : 'rgba(255,255,255,0.56)',
+                  color: isActive ? meta.paint : 'rgba(255,255,255,0.9)',
+                  backgroundColor: isActive
+                    ? meta.glow
+                    : 'rgba(255,255,255,0.035)',
+                  borderColor: isActive
+                    ? `${meta.paint}80`
+                    : 'rgba(255,255,255,0.12)',
+                  boxShadow: isActive ? `0 0 18px ${meta.glow}` : 'none',
+                  textShadow: '0 1px 8px rgba(255,255,255,0.16)',
                 }}
               >
-                <meta.Icon size={15} />
+                <meta.Icon
+                  size={17}
+                  strokeWidth={2.25}
+                  style={{ color: meta.paint }}
+                />
                 {meta.shortLabel}
                 {isActive && (
                   <motion.span
                     layoutId="menu-active-tab"
-                    className="absolute inset-x-3 bottom-0 h-[3px]"
+                    className="absolute inset-x-2 bottom-0 h-[3px]"
                     style={{ background: meta.paint }}
                     transition={{ type: 'spring', stiffness: 520, damping: 42 }}
                   />
@@ -706,8 +732,8 @@ function YardBoxCombo() {
         </motion.div>
 
         <motion.div
-          className="flex flex-col justify-between gap-8 bg-[#F5C518] p-6 text-black md:p-8"
-          style={{ clipPath: ROUGH_BTN }}
+          className="flex flex-col justify-between gap-8 bg-[#F5C518] px-7 pb-12 pt-10 text-black md:p-10"
+          style={{ clipPath: ROUGH_PANEL }}
           initial={{ opacity: 0, x: 28 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.28 }}
@@ -718,17 +744,23 @@ function YardBoxCombo() {
               Add extra protein
             </h2>
             <div className="mt-7 grid gap-4">
-              {[
-                ['Chicken', '$4'],
-                ['Saltfish', '$3'],
-                ['Goat', '$6'],
-              ].map(([label, price]) => (
-                <div key={label} className="flex items-baseline gap-3">
+              {extraProteinProducts.map((product) => (
+                <div
+                  key={product.id}
+                  className="flex flex-wrap items-center gap-3"
+                >
                   <span className="font-ui text-xl font-bold uppercase tracking-[0.08em]">
-                    {label}
+                    {product.title.replace('Extra ', '')}
                   </span>
                   <span className="h-px flex-1 border-b border-dotted border-black/45" />
-                  <span className="font-ui text-2xl font-bold">{price}</span>
+                  <span className="font-ui text-2xl font-bold">
+                    {product.price}
+                  </span>
+                  <AddToCartButton
+                    product={product}
+                    className="bg-black text-white hover:bg-[#C41E3A] hover:text-white"
+                    style={{ clipPath: ROUGH_BTN }}
+                  />
                 </div>
               ))}
             </div>
@@ -738,20 +770,26 @@ function YardBoxCombo() {
               Vegan combo vibes
             </h3>
             <div className="mt-4 grid gap-3">
-              {[
-                ['Small Belly Fill', 'Plate + drink', '$15'],
-                ['Yardman Combo', 'Plate + festival + drink', '$18'],
-                ['Rasta Box', '3 sides sampler', '$10'],
-              ].map(([label, detail, price]) => (
-                <div key={label} className="flex items-baseline gap-3">
+              {veganComboProducts.map((product) => (
+                <div
+                  key={product.id}
+                  className="flex flex-wrap items-center gap-3"
+                >
                   <span className="font-ui text-base font-bold uppercase tracking-[0.08em]">
-                    {label}
+                    {product.title}
                   </span>
                   <span className="hidden text-xs font-bold uppercase tracking-[0.08em] text-black/55 sm:inline">
-                    {detail}
+                    {VEGAN_COMBO_DETAILS[product.id]}
                   </span>
                   <span className="h-px flex-1 border-b border-dotted border-black/45" />
-                  <span className="font-ui text-xl font-bold">{price}</span>
+                  <span className="font-ui text-xl font-bold">
+                    {product.price}
+                  </span>
+                  <AddToCartButton
+                    product={product}
+                    className="bg-black text-white hover:bg-[#C41E3A] hover:text-white"
+                    style={{ clipPath: ROUGH_BTN }}
+                  />
                 </div>
               ))}
             </div>
@@ -765,7 +803,6 @@ function YardBoxCombo() {
           </p>
           <AddToCartButton
             product={yardBoxProduct}
-            label="Add box"
             className="w-fit bg-black text-white hover:bg-[#C41E3A] hover:text-white"
             style={{ clipPath: ROUGH_BTN }}
           />

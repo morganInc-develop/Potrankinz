@@ -22,7 +22,7 @@ export default function AddToCartButton({
   product,
   className = '',
   disabledLabel = 'Quote',
-  label = 'Add',
+  label = 'Add to cart',
   style,
 }: AddToCartButtonProps) {
   const [added, setAdded] = useState(false)
@@ -40,7 +40,7 @@ export default function AddToCartButton({
         type="button"
         disabled
         style={style}
-        className={`inline-flex items-center justify-center gap-2 border border-white/14 px-4 py-2 font-ui text-[11px] font-bold uppercase tracking-[0.14em] text-white/42 ${className}`}
+        className={`inline-flex items-center justify-center gap-2 whitespace-nowrap border border-white/14 px-4 py-2 font-ui text-[11px] font-bold uppercase tracking-[0.14em] text-white/42 ${className}`}
       >
         {disabledLabel}
       </button>
@@ -70,7 +70,7 @@ export default function AddToCartButton({
           addProduct()
         }}
         style={style}
-        className={`inline-flex items-center justify-center gap-2 bg-[#F5C518] px-4 py-2 font-ui text-[11px] font-bold uppercase tracking-[0.14em] text-black transition-colors hover:bg-[#4CAF50] ${className}`}
+        className={`inline-flex items-center justify-center gap-2 whitespace-nowrap bg-[#F5C518] px-4 py-2 font-ui text-[11px] font-bold uppercase tracking-[0.14em] text-black transition-colors hover:bg-[#4CAF50] ${className}`}
       >
         {added ? (
           <>
@@ -89,6 +89,7 @@ export default function AddToCartButton({
           open={sidePickerOpen}
           onOpenChange={setSidePickerOpen}
           productTitle={product.title}
+          productCategory={product.category}
           onConfirm={addProduct}
         />
       )}

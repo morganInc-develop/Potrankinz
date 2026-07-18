@@ -164,11 +164,12 @@ export const menuItems: MenuItem[] = [
       'Saltfish',
       'Onions & tomatoes',
       'Peppers',
-      'Fried dumpling, boiled banana, yam & festival',
+      'Fried dumpling, boiled dumplings & banana, yam & festival',
     ],
     description:
       "Jamaica's national dish with tender ackee, saltfish, onions, tomatoes, and peppers.",
-    chefNote: 'Served with fried dumpling, boiled banana, yam & festival.',
+    chefNote:
+      'Served with fried dumpling, boiled dumplings & banana, yam & festival.',
     tags: ['National dish', 'All-day'],
     featured: true,
   },
@@ -491,12 +492,13 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 'boiled-banana',
-    title: 'Boiled Banana',
+    title: 'Boiled Dumplings & Banana',
     price: '$3',
     image: menuImage('boiled-banana.jpg'),
     category: 'sides',
-    ingredients: ['Green banana', 'Sea salt'],
-    description: 'Classic boiled banana, simple and grounding.',
+    ingredients: ['Boiled dumplings', 'Green banana', 'Sea salt'],
+    description:
+      'Classic boiled dumplings and green banana, simple and grounding.',
     tags: ['Vegan', 'Side'],
   },
   {
@@ -635,7 +637,7 @@ export const navLinks = {
   ],
   right: [
     { label: 'Services', href: `/services` },
-    { label: 'Book Now', href: `/booking` },
+    { label: 'About Us', href: `/about` },
   ],
 }
 
@@ -818,7 +820,7 @@ export const footer = {
       title: 'Restaurant',
       links: [
         { label: 'Menus', href: `${siteRoot}/menu` },
-        { label: 'Book Now', href: `${siteRoot}/booking` },
+        { label: 'About Us', href: `${siteRoot}/about` },
         { label: 'Services', href: `${siteRoot}/services` },
         { label: 'Contact', href: `${siteRoot}/contact` },
       ],
@@ -843,12 +845,7 @@ export const footer = {
       ],
     },
   ],
-  hours: [
-    'Tue-Thu 11am-8pm',
-    'Fri-Sat 11am-10pm',
-    'Sun 12pm-6pm',
-    'Mon closed',
-  ],
+  hours: ['Every day', '6:00am until sold out'],
   contactLines: [
     '11582 SW Village Parkway',
     'Port Saint Lucie, FL 34987',
