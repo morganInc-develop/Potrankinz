@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 
 import AddToCartButton from '@/components/cart/AddToCartButton'
+import DeliveryAddressField from '@/components/cart/DeliveryAddressField'
 import AnnouncementBar from '@/components/layout/AnnouncementBar'
 import Header from '@/components/layout/Header'
 import MobileBottomBar from '@/components/layout/MobileBottomBar'
@@ -36,6 +37,7 @@ import {
   type CartLine,
 } from '@/lib/cart'
 import { cartProducts } from '@/lib/cart-products'
+import type { DeliveryQuote } from '@/lib/delivery'
 import { announcementMessages, footer, navLinks } from '@/lib/kindred-home-data'
 
 const ROUGH_BTN =
@@ -253,8 +255,13 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
   const [fulfillment, setFulfillment] = useState<'pickup' | 'delivery'>(
     'pickup',
   )
+  const [deliveryQuote, setDeliveryQuote] = useState<DeliveryQuote | null>(null)
+  const [deliveryApartment, setDeliveryApartment] = useState('')
   const [message, setMessage] = useState('')
   const subtotal = cartSubtotal(lines)
+  const deliveryFee =
+    fulfillment === 'delivery' ? (deliveryQuote?.feeCents ?? 0) : 0
+  const total = subtotal + deliveryFee
 
   useEffect(() => {
     const search = new URLSearchParams(window.location.search)
@@ -295,6 +302,11 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
   }, [])
 
   const startCheckout = async () => {
+    if (fulfillment === 'delivery' && !deliveryQuote) {
+      setMessage('Select a verified address before starting delivery checkout.')
+      return
+    }
+
     setCheckoutState('loading')
     setMessage('')
 
@@ -312,6 +324,13 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           fulfillment,
+          delivery:
+            fulfillment === 'delivery' && deliveryQuote
+              ? {
+                  placeId: deliveryQuote.placeId,
+                  apartment: deliveryApartment.trim(),
+                }
+              : undefined,
           items: lines.map((line) => ({
             id: line.id,
             quantity: line.quantity,
@@ -365,7 +384,7 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
               {
                 id: 'delivery',
                 label: 'Delivery',
-                detail: 'Address at checkout',
+                detail: '$0.85 per driving mile',
                 Icon: Truck,
               },
             ] as const
@@ -377,7 +396,10 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
                 key={id}
                 type="button"
                 aria-pressed={selected}
-                onClick={() => setFulfillment(id)}
+                onClick={() => {
+                  setFulfillment(id)
+                  setMessage('')
+                }}
                 className={`border p-3 text-left transition-colors ${
                   selected
                     ? 'border-[#F5C518] bg-[#F5C518] text-black'
@@ -400,10 +422,12 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
           })}
         </div>
         {fulfillment === 'delivery' && (
-          <p className="mt-3 text-xs leading-5 text-white/52">
-            Stripe will collect the delivery address securely. Delivery is
-            currently offered without an added delivery fee.
-          </p>
+          <DeliveryAddressField
+            quote={deliveryQuote}
+            apartment={deliveryApartment}
+            onApartmentChange={setDeliveryApartment}
+            onQuoteChange={setDeliveryQuote}
+          />
         )}
       </fieldset>
       <div className="mt-6 space-y-4 border-b border-white/12 pb-6">
@@ -414,21 +438,33 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
           </span>
         </div>
         <div className="flex items-center justify-between gap-4">
-          <span className="text-white/58">Taxes and fees</span>
+          <span className="text-white/58">Tax</span>
           <span className="text-sm text-white/56">At checkout</span>
         </div>
+        {fulfillment === 'delivery' && (
+          <div className="flex items-center justify-between gap-4">
+            <span className="text-white/58">Delivery fee</span>
+            <span className="text-sm text-white/72">
+              {deliveryQuote ? formatMoney(deliveryFee) : 'Select an address'}
+            </span>
+          </div>
+        )}
       </div>
       <div className="mt-6 flex items-center justify-between gap-4">
         <span className="font-ui text-[12px] font-bold uppercase tracking-[0.18em] text-white/62">
           Due today
         </span>
         <span className="font-display text-5xl font-light leading-none text-[#4CAF50]">
-          {formatMoney(subtotal)}
+          {formatMoney(total)}
         </span>
       </div>
       <button
         type="button"
-        disabled={lines.length === 0 || checkoutState === 'loading'}
+        disabled={
+          lines.length === 0 ||
+          checkoutState === 'loading' ||
+          (fulfillment === 'delivery' && !deliveryQuote)
+        }
         onClick={startCheckout}
         className="mt-7 inline-flex w-full items-center justify-center gap-2 bg-[#C41E3A] px-8 py-4 font-ui text-[13px] font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#F5C518] hover:text-black disabled:cursor-not-allowed disabled:bg-white/16 disabled:text-white/38"
         style={{ clipPath: ROUGH_BTN }}

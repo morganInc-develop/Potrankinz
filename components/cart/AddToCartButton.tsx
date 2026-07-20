@@ -88,6 +88,7 @@ export default function AddToCartButton({
         <SideSelectionModal
           open={sidePickerOpen}
           onOpenChange={setSidePickerOpen}
+          productId={product.id}
           productTitle={product.title}
           productCategory={product.category}
           onConfirm={addProduct}

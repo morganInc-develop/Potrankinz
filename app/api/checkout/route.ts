@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
 import { cartProductsById } from '@/lib/cart-products'
+import { getDeliveryQuote } from '@/lib/delivery-server'
 import { menuItems } from '@/lib/kindred-home-data'
 import { absoluteUrl } from '@/lib/site'
 
@@ -12,6 +13,11 @@ interface CheckoutLine {
 }
 
 type Fulfillment = 'pickup' | 'delivery'
+
+interface DeliverySelection {
+  placeId?: string
+  apartment?: string
+}
 
 export async function POST(request: Request) {
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY
@@ -26,7 +32,11 @@ export async function POST(request: Request) {
     )
   }
 
-  let body: { items?: CheckoutLine[]; fulfillment?: Fulfillment }
+  let body: {
+    items?: CheckoutLine[]
+    fulfillment?: Fulfillment
+    delivery?: DeliverySelection
+  }
 
   try {
     body = await request.json()
@@ -76,6 +86,44 @@ export async function POST(request: Request) {
     )
   }
 
+  let deliveryQuote = null
+
+  if (fulfillment === 'delivery') {
+    if (!body.delivery?.placeId) {
+      return NextResponse.json(
+        { error: 'Select a verified delivery address.' },
+        { status: 400 },
+      )
+    }
+
+    try {
+      deliveryQuote = await getDeliveryQuote(body.delivery.placeId)
+    } catch (error) {
+      return NextResponse.json(
+        {
+          error:
+            error instanceof Error
+              ? error.message
+              : 'Delivery could not be calculated.',
+        },
+        { status: 400 },
+      )
+    }
+
+    lineItems.push({
+      quantity: 1,
+      price_data: {
+        currency: 'usd',
+        unit_amount: deliveryQuote.feeCents,
+        product_data: {
+          name: 'Delivery fee',
+          description: `${deliveryQuote.distanceMiles.toFixed(1)} driving miles at $0.85 per mile`,
+          images: [],
+        },
+      },
+    })
+  }
+
   const origin =
     request.headers.get('origin') ??
     process.env.NEXT_PUBLIC_SITE_URL ??
@@ -89,17 +137,11 @@ export async function POST(request: Request) {
     phone_number_collection: {
       enabled: true,
     },
-    shipping_address_collection:
-      fulfillment === 'delivery'
-        ? {
-            allowed_countries: ['US'],
-          }
-        : undefined,
     custom_text: {
       submit: {
         message:
           fulfillment === 'delivery'
-            ? 'Your delivery address will be included with the order.'
+            ? `Delivery to ${deliveryQuote?.address ?? 'your verified address'} is included with this order.`
             : 'This order is marked for pickup at Pot Rankinz Kitchen.',
       },
     },
@@ -108,6 +150,12 @@ export async function POST(request: Request) {
     metadata: {
       source: 'potrankinz-cart',
       fulfillment,
+      delivery_address: deliveryQuote?.address ?? '',
+      delivery_apartment: body.delivery?.apartment?.trim().slice(0, 80) ?? '',
+      delivery_distance_miles: deliveryQuote
+        ? deliveryQuote.distanceMiles.toFixed(1)
+        : '',
+      delivery_fee_cents: deliveryQuote ? String(deliveryQuote.feeCents) : '',
     },
   })
 

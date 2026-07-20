@@ -260,7 +260,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'escovitch-fish',
     title: 'Escovitch Fish',
-    price: 'MP',
+    price: '$18',
     image: menuImage('escovitch-fish.jpg'),
     category: 'mains',
     ingredients: [
@@ -269,11 +269,13 @@ export const menuItems: MenuItem[] = [
       'Onions',
       'Peppers',
       'Vinegar spice sauce',
+      'Choice of 1 side',
     ],
     description:
       'Crispy fried fish topped with bright pickled carrots, onions, and peppers.',
-    chefNote: 'Market price.',
-    tags: ['Market price', 'Bright heat'],
+    chefNote:
+      'Choose 1 side: festival, white bread, white rice, rice & peas, or Rasta pasta.',
+    tags: ['$18', 'Choice of side', 'Bright heat'],
   },
   {
     id: 'brown-stew-chicken',
@@ -366,7 +368,7 @@ export const menuItems: MenuItem[] = [
     id: 'curry-chickpea-plate',
     title: 'Curry Chickpea Plate',
     price: '$12',
-    image: menuImage('curry-chickpea-plate.jpg'),
+    image: menuImage('jamaican-curry-chickpea.png'),
     category: 'vegan',
     ingredients: ['Chickpeas', 'Jamaican curry', 'Potatoes', 'Steamed veggies'],
     description: 'Jamaican curry chickpeas with potatoes and steamed veggies.',
@@ -387,7 +389,7 @@ export const menuItems: MenuItem[] = [
     id: 'callaloo-breakfast-bowl',
     title: 'Callaloo Breakfast Bowl',
     price: '$11',
-    image: menuImage('callaloo-breakfast-bowl.jpg'),
+    image: menuImage('jamaican-callaloo-tofu-breakfast.png'),
     category: 'vegan',
     ingredients: ['Callaloo', 'Seasoned tofu', 'Fried dumplings or rice'],
     description:
@@ -423,8 +425,8 @@ export const menuItems: MenuItem[] = [
     price: '$5',
     image: menuImage('bun-cheese.jpg'),
     category: 'snacks',
-    ingredients: ['Jamaican hard dough bread', 'Cheddar cheese', 'Sweet spice'],
-    description: 'Jamaican hard dough bread with cheddar cheese.',
+    ingredients: ['Jamaican spice bun', 'Cheddar cheese', 'Sweet spice'],
+    description: 'Jamaican spice bun layered with cheddar cheese.',
     tags: ['Sweet', 'Cheese'],
   },
 
@@ -494,11 +496,22 @@ export const menuItems: MenuItem[] = [
     id: 'boiled-banana',
     title: 'Boiled Dumplings & Banana',
     price: '$3',
-    image: menuImage('boiled-banana.jpg'),
+    image: menuImage('boiled-dumplings-banana-v2.png'),
     category: 'sides',
     ingredients: ['Boiled dumplings', 'Green banana', 'Sea salt'],
     description:
       'Classic boiled dumplings and green banana, simple and grounding.',
+    tags: ['Vegan', 'Side'],
+  },
+  {
+    id: 'white-bread',
+    title: 'White Bread',
+    price: '$2',
+    image: menuImage('jamaican-hard-dough-bread.png'),
+    category: 'sides',
+    ingredients: ['Jamaican hard dough bread'],
+    description:
+      'Thick Jamaican hard dough bread, ready for gravy and every last bite.',
     tags: ['Vegan', 'Side'],
   },
   {
@@ -512,13 +525,19 @@ export const menuItems: MenuItem[] = [
     tags: ['Side'],
   },
   {
-    id: 'vegan-mac-cheese-cup',
-    title: 'Vegan Mac & "Cheese" Cup',
+    id: 'rasta-pasta',
+    title: 'Rasta Pasta',
     price: '$6',
-    image: menuImage('mac-cheese.jpg'),
+    image: menuImage('rasta-pasta.png'),
     category: 'sides',
-    ingredients: ['Macaroni', 'Plant-based cheese sauce', 'Seasoned top'],
-    description: 'Plant-based mac cup with creamy vegan cheese-style sauce.',
+    ingredients: [
+      'Penne pasta',
+      'Red, yellow & green peppers',
+      'Scallions',
+      'Jamaican seasoning',
+    ],
+    description:
+      'Creamy plant-based penne with colorful peppers and Jamaican seasoning.',
     tags: ['Vegan', 'Side'],
   },
 

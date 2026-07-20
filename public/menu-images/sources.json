@@ -1,4 +1,21 @@
 {
+  "jamaican-hard-dough-bread.png": {
+    "type": "generated",
+    "subject": "Authentic Jamaican hard dough bread loaf and slices",
+    "visualReference": "https://www.foodnetwork.com/recipes/food-network-kitchen/jamaican-hard-dough-bread-18591120"
+  },
+  "boiled-dumplings-banana-v2.png": {
+    "type": "generated",
+    "subject": "Jamaican boiled flour dumplings and boiled green banana"
+  },
+  "jamaican-curry-chickpea.png": {
+    "type": "generated",
+    "subject": "Jamaican curry chickpeas with potatoes, rice and peas, and steamed cabbage"
+  },
+  "jamaican-callaloo-tofu-breakfast.png": {
+    "type": "generated",
+    "subject": "Vegan Jamaican callaloo breakfast with seasoned tofu and fried dumplings"
+  },
   "ackee-saltfish.jpg": {
     "query": "Ackee and Saltfish Jamaican dish image Wikimedia Commons",
     "source": "https://commons.wikimedia.org/wiki/File:Ackee_and_Saltfish.jpg",
@@ -123,13 +140,6 @@
     "title": "How To Make Best Jamaican Festival | Jamaican Festival Dumpling Recipe ...",
     "converted": true
   },
-  "boiled-banana.jpg": {
-    "query": "Jamaican boiled green banana photo",
-    "source": "https://qaqooking.wiki/all/how-to/how-to-boil-jamaican-green-bananas",
-    "image": "https://healthiersteps.com/wp-content/uploads/2020/10/boiled-green-bananas.jpg",
-    "title": "How To Boil Jamaican Green Bananas",
-    "converted": true
-  },
   "mac-cheese.jpg": {
     "query": "baked mac and cheese photo",
     "source": "https://momsdish.com/baked-mac-and-cheese",
@@ -207,25 +217,11 @@
     "title": "Easy homemade seitan recipe (vegan) - Damn Tasty Vegan",
     "converted": true
   },
-  "curry-chickpea-plate.jpg": {
-    "query": "curry chickpea plate rice photo",
-    "source": "https://www.chefdehome.com/recipes/592/easy-chickpea-curry-with-basmati-rice",
-    "image": "https://media.chefdehome.com/740/0/0/c/chickpea-curry/easy-indian-chickpea-curry-with-basmati-rice-chefdehome-7a.jpg",
-    "title": "Easy Chickpea Curry with Basmati Rice Recipe | ChefDeHome.com",
-    "converted": true
-  },
   "vegan-brown-stew-tofu.jpg": {
     "query": "vegan brown stew tofu Jamaican photo",
     "source": "https://www.pinterest.com/pin/31103053674166631/",
     "image": "https://i.pinimg.com/736x/60/90/6f/60906fe05f03f79af207eef001d0574d.jpg",
     "title": "This brown stew tofu recipe is a flavourful, hearty dinner inspired by ...",
-    "converted": true
-  },
-  "callaloo-breakfast-bowl.jpg": {
-    "query": "vegan callaloo tofu breakfast bowl photo",
-    "source": "https://www.jaroflemons.com/tofu-scramble-vegan-breakfast-bowl/",
-    "image": "https://www.jaroflemons.com/wp-content/uploads/2018/09/Tofu-Scramble-Vegan-Breakfast-Bowl-2.jpg",
-    "title": "Tofu Scramble Vegan Breakfast Bowl - Jar Of Lemons",
     "converted": true
   },
   "pineapple-ginger-juice.jpg": {

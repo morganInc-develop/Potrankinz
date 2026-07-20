@@ -13,11 +13,25 @@ const allSideOptions: CartSideSelection[] = menuItems
   .filter((item) => item.category === 'sides')
   .map(({ id, title, image }) => ({ id, title, image }))
 
-const breakfastExcludedSideIds = new Set(['rice-peas', 'white-rice'])
+const breakfastExcludedSideIds = new Set([
+  'rice-peas',
+  'white-rice',
+  'steamed-cabbage',
+  'mac-cheese',
+])
+
+const fishSideIds = new Set([
+  'festival',
+  'white-bread',
+  'white-rice',
+  'rice-peas',
+  'rasta-pasta',
+])
 
 interface SideSelectionModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
+  productId: string
   productTitle: string
   productCategory: string
   onConfirm: (side: CartSideSelection) => void
@@ -26,14 +40,19 @@ interface SideSelectionModalProps {
 export default function SideSelectionModal({
   open,
   onOpenChange,
+  productId,
   productTitle,
   productCategory,
   onConfirm,
 }: SideSelectionModalProps) {
   const sideOptions =
-    productCategory === 'breakfast'
-      ? allSideOptions.filter((side) => !breakfastExcludedSideIds.has(side.id))
-      : allSideOptions
+    productId === 'escovitch-fish'
+      ? allSideOptions.filter((side) => fishSideIds.has(side.id))
+      : productCategory === 'breakfast'
+        ? allSideOptions.filter(
+            (side) => !breakfastExcludedSideIds.has(side.id),
+          )
+        : allSideOptions
   const [activeIndex, setActiveIndex] = useState(0)
   const activeSide = sideOptions[activeIndex]
 

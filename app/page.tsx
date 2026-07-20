@@ -11,7 +11,6 @@ import {
 import type { MotionValue } from 'framer-motion'
 import { ArrowRight, ChefHat } from 'lucide-react'
 
-import AmbientMusicPlayer from '@/components/audio/AmbientMusicPlayer'
 import HomepageLink from '@/components/ui/homepage-link'
 import { menuItems } from '@/lib/kindred-home-data'
 
@@ -218,11 +217,6 @@ export default function LandingPage() {
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#050505] text-white">
-      <AmbientMusicPlayer
-        src="/audio/hungry-for-rankinz-beat.mp3"
-        title="Hungry for Rankinz Beat"
-        placement="splash"
-      />
       <section
         className="relative grid h-[100svh] place-items-center overflow-hidden px-6 py-4"
         onPointerMove={(event) => {

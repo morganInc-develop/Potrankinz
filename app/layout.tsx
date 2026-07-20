@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Anton, Oswald, DM_Sans, Special_Elite } from 'next/font/google'
+import SiteMusicPlayer from '@/components/audio/SiteMusicPlayer'
 import Providers from './providers'
 
 import './globals.css'
@@ -69,7 +70,10 @@ export default function RootLayout({
       className={`${anton.variable} ${oswald.variable} ${dmSans.variable} ${specialElite.variable}`}
     >
       <body className="min-h-screen bg-[#0D0A06] text-white antialiased">
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <SiteMusicPlayer />
+        </Providers>
       </body>
     </html>
   )
