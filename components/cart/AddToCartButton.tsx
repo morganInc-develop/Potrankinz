@@ -52,8 +52,8 @@ export default function AddToCartButton({
     product.category === 'vegan' ||
     (product.category === 'breakfast' && product.id !== 'cornmeal-porridge')
 
-  const addProduct = (selectedSide?: CartSideSelection) => {
-    addCartItem(product, 1, selectedSide)
+  const addProduct = (selectedSides?: CartSideSelection[]) => {
+    addCartItem(product, 1, selectedSides)
     setSidePickerOpen(false)
     setAdded(true)
   }
@@ -88,6 +88,7 @@ export default function AddToCartButton({
         <SideSelectionModal
           open={sidePickerOpen}
           onOpenChange={setSidePickerOpen}
+          productId={product.id}
           productTitle={product.title}
           productCategory={product.category}
           onConfirm={addProduct}

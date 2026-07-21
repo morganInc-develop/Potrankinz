@@ -1,26 +1,54 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Music2, Pause, Play, Volume2, VolumeX } from 'lucide-react'
+import {
+  Music2,
+  Pause,
+  Play,
+  SkipBack,
+  SkipForward,
+  Volume2,
+  VolumeX,
+} from 'lucide-react'
 
 const MUSIC_ENABLED_KEY = 'potrankinz-music-enabled'
 const MUSIC_MUTED_KEY = 'potrankinz-music-muted'
+const MUSIC_TRACK_KEY = 'potrankinz-music-track'
 
-interface AmbientMusicPlayerProps {
+export interface MusicTrack {
   src: string
   title: string
+}
+
+interface AmbientMusicPlayerProps {
+  tracks: MusicTrack[]
   placement?: 'splash' | 'site'
 }
 
 export default function AmbientMusicPlayer({
-  src,
-  title,
+  tracks,
   placement = 'site',
 }: AmbientMusicPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null)
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
   const [needsSoundGesture, setNeedsSoundGesture] = useState(false)
+  const currentTrack = tracks[currentTrackIndex] ?? tracks[0]
+
+  useEffect(() => {
+    const savedTrack = Number(
+      window.sessionStorage.getItem(MUSIC_TRACK_KEY) ?? '0',
+    )
+
+    if (
+      Number.isInteger(savedTrack) &&
+      savedTrack >= 0 &&
+      savedTrack < tracks.length
+    ) {
+      setCurrentTrackIndex(savedTrack)
+    }
+  }, [tracks.length])
 
   useEffect(() => {
     const audio = audioRef.current
@@ -65,7 +93,17 @@ export default function AmbientMusicPlayer({
       cancelled = true
       audio.pause()
     }
-  }, [src])
+  }, [currentTrack?.src])
+
+  const changeTrack = (direction: -1 | 1) => {
+    if (tracks.length < 2) return
+
+    const nextTrackIndex =
+      (currentTrackIndex + direction + tracks.length) % tracks.length
+    setCurrentTrackIndex(nextTrackIndex)
+    window.sessionStorage.setItem(MUSIC_TRACK_KEY, String(nextTrackIndex))
+    window.sessionStorage.setItem(MUSIC_ENABLED_KEY, 'true')
+  }
 
   const togglePlayback = async () => {
     const audio = audioRef.current
@@ -113,19 +151,22 @@ export default function AmbientMusicPlayer({
       ? 'right-4 top-4 md:right-6 md:top-6'
       : 'right-4 top-24 md:right-8 md:top-32 lg:top-28'
 
+  if (!currentTrack) return null
+
   return (
     <div
       className={`fixed z-[70] ${positionClass}`}
-      aria-label={`Music player: ${title}`}
+      aria-label={`Music player: ${currentTrack.title}`}
     >
       <audio
         ref={audioRef}
-        src={src}
+        src={currentTrack.src}
         autoPlay
         muted={isMuted}
-        loop
+        loop={tracks.length === 1}
         preload="auto"
         playsInline
+        onEnded={() => changeTrack(1)}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
       />
@@ -140,9 +181,9 @@ export default function AmbientMusicPlayer({
           aria-hidden
         />
 
-        <div className="hidden min-w-0 items-center gap-2 pl-1 pr-2 sm:flex">
+        <div className="flex min-w-0 max-w-28 items-center gap-2 pl-1 pr-1 sm:max-w-52 sm:pr-2">
           <Music2 size={16} className="shrink-0 text-[#4CAF50]" />
-          <span className="min-w-0">
+          <span className="min-w-0" aria-live="polite">
             <span className="block font-ui text-[8px] font-bold uppercase tracking-[0.18em] text-[#F5C518]">
               {needsSoundGesture
                 ? 'Tap for sound'
@@ -150,11 +191,16 @@ export default function AmbientMusicPlayer({
                   ? 'Now playing'
                   : 'Music paused'}
             </span>
-            <span className="block max-w-44 truncate font-special text-[10px] uppercase tracking-[0.06em] text-white/72">
-              {title}
+            <span className="block truncate font-special text-[9px] uppercase tracking-[0.04em] text-white/72 sm:text-[10px] sm:tracking-[0.06em]">
+              {currentTrack.title}
             </span>
+            {tracks.length > 1 && (
+              <span className="block font-ui text-[7px] font-bold uppercase tracking-[0.14em] text-white/38">
+                Track {currentTrackIndex + 1} of {tracks.length}
+              </span>
+            )}
           </span>
-          <span className="flex h-5 items-end gap-[2px]" aria-hidden>
+          <span className="hidden h-5 items-end gap-[2px] sm:flex" aria-hidden>
             {[10, 17, 13].map((height, index) => (
               <span
                 key={height}
@@ -173,17 +219,48 @@ export default function AmbientMusicPlayer({
         <button
           type="button"
           onClick={() => void togglePlayback()}
-          aria-label={isPlaying ? `Pause ${title}` : `Play ${title}`}
+          aria-label={
+            isPlaying
+              ? `Pause ${currentTrack.title}`
+              : `Play ${currentTrack.title}`
+          }
           title={isPlaying ? 'Pause music' : 'Play music'}
           className="grid h-10 w-10 place-items-center bg-[#F5C518] text-black transition-colors hover:bg-[#4CAF50] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           {isPlaying ? <Pause size={17} /> : <Play size={17} />}
         </button>
 
+        {tracks.length > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={() => changeTrack(-1)}
+              aria-label={`Play previous song. Currently playing ${currentTrack.title}`}
+              title="Previous song"
+              className="grid h-10 w-10 place-items-center border border-[#F5C518]/65 bg-black text-[#F5C518] transition-colors hover:bg-[#F5C518] hover:text-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              <SkipBack size={18} />
+            </button>
+            <button
+              type="button"
+              onClick={() => changeTrack(1)}
+              aria-label={`Play next song. Currently playing ${currentTrack.title}`}
+              title="Next song"
+              className="grid h-10 w-10 place-items-center border border-[#F5C518]/65 bg-black text-[#F5C518] transition-colors hover:bg-[#F5C518] hover:text-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              <SkipForward size={18} />
+            </button>
+          </>
+        )}
+
         <button
           type="button"
           onClick={() => void toggleMute()}
-          aria-label={isMuted ? `Turn on sound for ${title}` : `Mute ${title}`}
+          aria-label={
+            isMuted
+              ? `Turn on sound for ${currentTrack.title}`
+              : `Mute ${currentTrack.title}`
+          }
           title={isMuted ? 'Turn sound on' : 'Mute music'}
           className={`grid h-10 w-10 place-items-center border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
             isMuted

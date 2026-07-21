@@ -104,6 +104,21 @@ export async function POST(request: Request) {
         orderId: session.id,
         fulfillment:
           session.metadata?.fulfillment === 'delivery' ? 'Delivery' : 'Pickup',
+        deliveryAddress:
+          session.metadata?.fulfillment === 'delivery'
+            ? [
+                session.metadata.delivery_address,
+                session.metadata.delivery_apartment,
+              ]
+                .filter(Boolean)
+                .join(', ')
+            : undefined,
+        deliveryDistance: session.metadata?.delivery_distance_miles
+          ? `${session.metadata.delivery_distance_miles} driving miles`
+          : undefined,
+        deliveryFee: session.metadata?.delivery_fee_cents
+          ? formatMoney(Number(session.metadata.delivery_fee_cents), currency)
+          : undefined,
         total: formatMoney(session.amount_total ?? 0, currency),
         items,
       }),

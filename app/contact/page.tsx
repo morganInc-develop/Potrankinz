@@ -71,8 +71,8 @@ const contactMethods = [
   {
     Icon: MapPin,
     label: 'Location',
-    value: 'Port Saint Lucie, FL',
-    note: '11582 SW Village Parkway, FL 34987',
+    value: 'Fort Pierce, FL',
+    note: '7550 Pruitt Research Center Rd, FL 34945',
   },
   {
     Icon: Instagram,

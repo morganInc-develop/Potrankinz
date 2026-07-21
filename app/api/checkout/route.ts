@@ -2,16 +2,42 @@ import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
 import { cartProductsById } from '@/lib/cart-products'
+import { getDeliveryQuote } from '@/lib/delivery-server'
 import { menuItems } from '@/lib/kindred-home-data'
+import {
+  hasValidSideCombination,
+  sideIsAllowedForProduct,
+} from '@/lib/side-options'
 import { absoluteUrl } from '@/lib/site'
 
 interface CheckoutLine {
   id: string
   quantity: number
-  selectedSideId?: string
+  selectedSideIds?: string[]
 }
 
 type Fulfillment = 'pickup' | 'delivery'
+
+interface DeliverySelection {
+  placeId?: string
+  apartment?: string
+}
+
+function checkoutSideIds(line: CheckoutLine) {
+  return Array.isArray(line.selectedSideIds)
+    ? line.selectedSideIds.filter(
+        (sideId): sideId is string => typeof sideId === 'string',
+      )
+    : []
+}
+
+function productNeedsSides(category: string, productId: string) {
+  return (
+    category === 'mains' ||
+    category === 'vegan' ||
+    (category === 'breakfast' && productId !== 'cornmeal-porridge')
+  )
+}
 
 export async function POST(request: Request) {
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY
@@ -26,7 +52,11 @@ export async function POST(request: Request) {
     )
   }
 
-  let body: { items?: CheckoutLine[]; fulfillment?: Fulfillment }
+  let body: {
+    items?: CheckoutLine[]
+    fulfillment?: Fulfillment
+    delivery?: DeliverySelection
+  }
 
   try {
     body = await request.json()
@@ -40,13 +70,46 @@ export async function POST(request: Request) {
   const items = Array.isArray(body.items) ? body.items : []
   const fulfillment: Fulfillment =
     body.fulfillment === 'delivery' ? 'delivery' : 'pickup'
+
+  for (const line of items) {
+    const product = cartProductsById.get(line.id)
+    if (!product || !productNeedsSides(product.category, product.id)) continue
+
+    const sideIds = checkoutSideIds(line)
+    const sidesExist = sideIds.every((sideId) =>
+      menuItems.some((item) => item.id === sideId && item.category === 'sides'),
+    )
+    const sidesAreAllowed = sideIds.every((sideId) =>
+      sideIsAllowedForProduct({
+        sideId,
+        productId: product.id,
+        productCategory: product.category,
+      }),
+    )
+
+    if (!hasValidSideCombination(sideIds) || !sidesExist || !sidesAreAllowed) {
+      return NextResponse.json(
+        {
+          error: `${product.title} requires at least one side and allows no more than one starch plus one vegetable.`,
+        },
+        { status: 400 },
+      )
+    }
+  }
+
   const lineItems = items
     .map((line) => {
       const product = cartProductsById.get(line.id)
       const quantity = Math.max(1, Math.min(99, Math.floor(line.quantity)))
-      const selectedSide = menuItems.find(
-        (item) => item.id === line.selectedSideId && item.category === 'sides',
-      )
+      const selectedSideIds = checkoutSideIds(line)
+      const selectedSides = selectedSideIds
+        .map((sideId) =>
+          menuItems.find(
+            (item) => item.id === sideId && item.category === 'sides',
+          ),
+        )
+        .filter((side): side is NonNullable<typeof side> => Boolean(side))
+      const sideNames = selectedSides.map((side) => side.title).join(' + ')
 
       if (!product || !Number.isFinite(quantity)) return null
 
@@ -56,11 +119,9 @@ export async function POST(request: Request) {
           currency: 'usd',
           unit_amount: product.priceCents,
           product_data: {
-            name: selectedSide
-              ? `${product.title} — ${selectedSide.title}`
-              : product.title,
-            description: selectedSide
-              ? `${product.description} Side choice: ${selectedSide.title}.`
+            name: sideNames ? `${product.title} — ${sideNames}` : product.title,
+            description: sideNames
+              ? `${product.description} Side choices: ${sideNames}.`
               : product.description,
             images: [absoluteUrl(product.image)],
           },
@@ -76,6 +137,44 @@ export async function POST(request: Request) {
     )
   }
 
+  let deliveryQuote = null
+
+  if (fulfillment === 'delivery') {
+    if (!body.delivery?.placeId) {
+      return NextResponse.json(
+        { error: 'Select a verified delivery address.' },
+        { status: 400 },
+      )
+    }
+
+    try {
+      deliveryQuote = await getDeliveryQuote(body.delivery.placeId)
+    } catch (error) {
+      return NextResponse.json(
+        {
+          error:
+            error instanceof Error
+              ? error.message
+              : 'Delivery could not be calculated.',
+        },
+        { status: 400 },
+      )
+    }
+
+    lineItems.push({
+      quantity: 1,
+      price_data: {
+        currency: 'usd',
+        unit_amount: deliveryQuote.feeCents,
+        product_data: {
+          name: 'Delivery fee',
+          description: `${deliveryQuote.distanceMiles.toFixed(1)} driving miles at $0.85 per mile`,
+          images: [],
+        },
+      },
+    })
+  }
+
   const origin =
     request.headers.get('origin') ??
     process.env.NEXT_PUBLIC_SITE_URL ??
@@ -89,17 +188,11 @@ export async function POST(request: Request) {
     phone_number_collection: {
       enabled: true,
     },
-    shipping_address_collection:
-      fulfillment === 'delivery'
-        ? {
-            allowed_countries: ['US'],
-          }
-        : undefined,
     custom_text: {
       submit: {
         message:
           fulfillment === 'delivery'
-            ? 'Your delivery address will be included with the order.'
+            ? `Delivery to ${deliveryQuote?.address ?? 'your verified address'} is included with this order.`
             : 'This order is marked for pickup at Pot Rankinz Kitchen.',
       },
     },
@@ -108,6 +201,12 @@ export async function POST(request: Request) {
     metadata: {
       source: 'potrankinz-cart',
       fulfillment,
+      delivery_address: deliveryQuote?.address ?? '',
+      delivery_apartment: body.delivery?.apartment?.trim().slice(0, 80) ?? '',
+      delivery_distance_miles: deliveryQuote
+        ? deliveryQuote.distanceMiles.toFixed(1)
+        : '',
+      delivery_fee_cents: deliveryQuote ? String(deliveryQuote.feeCents) : '',
     },
   })
 

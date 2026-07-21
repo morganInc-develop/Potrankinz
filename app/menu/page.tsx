@@ -463,7 +463,7 @@ function MenuHero() {
           </motion.div>
         </motion.div>
 
-        <div className="space-y-4 lg:pt-24">
+        <div className="hidden space-y-4 md:block lg:pt-24">
           <motion.div
             className="mb-5"
             initial={{ opacity: 0, y: 18 }}
@@ -613,6 +613,7 @@ function MenuPosterCard({ item, index }: { item: MenuItem; index: number }) {
 
 function PriceLine({ item, index }: { item: MenuItem; index: number }) {
   const product = cartProductFromMenu(item)
+  const isVeganSide = item.category === 'sides' && item.tags.includes('Vegan')
 
   return (
     <motion.div
@@ -626,6 +627,18 @@ function PriceLine({ item, index }: { item: MenuItem; index: number }) {
         <h3 className="shrink-0 font-ui text-[clamp(1.05rem,2vw,1.42rem)] font-bold uppercase tracking-[0.04em] text-white">
           {item.title}
         </h3>
+        {isVeganSide && (
+          <span
+            className="inline-flex shrink-0 items-center gap-1 text-[#6FCD5B]"
+            aria-label="Vegan side"
+            title="Vegan"
+          >
+            <Leaf size={17} strokeWidth={2.4} />
+            <span className="font-ui text-[9px] font-bold uppercase tracking-[0.12em]">
+              Vegan
+            </span>
+          </span>
+        )}
         <div className="mb-1 h-px flex-1 border-b border-dotted border-white/42 transition-colors group-hover:border-[#F5C518]" />
         <span className="font-ui text-[clamp(1.1rem,2vw,1.55rem)] font-bold text-[#F5C518]">
           {item.price}

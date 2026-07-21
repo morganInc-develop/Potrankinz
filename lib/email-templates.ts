@@ -31,6 +31,9 @@ export interface ReceiptEmailData {
   customerEmail: string
   orderId: string
   fulfillment?: string
+  deliveryAddress?: string
+  deliveryDistance?: string
+  deliveryFee?: string
   total: string
   items: ReceiptEmailItem[]
 }
@@ -213,6 +216,9 @@ export function receiptEmailTemplate(data: ReceiptEmailData) {
           ['Email', data.customerEmail],
           ['Order', data.orderId],
           ['Order type', data.fulfillment],
+          ['Delivery address', data.deliveryAddress],
+          ['Delivery distance', data.deliveryDistance],
+          ['Delivery fee', data.deliveryFee],
         ])}
       </table>
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top:18px;">

@@ -278,6 +278,14 @@ export default function Footer({
                     <span className="font-ui text-[10px] uppercase tracking-[0.16em] text-black/62">
                       © 2026, {restaurantName}
                     </span>
+                    <a
+                      href="https://www.madeinvincible.dev"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-ui text-[10px] uppercase tracking-[0.16em] text-black/62 transition-colors hover:text-[#7B1F1F]"
+                    >
+                      Website by Made Invincible
+                    </a>
                     {legalLinks.map((link) => (
                       <HomepageLink
                         key={link.label}

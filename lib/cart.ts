@@ -16,12 +16,13 @@ export interface CartSideSelection {
 
 export interface CartLine extends CartProduct {
   lineId: string
-  selectedSide?: CartSideSelection
+  selectedSides?: CartSideSelection[]
   quantity: number
 }
 
 type StoredCartLine = Omit<CartLine, 'lineId'> & {
   lineId?: string
+  selectedSide?: CartSideSelection
 }
 
 export const CART_STORAGE_KEY = 'potrankinz-cart'
@@ -68,6 +69,15 @@ function isCartSideSelection(value: unknown): value is CartSideSelection {
   )
 }
 
+function isCartSideSelections(value: unknown): value is CartSideSelection[] {
+  return (
+    Array.isArray(value) &&
+    value.length > 0 &&
+    value.length <= 2 &&
+    value.every(isCartSideSelection)
+  )
+}
+
 export function readCart(): CartLine[] {
   if (typeof window === 'undefined') return memoryCart
 
@@ -93,15 +103,26 @@ export function readCart(): CartLine[] {
           typeof item.category === 'string' &&
           typeof item.description === 'string' &&
           typeof item.quantity === 'number' &&
+          (item.selectedSides === undefined ||
+            isCartSideSelections(item.selectedSides)) &&
           (item.selectedSide === undefined ||
             isCartSideSelection(item.selectedSide))
         )
       })
-      .map((item) => ({
-        ...item,
-        lineId: item.lineId ?? item.id,
-        quantity: Math.max(1, Math.min(99, Math.floor(item.quantity))),
-      }))
+      .map((item) => {
+        const { selectedSide, ...line } = item
+        const selectedSides =
+          line.selectedSides ?? (selectedSide ? [selectedSide] : undefined)
+
+        return {
+          ...line,
+          lineId: selectedSides
+            ? `${line.id}::sides:${selectedSides.map((side) => side.id).join('+')}`
+            : (line.lineId ?? line.id),
+          selectedSides,
+          quantity: Math.max(1, Math.min(99, Math.floor(line.quantity))),
+        }
+      })
   } catch {
     return []
   }
@@ -126,11 +147,12 @@ export function writeCart(lines: CartLine[]) {
 export function addCartItem(
   product: CartProduct,
   quantity = 1,
-  selectedSide?: CartSideSelection,
+  selectedSides?: CartSideSelection[],
 ) {
   const lines = readCart()
-  const lineId = selectedSide
-    ? `${product.id}::side:${selectedSide.id}`
+  const normalizedSides = selectedSides?.slice(0, 2)
+  const lineId = normalizedSides?.length
+    ? `${product.id}::sides:${normalizedSides.map((side) => side.id).join('+')}`
     : product.id
   const existing = lines.find((line) => line.lineId === lineId)
 
@@ -140,7 +162,7 @@ export function addCartItem(
     lines.push({
       ...product,
       lineId,
-      selectedSide,
+      selectedSides: normalizedSides,
       quantity: Math.max(1, quantity),
     })
   }

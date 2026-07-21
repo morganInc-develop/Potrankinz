@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Anton, Oswald, DM_Sans, Special_Elite } from 'next/font/google'
+import SiteMusicPlayer from '@/components/audio/SiteMusicPlayer'
 import Providers from './providers'
 
 import './globals.css'
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     template: '%s | Potrankinz',
   },
   description:
-    'Soul food and catering done right in Port Saint Lucie, FL and beyond.',
+    'Soul food and catering done right in Fort Pierce, FL and beyond.',
   icons: {
     icon: '/hero-chefs/cutouts/pot-rankinz-logo.png',
     shortcut: '/hero-chefs/cutouts/pot-rankinz-logo.png',
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Potrankinz',
     description:
-      'Soul food and catering done right in Port Saint Lucie, FL and beyond.',
+      'Soul food and catering done right in Fort Pierce, FL and beyond.',
     url: 'https://potrankinz.vercel.app',
     siteName: 'Potrankinz',
     type: 'website',
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Potrankinz',
     description:
-      'Soul food and catering done right in Port Saint Lucie, FL and beyond.',
+      'Soul food and catering done right in Fort Pierce, FL and beyond.',
   },
 }
 
@@ -69,7 +70,10 @@ export default function RootLayout({
       className={`${anton.variable} ${oswald.variable} ${dmSans.variable} ${specialElite.variable}`}
     >
       <body className="min-h-screen bg-[#0D0A06] text-white antialiased">
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <SiteMusicPlayer />
+        </Providers>
       </body>
     </html>
   )
