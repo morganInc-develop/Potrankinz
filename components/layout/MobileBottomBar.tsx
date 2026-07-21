@@ -26,7 +26,7 @@ export default function MobileBottomBar() {
   return (
     <div
       data-mobile-bottom-bar
-      className="relative z-20 w-full overflow-hidden border-t border-[#F5C518]/45 bg-[#111111] pb-[calc(env(safe-area-inset-bottom)+1px)] md:hidden"
+      className="fixed inset-x-0 bottom-0 z-[80] w-full overflow-hidden border-t border-[#F5C518]/45 bg-[#111111] pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       <div
         className="grid"
