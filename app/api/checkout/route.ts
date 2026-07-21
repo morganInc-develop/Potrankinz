@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
 import { cartProductsById } from '@/lib/cart-products'
-import { getDeliveryQuote } from '@/lib/delivery-server'
 import { menuItems } from '@/lib/kindred-home-data'
 import {
   hasValidSideCombination,
@@ -19,7 +18,7 @@ interface CheckoutLine {
 type Fulfillment = 'pickup' | 'delivery'
 
 interface DeliverySelection {
-  placeId?: string
+  address?: string
   apartment?: string
 }
 
@@ -137,42 +136,15 @@ export async function POST(request: Request) {
     )
   }
 
-  let deliveryQuote = null
+  const deliveryAddress = body.delivery?.address?.trim().slice(0, 240) ?? ''
 
   if (fulfillment === 'delivery') {
-    if (!body.delivery?.placeId) {
+    if (deliveryAddress.length < 8) {
       return NextResponse.json(
-        { error: 'Select a verified delivery address.' },
+        { error: 'Enter the full delivery address.' },
         { status: 400 },
       )
     }
-
-    try {
-      deliveryQuote = await getDeliveryQuote(body.delivery.placeId)
-    } catch (error) {
-      return NextResponse.json(
-        {
-          error:
-            error instanceof Error
-              ? error.message
-              : 'Delivery could not be calculated.',
-        },
-        { status: 400 },
-      )
-    }
-
-    lineItems.push({
-      quantity: 1,
-      price_data: {
-        currency: 'usd',
-        unit_amount: deliveryQuote.feeCents,
-        product_data: {
-          name: 'Delivery fee',
-          description: `${deliveryQuote.distanceMiles.toFixed(1)} driving miles at $0.85 per mile`,
-          images: [],
-        },
-      },
-    })
   }
 
   const origin =
@@ -192,7 +164,7 @@ export async function POST(request: Request) {
       submit: {
         message:
           fulfillment === 'delivery'
-            ? `Delivery to ${deliveryQuote?.address ?? 'your verified address'} is included with this order.`
+            ? `We will confirm delivery availability and any delivery charge for ${deliveryAddress} after checkout.`
             : 'This order is marked for pickup at Pot Rankinz Kitchen.',
       },
     },
@@ -201,12 +173,10 @@ export async function POST(request: Request) {
     metadata: {
       source: 'potrankinz-cart',
       fulfillment,
-      delivery_address: deliveryQuote?.address ?? '',
+      delivery_address: fulfillment === 'delivery' ? deliveryAddress : '',
       delivery_apartment: body.delivery?.apartment?.trim().slice(0, 80) ?? '',
-      delivery_distance_miles: deliveryQuote
-        ? deliveryQuote.distanceMiles.toFixed(1)
-        : '',
-      delivery_fee_cents: deliveryQuote ? String(deliveryQuote.feeCents) : '',
+      delivery_distance_miles: '',
+      delivery_fee_cents: '',
     },
   })
 
