@@ -1,4 +1,16 @@
 {
+  "jamaican-cabbage-salad.png": {
+    "type": "generated",
+    "query": "Jamaican cabbage salad food",
+    "subject": "Fresh Jamaican-style cabbage salad with carrot, cucumber, bell pepper, and lime vinaigrette",
+    "visualReference": "https://www.cozymeal.com/recipes/r/jamaican-cabbage"
+  },
+  "jamaican-pikliz.png": {
+    "type": "generated",
+    "query": "Jamaican pikliz food",
+    "subject": "Caribbean Pikliz with pickled cabbage, carrot, red onion, bell pepper, and Scotch bonnet",
+    "visualReference": "https://thatgirlcookshealthy.com/haitian-pikliz/"
+  },
   "jamaican-hard-dough-bread.png": {
     "type": "generated",
     "subject": "Authentic Jamaican hard dough bread loaf and slices",

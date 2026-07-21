@@ -463,7 +463,7 @@ function MenuHero() {
           </motion.div>
         </motion.div>
 
-        <div className="space-y-4 lg:pt-24">
+        <div className="hidden space-y-4 md:block lg:pt-24">
           <motion.div
             className="mb-5"
             initial={{ opacity: 0, y: 18 }}

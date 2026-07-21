@@ -194,25 +194,32 @@ function CartLineItem({ line }: { line: CartLine }) {
         <p className="mt-3 max-w-2xl text-sm leading-6 text-white/64">
           {line.description}
         </p>
-        {line.selectedSide && (
-          <div className="mt-4 inline-flex items-center gap-3 border border-[#F5C518]/30 bg-[#F5C518]/8 p-2 pr-4">
-            <span className="relative h-12 w-14 shrink-0 overflow-hidden">
-              <Image
-                src={line.selectedSide.image}
-                alt=""
-                fill
-                sizes="56px"
-                className="object-cover"
-              />
-            </span>
-            <span>
-              <span className="block font-ui text-[9px] font-bold uppercase tracking-[0.16em] text-white/48">
-                Side choice
-              </span>
-              <span className="font-ui text-xs font-bold uppercase tracking-[0.1em] text-[#F5C518]">
-                {line.selectedSide.title}
-              </span>
-            </span>
+        {line.selectedSides && line.selectedSides.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {line.selectedSides.map((side) => (
+              <div
+                key={side.id}
+                className="inline-flex items-center gap-3 border border-[#F5C518]/30 bg-[#F5C518]/8 p-2 pr-4"
+              >
+                <span className="relative h-12 w-14 shrink-0 overflow-hidden">
+                  <Image
+                    src={side.image}
+                    alt=""
+                    fill
+                    sizes="56px"
+                    className="object-cover"
+                  />
+                </span>
+                <span>
+                  <span className="block font-ui text-[9px] font-bold uppercase tracking-[0.16em] text-white/48">
+                    Side choice
+                  </span>
+                  <span className="font-ui text-xs font-bold uppercase tracking-[0.1em] text-[#F5C518]">
+                    {side.title}
+                  </span>
+                </span>
+              </div>
+            ))}
           </div>
         )}
       </div>
@@ -334,7 +341,7 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
           items: lines.map((line) => ({
             id: line.id,
             quantity: line.quantity,
-            selectedSideId: line.selectedSide?.id,
+            selectedSideIds: line.selectedSides?.map((side) => side.id),
           })),
         }),
       })

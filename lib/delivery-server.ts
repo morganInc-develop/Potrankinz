@@ -7,7 +7,7 @@ import {
 } from '@/lib/delivery'
 
 const DEFAULT_DELIVERY_ORIGIN =
-  '11582 SW Village Parkway, Port Saint Lucie, FL 34987'
+  '7550 Pruitt Research Center Rd, Fort Pierce, FL 34945'
 
 interface GooglePlaceDetails {
   formattedAddress?: string
