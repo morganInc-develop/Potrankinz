@@ -1,6 +1,6 @@
 import { Resend } from 'resend'
 
-const OWNER_EMAILS = ['morganinc5680@gmail.com', 'Potrankinz@gmail.com']
+const OWNER_EMAILS = ['Potrankinz@gmail.com', 'morganinc5680@gmail.com']
 const VERIFIED_SENDER_DOMAIN = '@potrankinz.com'
 const DEFAULT_FROM_EMAIL = `Pot Rankinz Kitchen <hello${VERIFIED_SENDER_DOMAIN}>`
 
@@ -36,29 +36,56 @@ export async function sendCustomerAndOwnerEmail({
   customerEmail,
   subject,
   html,
+  ownerSubject,
+  ownerHtml,
   replyTo,
 }: {
   customerEmail: string
   subject: string
   html: string
+  ownerSubject?: string
+  ownerHtml?: string
   replyTo?: string
 }) {
   const resend = requireResend()
-  const recipients = uniqueEmails([customerEmail, ...OWNER_EMAILS])
+  const normalizedCustomerEmail = customerEmail.trim()
+  const ownerRecipients = uniqueEmails(OWNER_EMAILS).filter(
+    (email) => email.toLowerCase() !== normalizedCustomerEmail.toLowerCase(),
+  )
+  const [primaryOwnerEmail, ...additionalOwnerEmails] = ownerRecipients
+  const messages = [
+    {
+      to: normalizedCustomerEmail,
+      subject,
+      html,
+      bcc: [] as string[],
+    },
+    ...(primaryOwnerEmail
+      ? [
+          {
+            to: primaryOwnerEmail,
+            subject: ownerSubject ?? subject,
+            html: ownerHtml ?? html,
+            bcc: additionalOwnerEmails,
+          },
+        ]
+      : []),
+  ]
 
   const results = await Promise.all(
-    recipients.map(async (to) => {
+    messages.map(async (message) => {
       const result = await resend.emails.send({
         from: FROM_EMAIL,
-        to,
-        subject,
-        html,
+        to: message.to,
+        subject: message.subject,
+        html: message.html,
+        bcc: message.bcc.length > 0 ? message.bcc : undefined,
         replyTo: replyTo ? [replyTo] : undefined,
       })
 
       if (result.error) {
         throw new Error(
-          `Resend rejected email to ${to}: ${result.error.message}`,
+          `Resend rejected email to ${message.to}: ${result.error.message}`,
         )
       }
 

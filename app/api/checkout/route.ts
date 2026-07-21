@@ -1,7 +1,19 @@
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
+import {
+  AddressVerificationUnavailableError,
+  DeliveryConfigurationError,
+  verifyDeliveryAddress,
+} from '@/lib/address-verification'
 import { cartProductsById } from '@/lib/cart-products'
+import {
+  confirmedDeliverySchema,
+  normalizeAddressForComparison,
+  normalizeDeliveryDetails,
+  type AddressVerificationResult,
+  type ConfirmedDeliveryDetails,
+} from '@/lib/delivery'
 import { menuItems } from '@/lib/kindred-home-data'
 import {
   hasValidSideCombination,
@@ -16,11 +28,6 @@ interface CheckoutLine {
 }
 
 type Fulfillment = 'pickup' | 'delivery'
-
-interface DeliverySelection {
-  address?: string
-  apartment?: string
-}
 
 function checkoutSideIds(line: CheckoutLine) {
   return Array.isArray(line.selectedSideIds)
@@ -54,7 +61,7 @@ export async function POST(request: Request) {
   let body: {
     items?: CheckoutLine[]
     fulfillment?: Fulfillment
-    delivery?: DeliverySelection
+    delivery?: unknown
   }
 
   try {
@@ -136,16 +143,87 @@ export async function POST(request: Request) {
     )
   }
 
-  const deliveryAddress = body.delivery?.address?.trim().slice(0, 240) ?? ''
+  let deliveryDetails: ConfirmedDeliveryDetails | undefined
+  let deliveryMatch: AddressVerificationResult | undefined
 
   if (fulfillment === 'delivery') {
-    if (deliveryAddress.length < 8) {
+    const parsedDelivery = confirmedDeliverySchema.safeParse(body.delivery)
+
+    if (!parsedDelivery.success) {
       return NextResponse.json(
-        { error: 'Enter the full delivery address.' },
+        {
+          error:
+            parsedDelivery.error.issues[0]?.message ??
+            'Check and confirm the delivery details.',
+        },
         { status: 400 },
       )
     }
+
+    const normalizedDetails = normalizeDeliveryDetails(parsedDelivery.data)
+    deliveryDetails = {
+      ...normalizedDetails,
+      confirmedAddress: parsedDelivery.data.confirmedAddress.trim(),
+    }
+
+    try {
+      deliveryMatch =
+        (await verifyDeliveryAddress(normalizedDetails)) ?? undefined
+    } catch (error) {
+      if (error instanceof DeliveryConfigurationError) {
+        return NextResponse.json({ error: error.message }, { status: 503 })
+      }
+
+      if (error instanceof AddressVerificationUnavailableError) {
+        return NextResponse.json(
+          {
+            error:
+              'The address checker is temporarily unavailable. Please try checkout again in a moment.',
+          },
+          { status: 502 },
+        )
+      }
+
+      return NextResponse.json(
+        { error: 'The delivery address could not be verified.' },
+        { status: 500 },
+      )
+    }
+
+    if (!deliveryMatch) {
+      return NextResponse.json(
+        {
+          error:
+            'We could not match that delivery address. Check it again before checkout.',
+        },
+        { status: 422 },
+      )
+    }
+
+    if (
+      normalizeAddressForComparison(deliveryMatch.matchedAddress) !==
+      normalizeAddressForComparison(deliveryDetails.confirmedAddress)
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            'The delivery address changed after confirmation. Check and confirm it again.',
+        },
+        { status: 409 },
+      )
+    }
+
+    if (deliveryMatch.withinDeliveryArea === false) {
+      return NextResponse.json(
+        {
+          error: `This address is outside the ${deliveryMatch.maxDistanceMiles}-mile delivery area.`,
+        },
+        { status: 422 },
+      )
+    }
   }
+
+  const deliveryAddress = deliveryMatch?.matchedAddress ?? ''
 
   const origin =
     request.headers.get('origin') ??
@@ -158,13 +236,13 @@ export async function POST(request: Request) {
     line_items: lineItems,
     customer_creation: 'if_required',
     phone_number_collection: {
-      enabled: true,
+      enabled: fulfillment === 'pickup',
     },
     custom_text: {
       submit: {
         message:
           fulfillment === 'delivery'
-            ? `We will confirm delivery availability and any delivery charge for ${deliveryAddress} after checkout.`
+            ? `Delivery address verified: ${deliveryAddress}. We will contact ${deliveryDetails?.contactName} if the driver needs help.`
             : 'This order is marked for pickup at Pot Rankinz Kitchen.',
       },
     },
@@ -174,8 +252,33 @@ export async function POST(request: Request) {
       source: 'potrankinz-cart',
       fulfillment,
       delivery_address: fulfillment === 'delivery' ? deliveryAddress : '',
-      delivery_apartment: body.delivery?.apartment?.trim().slice(0, 80) ?? '',
-      delivery_distance_miles: '',
+      delivery_apartment:
+        fulfillment === 'delivery' ? (deliveryDetails?.apartment ?? '') : '',
+      delivery_contact_name:
+        fulfillment === 'delivery' ? (deliveryDetails?.contactName ?? '') : '',
+      delivery_contact_phone:
+        fulfillment === 'delivery' ? (deliveryDetails?.contactPhone ?? '') : '',
+      delivery_latitude:
+        fulfillment === 'delivery'
+          ? String(deliveryMatch?.coordinates.latitude ?? '')
+          : '',
+      delivery_longitude:
+        fulfillment === 'delivery'
+          ? String(deliveryMatch?.coordinates.longitude ?? '')
+          : '',
+      delivery_distance_miles:
+        fulfillment === 'delivery' && deliveryMatch?.distanceMiles !== undefined
+          ? deliveryMatch.distanceMiles.toFixed(2)
+          : '',
+      delivery_distance_basis:
+        fulfillment === 'delivery' && deliveryMatch?.distanceMiles !== undefined
+          ? 'straight-line'
+          : '',
+      delivery_max_distance_miles:
+        fulfillment === 'delivery' &&
+        deliveryMatch?.maxDistanceMiles !== undefined
+          ? String(deliveryMatch.maxDistanceMiles)
+          : '',
       delivery_fee_cents: '',
     },
   })

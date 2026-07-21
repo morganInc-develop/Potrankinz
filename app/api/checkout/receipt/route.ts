@@ -93,34 +93,50 @@ export async function POST(request: Request) {
     amount: formatMoney(item.amount_total, item.currency ?? currency),
     image: productImage(item.price?.product),
   }))
+  const isDelivery = session.metadata?.fulfillment === 'delivery'
+  const fulfillment = isDelivery ? 'Delivery' : 'Pickup'
+  const receiptData = {
+    customerName:
+      session.metadata?.delivery_contact_name ||
+      session.customer_details?.name ||
+      undefined,
+    customerEmail,
+    contactPhone:
+      session.metadata?.delivery_contact_phone ||
+      session.customer_details?.phone ||
+      undefined,
+    orderId: session.id,
+    fulfillment,
+    deliveryAddress: isDelivery
+      ? session.metadata?.delivery_address || undefined
+      : undefined,
+    deliveryApartment: isDelivery
+      ? session.metadata?.delivery_apartment || undefined
+      : undefined,
+    deliveryDistance:
+      isDelivery && session.metadata?.delivery_distance_miles
+        ? `${session.metadata.delivery_distance_miles} straight-line miles from the delivery origin`
+        : undefined,
+    deliveryFee:
+      isDelivery && session.metadata?.delivery_fee_cents
+        ? formatMoney(Number(session.metadata.delivery_fee_cents), currency)
+        : undefined,
+    total: formatMoney(session.amount_total ?? 0, currency),
+    items,
+  }
 
   try {
     await sendCustomerAndOwnerEmail({
       customerEmail,
-      subject: `Pot Rankinz receipt ${session.id}`,
+      subject: `Your Pot Rankinz ${fulfillment.toLowerCase()} order is confirmed`,
       html: receiptEmailTemplate({
-        customerName: session.customer_details?.name ?? undefined,
-        customerEmail,
-        orderId: session.id,
-        fulfillment:
-          session.metadata?.fulfillment === 'delivery' ? 'Delivery' : 'Pickup',
-        deliveryAddress:
-          session.metadata?.fulfillment === 'delivery'
-            ? [
-                session.metadata.delivery_address,
-                session.metadata.delivery_apartment,
-              ]
-                .filter(Boolean)
-                .join(', ')
-            : undefined,
-        deliveryDistance: session.metadata?.delivery_distance_miles
-          ? `${session.metadata.delivery_distance_miles} driving miles`
-          : undefined,
-        deliveryFee: session.metadata?.delivery_fee_cents
-          ? formatMoney(Number(session.metadata.delivery_fee_cents), currency)
-          : undefined,
-        total: formatMoney(session.amount_total ?? 0, currency),
-        items,
+        ...receiptData,
+        audience: 'customer',
+      }),
+      ownerSubject: `New paid ${fulfillment.toLowerCase()} order — ${session.id}`,
+      ownerHtml: receiptEmailTemplate({
+        ...receiptData,
+        audience: 'owner',
       }),
     })
 

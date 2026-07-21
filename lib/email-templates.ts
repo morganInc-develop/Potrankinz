@@ -27,11 +27,14 @@ export interface ReceiptEmailItem {
 }
 
 export interface ReceiptEmailData {
+  audience?: 'customer' | 'owner'
   customerName?: string
   customerEmail: string
+  contactPhone?: string
   orderId: string
   fulfillment?: string
   deliveryAddress?: string
+  deliveryApartment?: string
   deliveryDistance?: string
   deliveryFee?: string
   total: string
@@ -182,6 +185,8 @@ export function bookingEmailTemplate(data: BookingEmailData) {
 }
 
 export function receiptEmailTemplate(data: ReceiptEmailData) {
+  const isOwner = data.audience === 'owner'
+  const isDelivery = data.fulfillment === 'Delivery'
   const items = data.items
     .map(
       (item) => `
@@ -202,25 +207,54 @@ export function receiptEmailTemplate(data: ReceiptEmailData) {
       `,
     )
     .join('')
+  const deliveryDetails = isDelivery
+    ? `
+      <div style="margin-top:20px;padding:18px;background:#eef7e9;border-left:4px solid #4caf50;">
+        <div style="color:#1e6b1e;font:700 11px Arial,sans-serif;text-transform:uppercase;letter-spacing:1.8px;">Verified delivery details</div>
+        <p style="margin:8px 0 0;color:#3a3026;font:400 14px Arial,sans-serif;line-height:1.55;">The address was matched through the U.S. Census Geocoder and confirmed by the customer before payment.</p>
+      </div>
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+        ${detailRows([
+          ['Delivery contact', data.customerName ?? data.customerEmail],
+          ['Driver phone', data.contactPhone],
+          ['Verified address', data.deliveryAddress],
+          ['Apartment / unit', data.deliveryApartment],
+          ['Distance', data.deliveryDistance],
+          ['Delivery fee', data.deliveryFee],
+        ])}
+      </table>
+    `
+    : ''
 
   return emailLayout({
-    eyebrow: 'Order receipt',
-    title: 'Payment received',
-    preview: `Pot Rankinz receipt for order ${data.orderId}.`,
+    eyebrow: isOwner ? 'New paid order' : 'Order confirmation',
+    title: isOwner
+      ? isDelivery
+        ? 'New delivery order'
+        : 'New pickup order'
+      : isDelivery
+        ? 'Delivery confirmed'
+        : 'Pickup confirmed',
+    preview: isOwner
+      ? `A new paid ${data.fulfillment?.toLowerCase() ?? ''} order is ready for Pot Rankinz.`
+      : `Pot Rankinz confirmation for order ${data.orderId}.`,
     heroImage: '/menu-images/curry-goat.jpg',
     children: `
-      <p style="margin:0 0 18px;color:#3a3026;font:400 16px Arial,sans-serif;line-height:1.65;">Your order payment is complete. We will start lining up the food and follow up if anything else is needed.</p>
+      <p style="margin:0 0 18px;color:#3a3026;font:400 16px Arial,sans-serif;line-height:1.65;">${
+        isOwner
+          ? 'Payment is complete. The customer and fulfillment details are ready below.'
+          : 'Your payment is complete. We will start lining up the food and follow up if anything else is needed.'
+      }</p>
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-top:4px solid #c41e3a;">
         ${detailRows([
           ['Customer', data.customerName ?? data.customerEmail],
           ['Email', data.customerEmail],
+          ['Contact phone', data.contactPhone],
           ['Order', data.orderId],
           ['Order type', data.fulfillment],
-          ['Delivery address', data.deliveryAddress],
-          ['Delivery distance', data.deliveryDistance],
-          ['Delivery fee', data.deliveryFee],
         ])}
       </table>
+      ${deliveryDetails}
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top:18px;">
         ${items}
         <tr>

@@ -37,6 +37,7 @@ import {
   type CartLine,
 } from '@/lib/cart'
 import { cartProducts } from '@/lib/cart-products'
+import type { ConfirmedDelivery } from '@/lib/delivery'
 import { announcementMessages, footer, navLinks } from '@/lib/kindred-home-data'
 
 const ROUGH_BTN =
@@ -261,12 +262,12 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
   const [fulfillment, setFulfillment] = useState<'pickup' | 'delivery'>(
     'pickup',
   )
-  const [deliveryAddress, setDeliveryAddress] = useState('')
-  const [deliveryApartment, setDeliveryApartment] = useState('')
+  const [confirmedDelivery, setConfirmedDelivery] =
+    useState<ConfirmedDelivery | null>(null)
   const [message, setMessage] = useState('')
   const subtotal = cartSubtotal(lines)
   const total = subtotal
-  const hasDeliveryAddress = deliveryAddress.trim().length >= 8
+  const hasConfirmedDelivery = Boolean(confirmedDelivery)
 
   useEffect(() => {
     const search = new URLSearchParams(window.location.search)
@@ -307,8 +308,8 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
   }, [])
 
   const startCheckout = async () => {
-    if (fulfillment === 'delivery' && !hasDeliveryAddress) {
-      setMessage('Enter the full delivery address before starting checkout.')
+    if (fulfillment === 'delivery' && !confirmedDelivery) {
+      setMessage('Check and confirm the delivery address before checkout.')
       return
     }
 
@@ -330,10 +331,11 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
         body: JSON.stringify({
           fulfillment,
           delivery:
-            fulfillment === 'delivery' && hasDeliveryAddress
+            fulfillment === 'delivery' && confirmedDelivery
               ? {
-                  address: deliveryAddress.trim(),
-                  apartment: deliveryApartment.trim(),
+                  ...confirmedDelivery.details,
+                  confirmedAddress:
+                    confirmedDelivery.verification.matchedAddress,
                 }
               : undefined,
           items: lines.map((line) => ({
@@ -389,7 +391,7 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
               {
                 id: 'delivery',
                 label: 'Delivery',
-                detail: 'Address confirmed after checkout',
+                detail: 'Address verified before payment',
                 Icon: Truck,
               },
             ] as const
@@ -403,6 +405,7 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
                 aria-pressed={selected}
                 onClick={() => {
                   setFulfillment(id)
+                  setConfirmedDelivery(null)
                   setMessage('')
                 }}
                 className={`border p-3 text-left transition-colors ${
@@ -428,13 +431,10 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
         </div>
         {fulfillment === 'delivery' && (
           <DeliveryAddressField
-            address={deliveryAddress}
-            apartment={deliveryApartment}
-            onAddressChange={(value) => {
-              setDeliveryAddress(value)
+            onVerificationChange={(delivery) => {
+              setConfirmedDelivery(delivery)
               setMessage('')
             }}
-            onApartmentChange={setDeliveryApartment}
           />
         )}
       </fieldset>
@@ -450,10 +450,32 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
           <span className="text-sm text-white/56">At checkout</span>
         </div>
         {fulfillment === 'delivery' && (
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-white/58">Delivery fee</span>
-            <span className="text-sm text-white/72">Confirmed separately</span>
-          </div>
+          <>
+            <div className="flex items-center justify-between gap-4">
+              <span className="text-white/58">Address status</span>
+              <span
+                className={`text-sm ${
+                  hasConfirmedDelivery ? 'text-[#77d67a]' : 'text-white/52'
+                }`}
+              >
+                {hasConfirmedDelivery ? 'Verified and confirmed' : 'Required'}
+              </span>
+            </div>
+            {confirmedDelivery?.verification.distanceMiles !== undefined && (
+              <div className="flex items-center justify-between gap-4">
+                <span className="text-white/58">Delivery distance</span>
+                <span className="text-sm text-white/72">
+                  {confirmedDelivery.verification.distanceMiles.toFixed(1)} mi
+                </span>
+              </div>
+            )}
+            <div className="flex items-center justify-between gap-4">
+              <span className="text-white/58">Delivery fee</span>
+              <span className="text-sm text-white/72">
+                Confirmed separately
+              </span>
+            </div>
+          </>
         )}
       </div>
       <div className="mt-6 flex items-center justify-between gap-4">
@@ -469,7 +491,7 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
         disabled={
           lines.length === 0 ||
           checkoutState === 'loading' ||
-          (fulfillment === 'delivery' && !hasDeliveryAddress)
+          (fulfillment === 'delivery' && !hasConfirmedDelivery)
         }
         onClick={startCheckout}
         className="mt-7 inline-flex w-full items-center justify-center gap-2 bg-[#C41E3A] px-8 py-4 font-ui text-[13px] font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#F5C518] hover:text-black disabled:cursor-not-allowed disabled:bg-white/16 disabled:text-white/38"
