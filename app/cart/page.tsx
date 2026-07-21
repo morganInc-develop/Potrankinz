@@ -37,7 +37,6 @@ import {
   type CartLine,
 } from '@/lib/cart'
 import { cartProducts } from '@/lib/cart-products'
-import type { DeliveryQuote } from '@/lib/delivery'
 import { announcementMessages, footer, navLinks } from '@/lib/kindred-home-data'
 
 const ROUGH_BTN =
@@ -262,13 +261,12 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
   const [fulfillment, setFulfillment] = useState<'pickup' | 'delivery'>(
     'pickup',
   )
-  const [deliveryQuote, setDeliveryQuote] = useState<DeliveryQuote | null>(null)
+  const [deliveryAddress, setDeliveryAddress] = useState('')
   const [deliveryApartment, setDeliveryApartment] = useState('')
   const [message, setMessage] = useState('')
   const subtotal = cartSubtotal(lines)
-  const deliveryFee =
-    fulfillment === 'delivery' ? (deliveryQuote?.feeCents ?? 0) : 0
-  const total = subtotal + deliveryFee
+  const total = subtotal
+  const hasDeliveryAddress = deliveryAddress.trim().length >= 8
 
   useEffect(() => {
     const search = new URLSearchParams(window.location.search)
@@ -309,8 +307,8 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
   }, [])
 
   const startCheckout = async () => {
-    if (fulfillment === 'delivery' && !deliveryQuote) {
-      setMessage('Select a verified address before starting delivery checkout.')
+    if (fulfillment === 'delivery' && !hasDeliveryAddress) {
+      setMessage('Enter the full delivery address before starting checkout.')
       return
     }
 
@@ -332,9 +330,9 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
         body: JSON.stringify({
           fulfillment,
           delivery:
-            fulfillment === 'delivery' && deliveryQuote
+            fulfillment === 'delivery' && hasDeliveryAddress
               ? {
-                  placeId: deliveryQuote.placeId,
+                  address: deliveryAddress.trim(),
                   apartment: deliveryApartment.trim(),
                 }
               : undefined,
@@ -391,7 +389,7 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
               {
                 id: 'delivery',
                 label: 'Delivery',
-                detail: '$0.85 per driving mile',
+                detail: 'Address confirmed after checkout',
                 Icon: Truck,
               },
             ] as const
@@ -430,10 +428,13 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
         </div>
         {fulfillment === 'delivery' && (
           <DeliveryAddressField
-            quote={deliveryQuote}
+            address={deliveryAddress}
             apartment={deliveryApartment}
+            onAddressChange={(value) => {
+              setDeliveryAddress(value)
+              setMessage('')
+            }}
             onApartmentChange={setDeliveryApartment}
-            onQuoteChange={setDeliveryQuote}
           />
         )}
       </fieldset>
@@ -451,9 +452,7 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
         {fulfillment === 'delivery' && (
           <div className="flex items-center justify-between gap-4">
             <span className="text-white/58">Delivery fee</span>
-            <span className="text-sm text-white/72">
-              {deliveryQuote ? formatMoney(deliveryFee) : 'Select an address'}
-            </span>
+            <span className="text-sm text-white/72">Confirmed separately</span>
           </div>
         )}
       </div>
@@ -470,7 +469,7 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
         disabled={
           lines.length === 0 ||
           checkoutState === 'loading' ||
-          (fulfillment === 'delivery' && !deliveryQuote)
+          (fulfillment === 'delivery' && !hasDeliveryAddress)
         }
         onClick={startCheckout}
         className="mt-7 inline-flex w-full items-center justify-center gap-2 bg-[#C41E3A] px-8 py-4 font-ui text-[13px] font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#F5C518] hover:text-black disabled:cursor-not-allowed disabled:bg-white/16 disabled:text-white/38"
@@ -572,7 +571,7 @@ export default function CartPage() {
   const count = cartItemCount(lines)
 
   return (
-    <main className="overflow-x-hidden bg-[#050505] pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0">
+    <main className="overflow-x-hidden bg-[#050505]">
       <AnnouncementBar messages={announcementMessages} />
       <Header leftLinks={navLinks.left} rightLinks={navLinks.right} />
       <CartHero count={count} />

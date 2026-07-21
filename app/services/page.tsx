@@ -837,7 +837,7 @@ export default function ServicesPage() {
   const orderedServices = useMemo(() => services, [])
 
   return (
-    <main className="overflow-x-hidden bg-[#050505] pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0">
+    <main className="overflow-x-hidden bg-[#050505]">
       <AnnouncementBar messages={announcementMessages} />
       <Header leftLinks={navLinks.left} rightLinks={navLinks.right} />
       <ServiceHero />
