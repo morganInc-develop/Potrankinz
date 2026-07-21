@@ -86,7 +86,7 @@ export default function NavBar() {
   const [open, setOpen] = useState(false)
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0D0A06]/95 backdrop-blur-sm border-b border-white/5">
+    <nav className="relative z-50 border-b border-white/5 bg-[#0D0A06]/95 backdrop-blur-sm">
       <div className="flex items-center justify-between px-6 lg:px-16 py-3">
         {/* ── Logo ──────────────────────────────────────────────────────────── */}
         <Link href="/" className="flex items-center gap-3 flex-shrink-0">

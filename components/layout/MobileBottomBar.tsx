@@ -1,7 +1,3 @@
-'use client'
-
-import { useEffect, useState } from 'react'
-import { createPortal } from 'react-dom'
 import { Mail, ChefHat, BookOpen, Info, ShoppingCart } from 'lucide-react'
 import Link from 'next/link'
 
@@ -27,16 +23,10 @@ const ICON_COLORS: Record<string, string> = {
 const allLinks = [...navLinks.left, ...navLinks.right]
 
 export default function MobileBottomBar() {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => setMounted(true), [])
-
-  if (!mounted) return null
-
-  return createPortal(
+  return (
     <div
       data-mobile-bottom-bar
-      className="fixed inset-x-0 bottom-[-1px] z-[80] w-full overflow-hidden border-t border-[#F5C518]/45 bg-[#111111] pb-[calc(env(safe-area-inset-bottom)+1px)] shadow-[0_-8px_24px_rgba(0,0,0,0.38)] md:hidden"
+      className="relative z-20 w-full overflow-hidden border-t border-[#F5C518]/45 bg-[#111111] pb-[calc(env(safe-area-inset-bottom)+1px)] md:hidden"
     >
       <div
         className="grid"
@@ -76,7 +66,6 @@ export default function MobileBottomBar() {
           )
         })}
       </div>
-    </div>,
-    document.body,
+    </div>
   )
 }

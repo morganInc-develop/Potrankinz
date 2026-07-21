@@ -1,7 +1,5 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import type { CSSProperties } from 'react'
 import { motion } from 'framer-motion'
 import {
   CalendarDays,
@@ -93,48 +91,8 @@ function HeaderNav({ links }: { links: HeaderLink[] }) {
 }
 
 export default function Header({ leftLinks, rightLinks }: HeaderProps) {
-  const [scrolled, setScrolled] = useState(false)
-  const [desktopTop, setDesktopTop] = useState(32)
-
-  useEffect(() => {
-    let frame = 0
-
-    const handle = () => {
-      if (frame) return
-
-      frame = window.requestAnimationFrame(() => {
-        const announcement = document.querySelector<HTMLElement>(
-          '[data-announcement-bar]',
-        )
-        const announcementBottom =
-          announcement?.getBoundingClientRect().bottom ?? 0
-
-        setScrolled(window.scrollY > 80)
-        setDesktopTop(Math.max(0, Math.round(announcementBottom)))
-        frame = 0
-      })
-    }
-
-    handle()
-    window.addEventListener('scroll', handle, { passive: true })
-    window.addEventListener('resize', handle)
-
-    return () => {
-      window.removeEventListener('scroll', handle)
-      window.removeEventListener('resize', handle)
-      if (frame) window.cancelAnimationFrame(frame)
-    }
-  }, [])
-
   return (
-    <header
-      className="pointer-events-none fixed inset-x-0 top-0 z-40 px-0 md:top-[var(--desktop-nav-top)] md:px-8 lg:px-10"
-      style={
-        {
-          '--desktop-nav-top': `${desktopTop}px`,
-        } as CSSProperties
-      }
-    >
+    <header className="pointer-events-none relative z-40 px-0 md:px-8 lg:px-10">
       {/* Paper backing (fades in on scroll) */}
       <motion.div
         animate={{ opacity: 1 }}
@@ -180,11 +138,7 @@ export default function Header({ leftLinks, rightLinks }: HeaderProps) {
       </motion.div>
 
       {/* Nav content */}
-      <div
-        className={`relative z-10 grid grid-cols-1 items-center px-6 pb-4 transition-[padding] duration-500 ease-out md:px-0 md:py-4 lg:grid-cols-[1fr_auto_1fr] ${
-          scrolled ? 'pt-4' : 'pt-12'
-        }`}
-      >
+      <div className="relative z-10 grid grid-cols-1 items-center px-6 py-4 md:px-0 lg:grid-cols-[1fr_auto_1fr]">
         <HeaderNav links={leftLinks} />
 
         <HomepageLink
