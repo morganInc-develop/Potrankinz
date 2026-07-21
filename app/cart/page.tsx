@@ -266,7 +266,11 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
     useState<ConfirmedDelivery | null>(null)
   const [message, setMessage] = useState('')
   const subtotal = cartSubtotal(lines)
-  const total = subtotal
+  const deliveryFee =
+    fulfillment === 'delivery'
+      ? (confirmedDelivery?.verification.deliveryFeeCents ?? 0)
+      : 0
+  const total = subtotal + deliveryFee
   const hasConfirmedDelivery = Boolean(confirmedDelivery)
 
   useEffect(() => {
@@ -470,9 +474,11 @@ function CartSummary({ lines }: { lines: CartLine[] }) {
               </div>
             )}
             <div className="flex items-center justify-between gap-4">
-              <span className="text-white/58">Delivery fee</span>
-              <span className="text-sm text-white/72">
-                Confirmed separately
+              <span className="text-white/58">Delivery fee ($0.85/mi)</span>
+              <span className="font-ui text-sm font-bold text-[#F5C518]">
+                {hasConfirmedDelivery
+                  ? formatMoney(deliveryFee)
+                  : 'Address check required'}
               </span>
             </div>
           </>

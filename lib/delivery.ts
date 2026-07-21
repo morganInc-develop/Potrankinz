@@ -1,6 +1,8 @@
 import { isPossiblePhoneNumber } from 'libphonenumber-js/max'
 import { z } from 'zod'
 
+export const DELIVERY_RATE_CENTS_PER_MILE = 85
+
 export const deliveryDetailsSchema = z.object({
   contactName: z
     .string()
@@ -57,8 +59,7 @@ export interface AddressVerificationResult {
     longitude: number
   }
   distanceMiles?: number
-  maxDistanceMiles?: number
-  withinDeliveryArea?: boolean
+  deliveryFeeCents?: number
 }
 
 export interface ConfirmedDelivery {
@@ -82,4 +83,9 @@ export function normalizeDeliveryDetails(
 
 export function normalizeAddressForComparison(address: string) {
   return address.toUpperCase().replace(/[^A-Z0-9]/g, '')
+}
+
+export function deliveryFeeCents(distanceMiles: number) {
+  if (!Number.isFinite(distanceMiles) || distanceMiles < 0) return 0
+  return Math.round(distanceMiles * DELIVERY_RATE_CENTS_PER_MILE)
 }

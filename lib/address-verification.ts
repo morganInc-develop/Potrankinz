@@ -3,6 +3,7 @@ import 'server-only'
 import { distance } from '@turf/distance'
 
 import {
+  deliveryFeeCents,
   normalizeDeliveryDetails,
   type AddressVerificationResult,
   type DeliveryDetails,
@@ -33,7 +34,6 @@ interface CensusGeocoderResponse {
 interface DeliveryDistanceConfig {
   latitude: number
   longitude: number
-  maxDistanceMiles?: number
 }
 
 export class AddressVerificationUnavailableError extends Error {
@@ -46,7 +46,7 @@ export class AddressVerificationUnavailableError extends Error {
 export class DeliveryConfigurationError extends Error {
   constructor() {
     super(
-      'Check the delivery settings. Override both origin coordinates together and use a positive maximum distance.',
+      'Check the delivery settings. Override both origin coordinates together.',
     )
     this.name = 'DeliveryConfigurationError'
   }
@@ -61,20 +61,15 @@ function finiteNumber(value: string | undefined) {
 function deliveryDistanceConfig(): DeliveryDistanceConfig {
   const rawLatitude = process.env.DELIVERY_ORIGIN_LATITUDE
   const rawLongitude = process.env.DELIVERY_ORIGIN_LONGITUDE
-  const rawMaxDistance = process.env.DELIVERY_MAX_DISTANCE_MILES
   const hasLatitude = Boolean(rawLatitude?.trim())
   const hasLongitude = Boolean(rawLongitude?.trim())
-  const hasMaxDistance = Boolean(rawMaxDistance?.trim())
   const configuredLatitude = finiteNumber(rawLatitude)
   const configuredLongitude = finiteNumber(rawLongitude)
-  const maxDistanceMiles = finiteNumber(rawMaxDistance)
 
   if (
     hasLatitude !== hasLongitude ||
     (hasLatitude && configuredLatitude === undefined) ||
-    (hasLongitude && configuredLongitude === undefined) ||
-    (hasMaxDistance && maxDistanceMiles === undefined) ||
-    (hasMaxDistance && (maxDistanceMiles ?? 0) <= 0)
+    (hasLongitude && configuredLongitude === undefined)
   ) {
     throw new DeliveryConfigurationError()
   }
@@ -86,7 +81,7 @@ function deliveryDistanceConfig(): DeliveryDistanceConfig {
     throw new DeliveryConfigurationError()
   }
 
-  return { latitude, longitude, maxDistanceMiles }
+  return { latitude, longitude }
 }
 
 export async function verifyDeliveryAddress(
@@ -153,12 +148,7 @@ export async function verifyDeliveryAddress(
   )
 
   verified.distanceMiles = Math.round(distanceMiles * 100) / 100
-
-  if (deliveryConfig.maxDistanceMiles !== undefined) {
-    verified.maxDistanceMiles = deliveryConfig.maxDistanceMiles
-    verified.withinDeliveryArea =
-      distanceMiles <= deliveryConfig.maxDistanceMiles
-  }
+  verified.deliveryFeeCents = deliveryFeeCents(distanceMiles)
 
   return verified
 }

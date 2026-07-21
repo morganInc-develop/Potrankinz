@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 
+import { formatMoney } from '@/lib/cart'
 import {
   deliveryDetailsSchema,
   normalizeDeliveryDetails,
@@ -165,7 +166,7 @@ export default function DeliveryAddressField({
   })
 
   const confirmAddress = () => {
-    if (!candidate || candidate.withinDeliveryArea === false) return
+    if (!candidate) return
 
     setConfirmed(true)
     onVerificationChange({
@@ -363,11 +364,9 @@ export default function DeliveryAddressField({
       {candidate && (
         <div
           className={`mt-4 border p-4 ${
-            candidate.withinDeliveryArea === false
-              ? 'border-[#C41E3A]/60 bg-[#C41E3A]/10'
-              : confirmed
-                ? 'border-[#4CAF50] bg-[#4CAF50]/12'
-                : 'border-[#F5C518]/60 bg-[#F5C518]/8'
+            confirmed
+              ? 'border-[#4CAF50] bg-[#4CAF50]/12'
+              : 'border-[#F5C518]/60 bg-[#F5C518]/8'
           }`}
         >
           <p className="font-ui text-[10px] font-bold uppercase tracking-[0.16em] text-white/52">
@@ -382,14 +381,14 @@ export default function DeliveryAddressField({
               miles from the delivery origin.
             </p>
           )}
-
-          {candidate.withinDeliveryArea === false ? (
-            <p className="mt-3 flex items-start gap-2 text-sm leading-6 text-[#ffb2bd]">
-              <CircleAlert aria-hidden className="mt-1 shrink-0" size={15} />
-              This address is outside the {candidate.maxDistanceMiles}-mile
-              delivery area. Please choose pickup or use another address.
+          {candidate.deliveryFeeCents !== undefined && (
+            <p className="mt-2 text-xs font-bold leading-5 text-[#F5C518]">
+              Delivery fee: {formatMoney(candidate.deliveryFeeCents)} at $0.85
+              per mile.
             </p>
-          ) : confirmed ? (
+          )}
+
+          {confirmed ? (
             <p className="mt-3 flex items-center gap-2 font-ui text-[11px] font-bold uppercase tracking-[0.12em] text-[#77d67a]">
               <Check aria-hidden size={15} />
               Ready for delivery checkout

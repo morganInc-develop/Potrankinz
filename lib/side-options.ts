@@ -7,12 +7,7 @@ const vegetableSideIds = new Set([
   'fried-plantains',
 ])
 
-const breakfastExcludedSideIds = new Set([
-  'rice-peas',
-  'white-rice',
-  'steamed-cabbage',
-  'mac-cheese',
-])
+const breakfastExcludedSideIds = new Set(['steamed-cabbage', 'mac-cheese'])
 
 const fishStarchSideIds = new Set([
   'festival',

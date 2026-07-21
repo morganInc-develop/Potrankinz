@@ -8,6 +8,7 @@ import {
 } from '@/lib/address-verification'
 import { cartProductsById } from '@/lib/cart-products'
 import {
+  DELIVERY_RATE_CENTS_PER_MILE,
   confirmedDeliverySchema,
   normalizeAddressForComparison,
   normalizeDeliveryDetails,
@@ -212,18 +213,28 @@ export async function POST(request: Request) {
         { status: 409 },
       )
     }
-
-    if (deliveryMatch.withinDeliveryArea === false) {
-      return NextResponse.json(
-        {
-          error: `This address is outside the ${deliveryMatch.maxDistanceMiles}-mile delivery area.`,
-        },
-        { status: 422 },
-      )
-    }
   }
 
   const deliveryAddress = deliveryMatch?.matchedAddress ?? ''
+
+  if (
+    fulfillment === 'delivery' &&
+    deliveryMatch?.deliveryFeeCents !== undefined &&
+    deliveryMatch.distanceMiles !== undefined
+  ) {
+    lineItems.push({
+      quantity: 1,
+      price_data: {
+        currency: 'usd',
+        unit_amount: deliveryMatch.deliveryFeeCents,
+        product_data: {
+          name: 'Delivery fee',
+          description: `${deliveryMatch.distanceMiles.toFixed(1)} straight-line miles at $${(DELIVERY_RATE_CENTS_PER_MILE / 100).toFixed(2)} per mile`,
+          images: [],
+        },
+      },
+    })
+  }
 
   const origin =
     request.headers.get('origin') ??
@@ -242,7 +253,7 @@ export async function POST(request: Request) {
       submit: {
         message:
           fulfillment === 'delivery'
-            ? `Delivery address verified: ${deliveryAddress}. We will contact ${deliveryDetails?.contactName} if the driver needs help.`
+            ? `Delivery to ${deliveryAddress} is included in this payment. We will contact ${deliveryDetails?.contactName} if the driver needs help.`
             : 'This order is marked for pickup at Pot Rankinz Kitchen.',
       },
     },
@@ -274,12 +285,11 @@ export async function POST(request: Request) {
         fulfillment === 'delivery' && deliveryMatch?.distanceMiles !== undefined
           ? 'straight-line'
           : '',
-      delivery_max_distance_miles:
+      delivery_fee_cents:
         fulfillment === 'delivery' &&
-        deliveryMatch?.maxDistanceMiles !== undefined
-          ? String(deliveryMatch.maxDistanceMiles)
+        deliveryMatch?.deliveryFeeCents !== undefined
+          ? String(deliveryMatch.deliveryFeeCents)
           : '',
-      delivery_fee_cents: '',
     },
   })
 
