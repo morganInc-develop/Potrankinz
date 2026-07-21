@@ -9,7 +9,7 @@ import { announcementMessages, footer, navLinks } from '@/lib/kindred-home-data'
 
 export default function Home() {
   return (
-    <main className="overflow-x-hidden bg-[#0D0A06]">
+    <main className="overflow-x-hidden bg-[#0D0A06] pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0">
       <AnnouncementBar messages={announcementMessages} />
       <Header leftLinks={navLinks.left} rightLinks={navLinks.right} />
       <HeroSection />
